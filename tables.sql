@@ -64,7 +64,6 @@ CREATE TABLE product (
         title varchar(255) NOT NULL,
         category_id int NOT NULL,
         brand_id int NOT NULL,
-        certification_id int,
         details varchar(255),
         image varchar(255),
         price decimal NOT NULL,
@@ -72,8 +71,7 @@ CREATE TABLE product (
         sale boolean NOT NULL,
         CONSTRAINT pk_product primary key (product_id),
         CONSTRAINT fk_brand_id foreign key (brand_id) references brand (brand_id),
-        CONSTRAINT fk_category_id foreign key (category_id) references category (category_id),
-        CONSTRAINT fk_certification_id foreign key (certification_id) references certification (certification_id)
+        CONSTRAINT fk_category_id foreign key (category_id) references category (category_id)
 );
 
 ALTER TABLE certification_product add foreign key (product_id) references product (product_id);
