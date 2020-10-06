@@ -20,7 +20,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	@Override
 	public List<Product> viewAllProducts() {
 		// TODO Auto-generated method stub
-		String getAllProducts= "SELECT * FROM Product";
+		String getAllProducts= "SELECT * FROM product";
 		List<Product> allProducts = new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(getAllProducts);
 		while(result.next()) {

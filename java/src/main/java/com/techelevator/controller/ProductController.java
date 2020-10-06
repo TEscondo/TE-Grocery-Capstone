@@ -22,47 +22,39 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.dao.ProductsDAO;
 import com.techelevator.model.Product;
 import com.techelevator.service.ProductService;
+
 @CrossOrigin
 @RestController
 public class ProductController {
 
-@Autowired
-ProductsDAO dao;
-	
-	
-	
-	@RequestMapping(path="/allProducts", method = RequestMethod.GET)	
-	public List<Product> viewAllProducts(){
-		List<Product> allProducts= dao.viewAllProducts();
-	return allProducts;
-}
-	@RequestMapping(path="/byCategory/{categoryId}", method= RequestMethod.GET)
-	public List<Product> viewProductsByCategory(@PathVariable int categoryId){
+	@Autowired
+	ProductsDAO dao;
+
+	@RequestMapping(path = "/allProducts", method = RequestMethod.GET)
+	public List<Product> viewAllProducts() {
+		List<Product> allProducts = dao.viewAllProducts();
+		return allProducts;
+	}
+
+	@RequestMapping(path = "/byCategory/{categoryId}", method = RequestMethod.GET)
+	public List<Product> viewProductsByCategory(@PathVariable int categoryId) {
 		List<Product> productsCat = dao.viewProductsByCategory(categoryId);
 		return productsCat;
 	}
-	
-	
-	@RequestMapping(path = "/byBrand/{brandId}", method= RequestMethod.GET)
-	public List<Product> viewProductsByBrand(@PathVariable int brandId){
+
+	@RequestMapping(path = "/byBrand/{brandId}", method = RequestMethod.GET)
+	public List<Product> viewProductsByBrand(@PathVariable int brandId) {
 		List<Product> productBrand = dao.viewProductsByBrand(brandId);
 		return productBrand;
 	}
-	
-	
+
 //	@RequestMapping(path= "/bySale", method = RequestMethod.GET)
 //	public List<Product> bySale(){
 //		
 //	}
 //	
-	
-	
-	
-	
-	
-	
-	
-	//	ProductService productService = new ProductService();
+
+	// ProductService productService = new ProductService();
 //
 //	@RequestMapping(path = "/search", method = RequestMethod.GET)
 //	public List<Product> searchProduct(@RequestParam String query) throws JsonMappingException, JsonProcessingException {
