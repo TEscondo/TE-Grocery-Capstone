@@ -8,12 +8,13 @@ public interface ProductsDAO {
 
 	List<Product> viewAllProducts();
 	
-	List<Product> viewProductsByCategory(String category);
+	List<Product> viewProductsByCategory(int categoryId);
 	
-	List<Product> viewProductsByBrand(String brand);
+	List<Product> viewProductsByBrand(int brand);
 	
-	List<Product> viewProductsBySale(boolean sale);
+	List<Product> viewProductsBySale();
+	List<Product>viewProductDetails(int id);
 	
-	List<Product> viewProductsByDescription(String searchTerm);
+
 	
 }

@@ -4,106 +4,133 @@ import java.math.BigDecimal;
 
 public class Product {
 
-	private String productName;
+	private String title;
 	private BigDecimal price;
-	private BigDecimal salePrice;
 	private boolean sale;
-	private String brandName;
-	private String description;
+	private int brandId;
+	private String details;
 	private double weight;
-	private String UPC;
-	private String category;
-	private String subcategory;
-	private String imageUrl;
+	private int id;
+	private int categoryId;
+	private String image;
+	private String certification;
 	
-	public Product(String productName, String image, BigDecimal price, double weight) {
-		this.productName = productName;
-		this.imageUrl = image;
+	public Product(String title, String image, BigDecimal price, double weight) {
+		this.title =title;
+		this.image = image;
 		this.price = price;
 		this.weight = weight;
 	}
+
 	
-	public Product(String productName, BigDecimal price, BigDecimal salePrice, boolean sale, String brandName,
-			String description, double weight, String UPC, String category, String subcategory, String imageUrl) {
-		this.productName = productName;
+	
+	
+	
+	
+	
+	
+	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, String certification, boolean sale, BigDecimal price) {
+		
+		this.title = title;
 		this.price = price;
-		this.salePrice = salePrice;
 		this.sale = sale;
-		this.brandName = brandName;
-		this.description = description;
+		this.brandId = brandId;
+		this.details = details;
 		this.weight = weight;
-		this.UPC = UPC;
-		this.category = category;
-		this.subcategory = subcategory;
-		this.imageUrl = imageUrl;
+		this.id = id;
+		this.categoryId = categoryId;
+		this.image = image;
+		this.certification = certification;
 	}
-	
-	public String getProductName() {
-		return productName;
+
+
+
+
+
+
+
+
+	public String getTitle() {
+		return title;
 	}
-	public void setProductName(String productName) {
-		this.productName = productName;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}
+
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	public BigDecimal getSalePrice() {
-		return salePrice;
-	}
-	public void setSalePrice(BigDecimal salePrice) {
-		this.salePrice = salePrice;
-	}
+
 	public boolean isSale() {
 		return sale;
 	}
+
 	public void setSale(boolean sale) {
 		this.sale = sale;
 	}
-	public String getBrandName() {
-		return brandName;
+
+	public int getBrandId() {
+		return brandId;
 	}
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
+
+	public void setBrandId(int brandId) {
+		this.brandId = brandId;
 	}
-	public String getDescription() {
-		return description;
+
+	public String getDetails() {
+		return details;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
+
 	public double getWeight() {
 		return weight;
 	}
+
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	public String getUPC() {
-		return UPC;
+
+	public int getId() {
+		return id;
 	}
-	public void setUPC(String uPC) {
-		UPC = uPC;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getCategory() {
-		return category;
+
+	public int getCategoryId() {
+		return categoryId;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+
+	public void setCategory(int categoryId) {
+		this.categoryId = categoryId;
 	}
-	public String getSubcategory() {
-		return subcategory;
+
+	public String getImage() {
+		return image;
 	}
-	public void setSubcategory(String subcategory) {
-		this.subcategory = subcategory;
+
+	public void setImage(String image) {
+		this.image = image;
 	}
-	public String getImageUrl() {
-		return imageUrl;
+
+	public String getCertification() {
+		return certification;
 	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+
+	public void setCertification(String certification) {
+		this.certification = certification;
 	}
+	
+
 	
 	
 }
