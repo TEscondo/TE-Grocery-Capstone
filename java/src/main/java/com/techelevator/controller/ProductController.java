@@ -23,11 +23,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.dao.ProductsDAO;
 import com.techelevator.model.Product;
 import com.techelevator.service.ProductService;
+
 @CrossOrigin
 @RestController
 public class ProductController {
 
 	@Autowired
+
 ProductsDAO dao;
 
 	
@@ -38,20 +40,21 @@ public void test() {
 
 	
 @PreAuthorize("permitAll()")	
-	@RequestMapping(path="/allProducts", method = RequestMethod.GET)	
-	public List<Product> viewAllProducts(){
-		List<Product> allProducts= dao.viewAllProducts();
-	return allProducts;
-}
-	@RequestMapping(path="/byCategory/{categoryId}", method= RequestMethod.GET)
-	public List<Product> viewProductsByCategory(@PathVariable int categoryId){
+@RequestMapping(path = "/allProducts", method = RequestMethod.GET)
+	public List<Product> viewAllProducts() {
+		List<Product> allProducts = dao.viewAllProducts();
+		return allProducts;
+	}
+
+	@RequestMapping(path = "/byCategory/{categoryId}", method = RequestMethod.GET)
+	public List<Product> viewProductsByCategory(@PathVariable int categoryId) {
+
 		List<Product> productsCat = dao.viewProductsByCategory(categoryId);
 		return productsCat;
 	}
-	
-	
-	@RequestMapping(path = "/byBrand/{brandId}", method= RequestMethod.GET)
-	public List<Product> viewProductsByBrand(@PathVariable int brandId){
+
+	@RequestMapping(path = "/byBrand/{brandId}", method = RequestMethod.GET)
+	public List<Product> viewProductsByBrand(@PathVariable int brandId) {
 		List<Product> productBrand = dao.viewProductsByBrand(brandId);
 		return productBrand;
 	}
@@ -68,24 +71,6 @@ public void test() {
 		List<Product> itemDetails= dao.viewProductDetails(productId);
 		return itemDetails;
 	}
-	
-//	ProductService productService = new ProductService();
-//	
-//	@RequestMapping(path = "/search", method = RequestMethod.GET)
-//	public List<Product> searchProduct(@RequestParam String query) throws JsonMappingException, JsonProcessingException {
-//		String url = "https://api.kroger.com/v1/products?filter.locationId=01800689&filter.term=" + query + "&limit=10";
-//		
-//		HttpEntity<String> httpEntity = new HttpEntity<>("");
-//		RestTemplate restTemplate = new RestTemplate();
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		
-//		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
-//		JsonNode jsonNode = objectMapper.readTree(response.getBody());
-//		List<Product> productList = productService.getProducts(jsonNode);
-//		System.out.println(productList);
-//		return productList;
-//		
-//	}
 	
 	
 	
