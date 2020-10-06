@@ -8,9 +8,10 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Product;
-
+@Component
 public class ProductsJDBCDAO implements ProductsDAO {
 	private JdbcTemplate template;
 	public ProductsJDBCDAO(DataSource datasource) {
