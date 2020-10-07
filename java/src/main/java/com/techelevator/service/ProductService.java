@@ -21,7 +21,7 @@ public class ProductService {
 			String weight = jsonNode.path("data").path(i).path("items").path("size").toString();
 			double dWeight = Double.parseDouble(weight);
 
-			Product product = new Product(productName, image, bdPrice, dWeight);
+			Product product = new Product(i, productName, image, bdPrice, dWeight);
 			productList.add(product);
 
 		}
