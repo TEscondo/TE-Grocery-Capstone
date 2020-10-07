@@ -14,7 +14,7 @@ public interface ProductsDAO {
 	
 	List<Product> viewProductsBySale();
 	List<Product>viewProductDetails(int id);
-	
+	List<Product> getTitleFromCategory(String categoryName);
 
 	
 }

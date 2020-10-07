@@ -73,7 +73,11 @@ public void test() {
 	}
 	
 	
-	
+	@RequestMapping(path = "/category/{categoryName}", method= RequestMethod.GET)
+	public List<Product> getTitleFromCategory(@PathVariable String categoryName){
+		List<Product> categoryList = dao.getTitleFromCategory(categoryName);
+		return categoryList;
+	}
 	
 	
 }
