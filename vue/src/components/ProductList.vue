@@ -42,16 +42,7 @@ return filteredProducts;
     productService.getAllProducts().then((response) => {
       this.products = response.data;
     });
-<<<<<<< HEAD
-  },
-    // computed: {
-    //   filteredList() {
-    //   }
-    // }
-}
-=======
   }}
->>>>>>> 1f14383524820895ad758a8f1e55b4b3bdf9396f
 </script>
 
 <style>
