@@ -6,8 +6,9 @@
     <div class='container' v-for="product in products" :key="product.brandId">
       <img class="thumbnail" v-if="product.image!=null" v-bind:src="product.image" />
       <img class="thumbnail" v-else src='https://storage.needpix.com/rsynced_images/grocery-store-2119702_1280.jpg' />
-      <br>
+     <br>
       {{product.title}} ${{product.price}}.00
+      <h2 v-if="product.onSale==true">{{salePrice}}</h2>
     </div>
   </div>
 </template>
@@ -20,8 +21,8 @@ export default {
         products: [],
         filter: {
           title: "",
-          price: ""
-
+          price: "",
+          salePrice: ""
         }
       }
     },
