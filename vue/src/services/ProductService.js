@@ -10,5 +10,8 @@ export default {
     },
     getProductByDetails(id){
         return http.get(`/byBrand/${id}`);
+    },
+    getProductsByCategory(category){
+        return http.get(`/category/${category}`)
     }
 }

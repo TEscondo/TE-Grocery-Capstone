@@ -6,19 +6,20 @@
     <label for="checkbox"> Sale Items Only</label>
     <div class="filter">
   <label for="basic-dropdown">Categories: </label>
-  <select name="basic-dropdown" v-model="selectedFruit">
-    <option>frozen</option>
-    <option>produce</option>
-    <option>internatinal</option>
-    <option>beverages</option>
-    <option>pets</option>
-    <option>dry goods pasta</option>
-    <option>personal care</option>
-    <option>meat seafood</option>
-    <option>pantry</option>
-    <option>breakfast</option>
-    <option>canned goods</option>
-    <option>snacks</option>
+  <select name="basic-dropdown" v-model="filter.categoryId">
+    <option value=""> View All </option>
+    <option value="1">frozen</option>
+    <option value="4">produce</option>
+    <option value="6">international</option>
+    <option value="7">beverages</option>
+    <option value="8">pets</option>
+    <option value="9">dry goods pasta</option>
+    <option value="11">personal care</option>
+    <option value="12">meat seafood</option>
+    <option value="13">pantry</option>
+    <option value="14">breakfast</option>
+    <option value="15">canned goods</option>
+    <option value="19">snacks</option>
   </select>
 </div>
     <div class="main">
@@ -54,6 +55,7 @@ export default {
         filter: {
           title:"",
           sale: false,
+          categoryId:""
         },
       }
     },
@@ -70,7 +72,11 @@ filteredProducts = filteredProducts.filter((item) =>
 item.sale === this.filter.sale
 );
 }
-
+if (this.filter.categoryId != "") {
+  filteredProducts = filteredProducts.filter((item) =>
+item.categoryId == this.filter.categoryId
+);
+}
 return filteredProducts;
 },
 },
