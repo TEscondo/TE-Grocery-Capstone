@@ -3,11 +3,15 @@
     <h3>PRODUCTS</h3>
     <input type="text" name="Search" value="Search for products" />
     <button v-on:click="filteredList()">SEARCH</button>
+    <div class="main">
     <div class='container' v-for="product in products" :key="product.brandId">
+      <div class="product-title">{{product.title}}</div>
       <img class="thumbnail" v-if="product.image!=null" v-bind:src="product.image" />
       <img class="thumbnail" v-else src='https://storage.needpix.com/rsynced_images/grocery-store-2119702_1280.jpg' />
       <br>
-      {{product.title}} ${{product.price}}.00
+      ${{product.price}}.00
+      {{product.weight}}oz
+    </div>
     </div>
   </div>
 </template>
@@ -40,17 +44,28 @@ export default {
 </script>
 
 <style>
+.main {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
 .container {
-  display : grid;
-  grid-template-columns: 1fr 1fr;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 250px;
+  height: 270px;
   gap: 1rem;
-  margin: 3rem 3rem;
-  grid-template-rows: auto;
-  align-items: center;
+  margin: 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+.product-title {
+  font-size: 1.5rem;
 }
 .thumbnail {
     max-width: 200px;
-    max-height: 200px;
+    max-height: 150px;
 }
 
 
