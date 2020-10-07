@@ -29,7 +29,7 @@ public class Product {
 	
 	
 	
-	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, String certification, boolean sale, BigDecimal price) {
+	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, boolean sale, BigDecimal price) {
 		
 		this.title = title;
 		this.price = price;
@@ -40,7 +40,7 @@ public class Product {
 		this.id = id;
 		this.categoryId = categoryId;
 		this.image = image;
-		this.certification = certification;
+
 	}
 
 
