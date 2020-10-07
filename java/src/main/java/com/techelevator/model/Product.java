@@ -15,7 +15,8 @@ public class Product {
 	private String image;
 	private String certification;
 	
-	public Product(String title, String image, BigDecimal price, double weight) {
+	public Product(int id, String title, String image, BigDecimal price, double weight) {
+		this.id = id;
 		this.title =title;
 		this.image = image;
 		this.price = price;
