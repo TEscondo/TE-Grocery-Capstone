@@ -9,7 +9,8 @@
       <img class="thumbnail" v-if="product.image!=null" v-bind:src="product.image" />
       <img class="thumbnail" v-else src='https://storage.needpix.com/rsynced_images/grocery-store-2119702_1280.jpg' />
       <br>
-      ${{product.price}}.00
+      <div v-if="product.sale != true">${{product.price}}.00</div>
+      <div v-else> {{product.discountedPrice}}</div>
       {{product.weight}}oz
     </div>
     </div>
@@ -29,7 +30,13 @@ export default {
       }
     },
     methods: {
-     
+     findSalePrice() {
+      if (this.product.sale) {
+        this.product.price = this.product.price * 0.90
+      }
+      console.log(this.product.price)
+      return this.product.price
+     }
     },
     computed: {
 filteredList() {
@@ -43,13 +50,13 @@ filteredProducts = filteredProducts.filter((item) =>
 item.sale === this.filter.sale
 );
 }
-
 return filteredProducts;
 }
 },
     created() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
+      this.products.forEach((product) => {product.discountedPrice = product.price * 0.9})
     });
   }}
 </script>
