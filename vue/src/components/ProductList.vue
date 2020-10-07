@@ -1,10 +1,9 @@
 <template>
   <div>
     <h3>PRODUCTS</h3>
-    <input type="text" name="Search" value="Search for products" />
-    <button v-on:click="filteredList()">SEARCH</button>
+    <input type="text" id="Search" v-model="filter.title"/>
     <div class="main">
-    <div class='container' v-for="product in products" :key="product.brandId">
+    <div class='container' v-for="product in filteredList" v-bind:key="product.id">
       <div class="product-title">{{product.title}}</div>
       <img class="thumbnail" v-if="product.image!=null" v-bind:src="product.image" />
       <img class="thumbnail" v-else src='https://storage.needpix.com/rsynced_images/grocery-store-2119702_1280.jpg' />
@@ -22,28 +21,28 @@ export default {
     data() {
       return {
         products: [],
+        filter: {
+          title:"",
+        }
       }
     },
     methods: {
     },
+    computed: {
+filteredList() {
+let filteredProducts = this.products;
+if (this.filter.title != "") {
+filteredProducts = filteredProducts.filter((item) =>
+item.title.toLowerCase().includes(this.filter.title.toLowerCase()));
+}
+return filteredProducts;
+}
+},
     created() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
     });
-  },
-    computed: {
-      filteredList() {
-        let filteredProducts = this.products;
-        if (this.product.title != "") {
-          filteredProducts = filteredProducts.filter((product) =>
-          product.title
-          .toLowerCase()
-          .includes(this.products.title.toLowerCase())
-          );
-        }
-      }
-    }
-}
+  }}
 </script>
 
 <style>
