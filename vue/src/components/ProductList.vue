@@ -31,10 +31,10 @@ export default {
       this.products = response.data;
     });
   },
-    computed: {
-      filteredList() {
-      }
-    }
+    // computed: {
+    //   filteredList() {
+    //   }
+    // }
 }
 </script>
 
