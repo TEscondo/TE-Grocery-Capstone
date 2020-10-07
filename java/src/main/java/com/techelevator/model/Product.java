@@ -15,7 +15,8 @@ public class Product {
 	private String image;
 	private String certification;
 	
-	public Product(String title, String image, BigDecimal price, double weight) {
+	public Product(int id, String title, String image, BigDecimal price, double weight) {
+		this.id = id;
 		this.title =title;
 		this.image = image;
 		this.price = price;
@@ -29,7 +30,7 @@ public class Product {
 	
 	
 	
-	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, String certification, boolean sale, BigDecimal price) {
+	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, boolean sale, BigDecimal price) {
 		
 		this.title = title;
 		this.price = price;
@@ -40,7 +41,7 @@ public class Product {
 		this.id = id;
 		this.categoryId = categoryId;
 		this.image = image;
-		this.certification = certification;
+
 	}
 
 

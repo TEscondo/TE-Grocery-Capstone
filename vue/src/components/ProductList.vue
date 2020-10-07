@@ -5,6 +5,7 @@
     <button v-on:click="filteredList()">SEARCH</button>
     <div class='container' v-for="product in products" :key="product.brandId">
       <img class="thumbnail" v-if="product.image!=null" v-bind:src="product.image" />
+      <img class="thumbnail" v-else src='https://storage.needpix.com/rsynced_images/grocery-store-2119702_1280.jpg' />
       <br>
       {{product.title}} ${{product.price}}.00
     </div>

@@ -24,13 +24,17 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		List<Product> allProducts = new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(getAllProducts);
 		while(result.next()) {
-		
+			int id = result.getInt("product_id");
 			String title = result.getString("title");
+			int brandId = result.getInt("brand_id");
+			String details= result.getString("details");
 			double weight= result.getDouble("weight");
+			int category = result.getInt("category_id");
 			String image = result.getString("image");
+			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product(title, image, price, weight);
+			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
 			allProducts.add(product);
 		}
 		return allProducts;
@@ -47,12 +51,17 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		List<Product>productCat= new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(productsByCat, categoryId);
 		while(result.next()) {
+			int id = result.getInt("product_id");
 			String title = result.getString("title");
+			int brandId = result.getInt("brand_id");
+			String details= result.getString("details");
 			double weight= result.getDouble("weight");
+			int category = result.getInt("category_id");
 			String image = result.getString("image");
+			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product( title, image, price, weight);
+			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
 			productCat.add(product);
 		}
 		return productCat;
@@ -65,16 +74,21 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	
 	@Override
 	public List<Product> viewProductsByBrand(int brandId) {
-		String productsByBrand= "Select * from Product where brandId = ? ";
+		String productsByBrand= "Select * from Product where brand_id = ? ";
 		List<Product>productBrand= new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(productsByBrand, brandId);
 		while(result.next()) {
+			int id = result.getInt("product_id");
 			String title = result.getString("title");
+			int brandId1 = result.getInt("brand_id");
+			String details= result.getString("details");
 			double weight= result.getDouble("weight");
+			int category = result.getInt("category_id");
 			String image = result.getString("image");
+			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product( title, image, price, weight);
+			Product product = new Product(id, title, brandId1, details, weight, category, image, sale, price);
 			productBrand.add(product);
 		}
 		return productBrand;
@@ -92,12 +106,17 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		List<Product>productSale= new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(productsBySale);
 		while(result.next()) {
+			int id = result.getInt("product_id");
 			String title = result.getString("title");
+			int brandId = result.getInt("brand_id");
+			String details= result.getString("details");
 			double weight= result.getDouble("weight");
+			int category = result.getInt("category_id");
 			String image = result.getString("image");
+			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product( title, image, price, weight);
+			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
 			productSale.add(product);
 		}
 		return productSale;
@@ -111,7 +130,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	@Override
 	public List<Product> viewProductDetails(int productId) {
 		// TODO Auto-generated method stub
-		String getAllProducts= "SELECT * FROM Product where product_id = ?";
+		String getAllProducts= "SELECT * FROM product where product_id = ?";
 		List<Product> productDetails = new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(getAllProducts, productId);
 		while(result.next()) {
@@ -122,11 +141,10 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			double weight= result.getDouble("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
-			String certification = result.getString("certification");
 			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product(id, title, brandId, details, weight, category, image, certification, sale, price);
+			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
 			productDetails.add(product);
 		}
 		return productDetails;

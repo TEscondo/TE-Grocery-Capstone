@@ -67,7 +67,7 @@ public void test() {
 	}
 	
 	@RequestMapping(path = "/details/{productId}", method=RequestMethod.GET)
-	public List<Product> viewDetails(@PathVariable int productId){
+	public List<Product> viewProductDetails(@PathVariable int productId){
 		List<Product> itemDetails= dao.viewProductDetails(productId);
 		return itemDetails;
 	}
