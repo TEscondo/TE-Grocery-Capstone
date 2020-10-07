@@ -1,7 +1,8 @@
 <template>
   <div>
     <h3>PRODUCTS</h3>
-    <input type="text" id="Search" v-model="filter.title"/>
+    <input type="text" id="Search" v-model="filter.title"/><br />
+    <input type="checkbox" v-model="filter.sale"/> <label for="checkbox"> Sale Items Only</label>
     <div class="main">
     <div class='container' v-for="product in filteredList" v-bind:key="product.id">
       <div class="product-title">{{product.title}}</div>
@@ -23,10 +24,12 @@ export default {
         products: [],
         filter: {
           title:"",
-        }
+          sale: false,
+        },
       }
     },
     methods: {
+     
     },
     computed: {
 filteredList() {
@@ -35,6 +38,12 @@ if (this.filter.title != "") {
 filteredProducts = filteredProducts.filter((item) =>
 item.title.toLowerCase().includes(this.filter.title.toLowerCase()));
 }
+if (this.filter.sale != "") {
+filteredProducts = filteredProducts.filter((item) =>
+item.sale === this.filter.sale
+);
+}
+
 return filteredProducts;
 }
 },

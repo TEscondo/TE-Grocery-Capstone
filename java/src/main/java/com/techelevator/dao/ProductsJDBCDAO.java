@@ -150,5 +150,24 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		return productDetails;
 		
 	}
-
+	public List<Product> getTitleFromCategory(String categoryName){
+	String getName = "SELECT * from product A join category B on A.category_id = B.category_id where B.category_name = ?";
+	List<Product> productName = new ArrayList<>();
+	SqlRowSet result = template.queryForRowSet(getName, categoryName);
+	while(result.next()) {
+		int id = result.getInt("product_id");
+		String title = result.getString("title");
+		int brandId = result.getInt("brand_id");
+		String details= result.getString("details");
+		double weight= result.getDouble("weight");
+		int category = result.getInt("category_id");
+		String image = result.getString("image");
+		Boolean sale= result.getBoolean("sale");
+		BigDecimal price = result.getBigDecimal("price");
+		
+		Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
+		productName.add(product);
+	}
+	return productName;
+	}
 }
