@@ -18,11 +18,6 @@ export default {
     data() {
       return {
         products: [],
-        filter: {
-          title: "",
-          price: ""
-
-        }
       }
     },
     methods: {
@@ -34,6 +29,14 @@ export default {
   },
     computed: {
       filteredList() {
+        let filteredProducts = this.products;
+        if (this.product.title != "") {
+          filteredProducts = filteredProducts.filter((product) =>
+          product.title
+          .toLowerCase()
+          .includes(this.products.title.toLowerCase())
+          );
+        }
       }
     }
 }
