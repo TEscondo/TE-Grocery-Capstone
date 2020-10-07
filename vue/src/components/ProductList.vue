@@ -21,12 +21,7 @@ import productService from "../services/ProductService.js";
 export default {
     data() {
       return {
-        products: [],
-        filter: {
-          title: "",
-          price: "",
-          salePrice: ""
-        }
+        products: []
       }
     },
     methods: {
