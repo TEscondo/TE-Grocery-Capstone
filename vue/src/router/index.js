@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import AllProducts from '../views/AllProducts.vue'
+import ProductList from '../components/ProductList.vue'
 
 Vue.use(Router)
 
@@ -57,7 +58,7 @@ const router = new Router({
     {
       path: "/all-products",
       name: "all-products",
-      component: AllProducts,
+      component: ProductList,
       meta: {
         requiresAuth: false
       }
