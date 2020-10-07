@@ -65,7 +65,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	
 	@Override
 	public List<Product> viewProductsByBrand(int brandId) {
-		String productsByBrand= "Select * from Product where brandId = ? ";
+		String productsByBrand= "Select * from Product where brand_id = ? ";
 		List<Product>productBrand= new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(productsByBrand, brandId);
 		while(result.next()) {
@@ -111,7 +111,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	@Override
 	public List<Product> viewProductDetails(int productId) {
 		// TODO Auto-generated method stub
-		String getAllProducts= "SELECT * FROM Product where product_id = ?";
+		String getAllProducts= "SELECT * FROM product where product_id = ?";
 		List<Product> productDetails = new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(getAllProducts, productId);
 		while(result.next()) {
@@ -122,11 +122,10 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			double weight= result.getDouble("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
-			String certification = result.getString("certification");
 			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product(id, title, brandId, details, weight, category, image, certification, sale, price);
+			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
 			productDetails.add(product);
 		}
 		return productDetails;
