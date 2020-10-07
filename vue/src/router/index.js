@@ -5,7 +5,6 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import AllProducts from '../views/AllProducts.vue'
 import ProductList from '../components/ProductList.vue'
 
 Vue.use(Router)
