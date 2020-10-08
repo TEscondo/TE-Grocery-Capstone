@@ -13,5 +13,8 @@ export default {
     },
     getProductsByCategory(category){
         return http.get(`/category/${category}`)
+    },
+    getProductById(id) {
+        return http.get(`/details/${id}`)
     }
 }
