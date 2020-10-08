@@ -1,10 +1,9 @@
 <template>
   <div class="home">
-    <h1>Select Category</h1>
-    <h1>Browse all items</h1>
-    <div class="category">Frozen<img src= 'https://zonacooks.com/wp-content/uploads/2017/03/No-Yeast-Pizza-Dough-for-One-Recipe-13.jpg.webp'/>
+    <div class="category">Frozen<img @click="clickMethod" src= 'https://zonacooks.com/wp-content/uploads/2017/03/No-Yeast-Pizza-Dough-for-One-Recipe-13.jpg.webp'/>
     <img src = 'https://www.rachaelraymag.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTQ2MDQwNzQzMjQ3NzUwODYx/three-cheese-baked-ziti-102594818.jpg'/> 
     <img src = 'https://www.recipegirl.com/wp-content/uploads/2019/10/pasta-vodka-sauce-1-1.jpg'/>
+    
 </div>
     <div class="category">Produce</div>
     <div class="category">International</div>
@@ -33,6 +32,11 @@ export default {
       });
     });
   },
+  methods:{
+    clickMethod(){
+      this.$router.push('all-products');
+    }
+  }
 };
 </script>
 

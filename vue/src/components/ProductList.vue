@@ -114,7 +114,7 @@ export default {
 }
 
 .container {
-  background-color: white;
+  background-color:white;
   border-radius: 10px;
   width: 250px;
   height: 270px;
