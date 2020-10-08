@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import ProductList from '../components/ProductList.vue'
+import Category from '../components/Category.vue'
 import ProductDetails from '../components/ProductDetails.vue'
 
 Vue.use(Router)
@@ -64,11 +65,23 @@ const router = new Router({
       }
     },
     {
+      path: "/byCategory/:categoryId",
+      name: 'category',
+      component: Category,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
       path: "/product-details/:id",
       name: "product-details",
       component: ProductDetails,
+<<<<<<< HEAD
     },
    
+=======
+    }
+>>>>>>> cd889b7b9aa8d31a4894c8e408ab0d6a93a2deee
   ]
 })
 

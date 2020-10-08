@@ -80,6 +80,7 @@ public void test() {
 		List<Product> categoryList = dao.getTitleFromCategory(categoryName);
 		return categoryList;
 	}
+
 	
 	@RequestMapping(path = "/cat", method= RequestMethod.GET)
 	public List<Category>getAllCategories(){
