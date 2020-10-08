@@ -44,7 +44,7 @@ export default {
   },
   created() {
     productService
-      .getProductsByCategory(this.$route.params.categoryId)
+      .getProductsByCategoryId(this.$route.params.categoryId)
       .then((response) => {
         this.products = response.data;
         this.products.forEach((product) => {
