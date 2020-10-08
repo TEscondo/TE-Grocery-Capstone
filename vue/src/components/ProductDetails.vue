@@ -1,9 +1,8 @@
 <template>
   <div class="details-main">
-    <banner />
-    <h2>{{ currentProduct.title }} Details</h2>
     <br />
     <div class="details-container">
+    <h2>{{ currentProduct.title }}</h2>
       <img
         class="thumbnail"
         v-if="currentProduct.image"
@@ -15,28 +14,25 @@
         v-else
         src="https://grocerymonk.com/image_placeholder.png"
       />
-      <div>{{ currentProduct.title }}</div>
-      <div class="price" v-if="currentProduct.sale != true">
-        ${{ currentProduct.price }}.00
-      </div>
-      <div class="sale-price" v-else>
+     
+      <span class="price" v-if="currentProduct.sale != true">
+        ${{ currentProduct.price }}.00 | 
+      </span>
+      <span class="sale-price" v-else>
         was ${{ currentProduct.price }}.00 now ${{
           currentProduct.discountedPrice
         }}0
-      </div>
+      </span> {{ currentProduct.weight }}oz <br/>
       {{ currentProduct.details }}
-      {{ currentProduct.weight }}oz
+      
     </div>
   </div>
 </template>
 
 <script>
 import productService from "../services/ProductService.js";
-import Banner from "@/components/Banner";
 export default {
-  components: {
-    Banner,
-  },
+  
   name: "details",
   data() {
     return {
@@ -54,11 +50,18 @@ export default {
 
 <style>
 .details-main {
-  display: grid;
+  display: block;
+  
 }
 
 .details-container {
   max-width: 500px;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+    color: #03989e;
 }
 </style>
