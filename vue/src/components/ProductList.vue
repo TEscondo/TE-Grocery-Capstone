@@ -8,18 +8,18 @@
       <label for="basic-dropdown">Categories: </label>
       <select name="basic-dropdown" v-model="filter.categoryId">
         <option value="">View All</option>
-        <option value="1">frozen</option>
-        <option value="4">produce</option>
-        <option value="6">international</option>
-        <option value="7">beverages</option>
-        <option value="8">pets</option>
-        <option value="9">dry goods pasta</option>
-        <option value="11">personal care</option>
-        <option value="12">meat seafood</option>
-        <option value="13">pantry</option>
-        <option value="14">breakfast</option>
-        <option value="15">canned goods</option>
-        <option value="19">snacks</option>
+        <option value="1">Frozen</option>
+        <option value="4">Produce</option>
+        <option value="6">International</option>
+        <option value="7">Beverages</option>
+        <option value="8">Pets</option>
+        <option value="9">Dry Goods/Pasta</option>
+        <option value="11">Personal Care</option>
+        <option value="12">Meat/Seafood</option>
+        <option value="13">Pantry</option>
+        <option value="14">Breakfast</option>
+        <option value="15">Canned Goods</option>
+        <option value="19">Snacks</option>
       </select>
     </div>
     <div class="main">
@@ -28,22 +28,25 @@
         v-for="product in filteredList"
         v-bind:key="product.id"
       >
-        <div class="product-title">{{ product.title }}</div>
+      <a v-bind:href="'/product-details/' + product.id">
         <img
           class="thumbnail"
-          v-if="product.image != null"
+          v-if="product.image"
           v-bind:src="product.image"
+          onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
         />
         <img
           class="thumbnail"
           v-else
-          src="https://storage.needpix.com/rsynced_images/grocery-store-2119702_1280.jpg"
+          src="https://grocerymonk.com/image_placeholder.png"
         />
-        <br />
-        <div v-if="product.sale != true">${{ product.price }}.00</div>
-        <div v-else>was ${{product.price}}.00 now ${{ product.discountedPrice }}0</div>
+        <div class="product-title">{{ product.title }}</div>
+        <div class="price" v-if="product.sale != true">${{ product.price }}.00</div>
+        <div class="sale-price" v-else>was ${{product.price}}.00 now ${{ product.discountedPrice }}0</div>
         {{ product.weight }}oz
+        </a>
       </div>
+      
     </div>
   </div>
 </template>
@@ -107,10 +110,11 @@ export default {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  background-color: #f9fafb;
 }
 
 .container {
-  border: 2px solid black;
+  background-color: white;
   border-radius: 10px;
   width: 250px;
   height: 270px;
@@ -125,5 +129,9 @@ export default {
 .thumbnail {
   max-width: 200px;
   max-height: 150px;
+}
+
+.price {
+  font-size: 1.4rem;
 }
 </style>

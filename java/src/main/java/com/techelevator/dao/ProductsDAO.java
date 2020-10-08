@@ -13,7 +13,7 @@ public interface ProductsDAO {
 	List<Product> viewProductsByBrand(int brand);
 	
 	List<Product> viewProductsBySale();
-	List<Product>viewProductDetails(int id);
+	Product viewProductDetails(int id);
 	List<Product> getTitleFromCategory(String categoryName);
 
 	

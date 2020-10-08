@@ -6,9 +6,12 @@
 
 <script>
 import HomePage from '@/components/HomePage';
+
+
 export default {
   components : {
-   HomePage
+   HomePage,
+  
   }
 };
 </script>
