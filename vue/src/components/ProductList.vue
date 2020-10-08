@@ -28,6 +28,7 @@
         v-for="product in filteredList"
         v-bind:key="product.id"
       >
+      <a v-bind:href="'/product-details/' + product.id">
         <img
           class="thumbnail"
           v-if="product.image"
@@ -43,7 +44,9 @@
         <div class="price" v-if="product.sale != true">${{ product.price }}.00</div>
         <div class="sale-price" v-else>was ${{product.price}}.00 now ${{ product.discountedPrice }}0</div>
         {{ product.weight }}oz
+        </a>
       </div>
+      
     </div>
   </div>
 </template>
@@ -107,7 +110,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  background-color: #F9FAFB;
+  background-color: #f9fafb;
 }
 
 .container {

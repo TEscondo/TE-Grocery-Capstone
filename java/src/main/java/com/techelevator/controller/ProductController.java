@@ -20,7 +20,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techelevator.dao.CategoryDAO;
 import com.techelevator.dao.ProductsDAO;
+import com.techelevator.model.Category;
 import com.techelevator.model.Product;
 import com.techelevator.service.ProductService;
 
@@ -31,7 +33,7 @@ public class ProductController {
 	@Autowired
 
 ProductsDAO dao;
-
+CategoryDAO dao1;
 	
 	@RequestMapping(path="/test", method=RequestMethod.GET)
 public void test() {
@@ -67,8 +69,8 @@ public void test() {
 	}
 	
 	@RequestMapping(path = "/details/{productId}", method=RequestMethod.GET)
-	public List<Product> viewProductDetails(@PathVariable int productId){
-		List<Product> itemDetails= dao.viewProductDetails(productId);
+	public Product viewProductDetails(@PathVariable int productId){
+		Product itemDetails= dao.viewProductDetails(productId);
 		return itemDetails;
 	}
 	
@@ -80,5 +82,9 @@ public void test() {
 	}
 
 	
-	
+	@RequestMapping(path = "/cat", method= RequestMethod.GET)
+	public List<Category>getAllCategories(){
+		List<Category> allCategory= dao1.getAllCategories();
+		return allCategory;
+	}
 }

@@ -23,13 +23,6 @@ public class Product {
 		this.weight = weight;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, boolean sale, BigDecimal price) {
 		
 		this.title = title;

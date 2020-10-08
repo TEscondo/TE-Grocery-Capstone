@@ -6,5 +6,6 @@ import com.techelevator.model.Category;
 
 public interface CategoryDAO {
 	List <Category> viewProductsByCategory(int id);
+	List<Category> getAllCategories();
 
 }

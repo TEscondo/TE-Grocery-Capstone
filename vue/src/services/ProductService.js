@@ -11,10 +11,10 @@ export default {
     getProductByDetails(id){
         return http.get(`/byBrand/${id}`);
     },
-    getProductsByCategory(categoryId){
-        return http.get(`byCategory/${categoryId}`)
+    getProductsByCategory(category){
+        return http.get(`/category/${category}`)
     },
-    getTitleFromCategory(categoryName) {
-        return http.get(`/category/${categoryName}`)
+    getProductById(id) {
+        return http.get(`/details/${id}`)
     }
 }

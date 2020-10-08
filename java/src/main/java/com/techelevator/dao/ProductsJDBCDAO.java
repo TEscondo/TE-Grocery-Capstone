@@ -128,10 +128,10 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	
 	
 	@Override
-	public List<Product> viewProductDetails(int productId) {
+	public Product viewProductDetails(int productId) {
 		// TODO Auto-generated method stub
 		String getAllProducts= "SELECT * FROM product where product_id = ?";
-		List<Product> productDetails = new ArrayList<>();
+		Product productDetails = null;
 		SqlRowSet result = template.queryForRowSet(getAllProducts, productId);
 		while(result.next()) {
 			int id = result.getInt("product_id");
@@ -144,8 +144,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			Boolean sale= result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
 			
-			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
-			productDetails.add(product);
+			productDetails = new Product(id, title, brandId, details, weight, category, image, sale, price);
 		}
 		return productDetails;
 		
