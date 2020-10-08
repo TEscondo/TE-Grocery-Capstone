@@ -147,4 +147,11 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 </style>
