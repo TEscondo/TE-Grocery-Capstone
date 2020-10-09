@@ -1,14 +1,23 @@
 <template>
-  <div class="home">
-    <product-list />
-  </div>
+<div class ="home">
+  <home-page/>
+</div>
 </template>
 
 <script>
-import ProductList from '@/components/ProductList';
+import HomePage from '@/components/HomePage';
+
+
 export default {
   components : {
-    ProductList
+   HomePage,
+  
   }
 };
 </script>
+
+<style>
+
+
+
+</style>

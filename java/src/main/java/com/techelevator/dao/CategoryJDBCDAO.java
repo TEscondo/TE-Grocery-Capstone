@@ -27,6 +27,18 @@ public class CategoryJDBCDAO implements CategoryDAO {
 			String categoryName = result.getNString("category_name");
 			
 			Category category = new Category(categoryid, categoryName);
+			categories.add(category);
+		}
+		return categories;
+	}
+	public List<Category>getAllCategories(){
+		String getCategory="select category_name from category";
+		List<Category> categories = new ArrayList<>();
+		SqlRowSet result = template.queryForRowSet(getCategory);
+		while(result.next()) {
+			String categoryName = result.getString("category_name");
+			Category category = new Category(categoryName);
+			categories.add(category);
 		}
 		return categories;
 	}
