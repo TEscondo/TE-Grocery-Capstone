@@ -26,7 +26,7 @@
           ${{ product.price }}.00
         </div>
         <div class="sale-price" v-else>
-          was ${{ product.price }}.00 now ${{ product.discountedPrice }}0
+          <s>${{ product.price }}.00</s> ${{ product.discountedPrice }}0
         </div>
         {{ product.weight }}oz
       </div>
