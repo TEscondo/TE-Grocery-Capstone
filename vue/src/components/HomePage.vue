@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import productService from '@/services/ProductService.js';
+import productService from "@/services/ProductService.js";
 export default {
    data() {
     return {
@@ -65,29 +65,23 @@ export default {
 </script>
 
 <style>
-
 body {
   background-color: skyblue;
-
 }
-.category{
+.category {
   display: flex;
   margin-top: 5rem;
-  border:5px ;
- padding: 1px;
- font-size: 30px;
+  border: 5px;
+  padding: 1px;
+  font-size: 30px;
 }
 
-img{
+img {
   display: flex;
-  
+
   margin: 50px;
-  width:200px;
-  height:200px;
+  width: 200px;
+  height: 200px;
   padding-left: 20px;
-  
 }
-
-
-
 </style>
