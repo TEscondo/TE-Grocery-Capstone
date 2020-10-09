@@ -76,12 +76,7 @@ const router = new Router({
       path: "/product-details/:id",
       name: "product-details",
       component: ProductDetails,
-<<<<<<< HEAD
-    },
-   
-=======
     }
->>>>>>> dc91e54cf2d5d9b612eee1a39417cb2b002ed280
   ]
 })
 
