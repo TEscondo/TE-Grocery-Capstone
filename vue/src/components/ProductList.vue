@@ -27,25 +27,30 @@
         v-for="product in filteredList"
         v-bind:key="product.id"
       >
-      <a v-bind:href="'/product-details/' + product.id">
-        <img
-          class="thumbnail"
-          v-if="product.image"
-          v-bind:src="product.image"
-          onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-        />
-        <img
-          class="thumbnail"
-          v-else
-          src="https://grocerymonk.com/image_placeholder.png"
-        />
-        <div class="product-title">{{ product.title }}</div>
-        <div class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</div>
-        <div class="sale-price" v-else>was ${{product.price.toFixed(2)}} now ${{ product.discountedPrice.toFixed(2) }}</div>
-        {{ product.weight }}oz
+        <a v-bind:href="'/product-details/' + product.id">
+          <img
+            class="thumbnail"
+            v-if="product.image"
+            v-bind:src="product.image"
+            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+          />
+          <img
+            class="thumbnail"
+            v-else
+            src="https://grocerymonk.com/image_placeholder.png"
+          />
+          <div class="product-title">{{ product.title }}</div>
+          <div class="price" v-if="product.sale != true">
+            ${{ product.price.toFixed(2) }}
+          </div>
+          <div class="sale-price" v-else>
+            was ${{ product.price.toFixed(2) }} now ${{
+              product.discountedPrice.toFixed(2)
+            }}
+          </div>
+          {{ product.weight }}oz
         </a>
       </div>
-      
     </div>
   </div>
 </template>
@@ -113,7 +118,7 @@ export default {
 }
 
 .container {
-  background-color:white;
+  background-color: white;
   border-radius: 10px;
   width: 250px;
   height: 270px;
