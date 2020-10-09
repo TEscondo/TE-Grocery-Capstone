@@ -27,6 +27,7 @@
         v-for="product in filteredList"
         v-bind:key="product.id"
       >
+      <div class = "product-card">
       <a v-bind:href="'/product-details/' + product.id">
         <img
           class="thumbnail"
@@ -41,9 +42,10 @@
         />
         <div class="product-title">{{ product.title }}</div>
         <div class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</div>
-        <div class="sale-price" v-else><s><div class="before-sale-price">${{product.price.toFixed(2)}}</div></s> ${{ product.discountedPrice.toFixed(2) }}</div>
+        <div v-else class="before-sale-price"><s>${{product.price.toFixed(2)}}</s></div><div>${{ product.discountedPrice.toFixed(2) }}</div>
         {{ product.weight }}oz
-        </a>
+      </a>
+      </div>
       </div>
       
     </div>
@@ -114,27 +116,31 @@ export default {
 
 .container {
   background-color:white;
-  border-radius: 10px;
-  width: 250px;
-  height: 270px;
-  gap: 1rem;
+  border-radius: 1em;
+  width: 15em;
+  height: 25em;
+  gap: 10em;
   margin: 1rem;
   text-align: center;
-  vertical-align: middle;
 }
 .product-title {
   font-size: 1.5rem;
 }
 .thumbnail {
-  max-width: 200px;
-  max-height: 150px;
+  max-width: 10em;
+  max-height: 10em;
 }
 
 .price {
-  font-size: 1.4rem;
+  font-size: 1em;
 }
 
 .before-sale-price {
     color: rgb(253, 97, 97);
+    font-size: 1em;
+}
+
+.product-card {
+  display: flex;
 }
 </style>
