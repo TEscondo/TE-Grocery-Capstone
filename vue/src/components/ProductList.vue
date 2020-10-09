@@ -13,11 +13,10 @@
         <option value="6">International</option>
         <option value="7">Beverages</option>
         <option value="8">Pets</option>
-        <option value="9">Dry Goods/Pasta</option>
+        <option value="9">Dry Goods</option>
         <option value="11">Personal Care</option>
         <option value="12">Meat/Seafood</option>
         <option value="13">Pantry</option>
-        <option value="14">Breakfast</option>
         <option value="15">Canned Goods</option>
         <option value="19">Snacks</option>
       </select>
