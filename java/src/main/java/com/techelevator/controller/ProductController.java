@@ -33,6 +33,7 @@ public class ProductController {
 	@Autowired
 
 ProductsDAO dao;
+	@Autowired
 CategoryDAO dao1;
 	
 	@RequestMapping(path="/test", method=RequestMethod.GET)

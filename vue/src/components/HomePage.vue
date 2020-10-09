@@ -1,27 +1,28 @@
 <template>
   <div class="home">
-    <div class="category">Frozen<img @click="clickMethod" src= 'https://zonacooks.com/wp-content/uploads/2017/03/No-Yeast-Pizza-Dough-for-One-Recipe-13.jpg.webp'/>
-    <img src = 'https://www.rachaelraymag.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTQ2MDQwNzQzMjQ3NzUwODYx/three-cheese-baked-ziti-102594818.jpg'/> 
-    <img src = 'https://www.recipegirl.com/wp-content/uploads/2019/10/pasta-vodka-sauce-1-1.jpg'/>
-    
-</div>
-    <div class="category">Produce</div>
-    <div class="category">International</div>
-    <div class="category">Beverages</div>
-    <div class="category">Dry Goods Pasta</div>
-    <div class="category">Personal Care</div>
-    <div class="category">Meat Seafood</div>
-    <div class="category">Panty</div>
-    <div class="category">Breakfast</div>
-    <div class="category">Canned Goods</div>
-    <div class="category">Snacks</div>
-    <product-list />
+
+    <div v-for="category in categories" v-bind:key="category.categoryId">
+      <h3>{{category.categoryName}}</h3>
+      <div v-for="product in products" v-bind:key="product.categoryId">
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
   import productService from '@/services/ProductService.js';
 export default {
+   data() {
+    return {
+      products: [],
+      filter: {
+        title: "",
+        sale: false,
+        categoryId: "",
+      },
+      categories: [],
+    };
+  },
   components : {
   },
   created() {
@@ -31,12 +32,35 @@ export default {
         product.discountedPrice = product.price * 0.9;
       });
     });
+  productService.getAllCategories().then((response) => {
+    this.categories = response.data;
+  });
   },
   methods:{
     clickMethod(){
       this.$router.push('all-products');
     }
-  }
+  },computed: {
+    filteredList() {
+      let filteredProducts = this.products;
+      if (this.filter.title != "") {
+        filteredProducts = filteredProducts.filter((item) =>
+          item.title.toLowerCase().includes(this.filter.title.toLowerCase())
+        );
+      }
+      if (this.filter.sale != "") {
+        filteredProducts = filteredProducts.filter(
+          (item) => item.sale === this.filter.sale
+        );
+      }
+      if (this.filter.categoryId != "") {
+        filteredProducts = filteredProducts.filter(
+          (item) => item.categoryId == this.filter.categoryId
+        );
+      }
+      return filteredProducts;
+    },
+  },
 };
 </script>
 
