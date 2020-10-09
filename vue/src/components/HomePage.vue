@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <template>
   <div class="home">
 
@@ -87,4 +85,3 @@ img {
   padding-left: 20px;
 }
 </style>
->>>>>>> c4aa0bb090b635c44eae3d6a9eabb9d33c2515d9
