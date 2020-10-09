@@ -26,7 +26,7 @@
           ${{ product.price }}.00
         </div>
         <div class="sale-price" v-else>
-          <s>${{ product.price }}.00</s> ${{ product.discountedPrice }}0
+          <s><div class="before-sale-price">${{ product.price }}.00</div></s> ${{ product.discountedPrice }}0
         </div>
         {{ product.weight }}oz
       </div>
@@ -207,5 +207,9 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.before-sale-price {
+    color: rgb(253, 97, 97);
 }
 </style>
