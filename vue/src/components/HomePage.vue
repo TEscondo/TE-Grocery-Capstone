@@ -50,7 +50,7 @@ export default {
 
 <style>
 
-body{
+body {
   background-color: skyblue;
 
 }
