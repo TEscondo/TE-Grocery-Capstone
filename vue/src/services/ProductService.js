@@ -5,6 +5,9 @@ const http = axios.create({
 });
 
 export default {
+    loadHomePageData() {
+        return http.get('/allProductsHome');
+    },
     getAllProducts() {
         return http.get('/allProducts');
     },

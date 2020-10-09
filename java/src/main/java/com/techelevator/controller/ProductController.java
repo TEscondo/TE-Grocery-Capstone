@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.dao.CategoryDAO;
 import com.techelevator.dao.ProductsDAO;
 import com.techelevator.model.Category;
+import com.techelevator.model.CategorySummary;
 import com.techelevator.model.Product;
 import com.techelevator.service.ProductService;
 
@@ -41,6 +42,37 @@ public void test() {
 	System.out.println("It's working");
 }
 
+	@PreAuthorize("permitAll()")	
+	@RequestMapping(path="/allProductsHome", method = RequestMethod.GET)
+	public List<CategorySummary> getHomePageData() {
+		
+		List<CategorySummary> catSummaryList = new ArrayList<CategorySummary>();
+		List<Category> allCategory= dao1.getAllCategories();
+		
+		for (Category cat : allCategory) {
+			CategorySummary catSummary = new CategorySummary();
+			
+			catSummary.setCategoryDescription(cat.categoryDescription);
+			catSummary.setCategoryName(cat.categoryName);
+			catSummary.setCategoryId(cat.categoryId);
+			List<Product> productsCatAll = dao.viewProductsByCategory(cat.categoryId);
+			
+			List<Product> productsCat = new ArrayList<Product>();
+			for (int i=0; i < 3; i++ ) {
+				productsCat.add(productsCatAll.get(i));
+			}
+			
+			catSummary.setProductsList(productsCat);
+			
+			catSummaryList.add(catSummary);
+			
+		}
+		
+		return catSummaryList;
+		
+		
+	}
+	
 	
 @PreAuthorize("permitAll()")	
 @RequestMapping(path = "/allProducts", method = RequestMethod.GET)

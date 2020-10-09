@@ -19,7 +19,7 @@
         ${{ currentProduct.price }}.00 | 
       </span>
       <span class="sale-price" v-else>
-        was ${{ currentProduct.price }}.00 now ${{
+        <s><div class="before-sale-price">${{ currentProduct.price }}.00</div></s> ${{
           currentProduct.discountedPrice
         }}0
       </span> {{ currentProduct.weight }}oz <br/>
@@ -63,5 +63,9 @@ export default {
 
 h2 {
     color: #03989e;
+}
+
+.before-sale-price {
+    color: rgb(253, 97, 97);
 }
 </style>
