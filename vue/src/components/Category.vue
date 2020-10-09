@@ -3,7 +3,7 @@
     <div class="category-title">
       <h1>{{returnCategoryName}}</h1>
     </div>
-    <p class="category-description">Category Description</p>
+    <p class="category-description">{{returnCategoryDescription}}</p>
     <div class="main">
       <div
         class="container"
@@ -64,7 +64,7 @@ export default {
              return "Pets";
         }
         if (this.$route.params.categoryId == 9) {
-            return "Dry Goods Pasta";
+            return "Dry Goods";
         }
         if (this.$route.params.categoryId == 10) {
             return "Bulk";
@@ -85,7 +85,7 @@ export default {
             return "Canned Goods";
         }
         if (this.$route.params.categoryId == 16) {
-            return "Dairy Eggs";
+            return "Dairy";
         }
         if (this.$route.params.categoryId == 17) {
             return "Household";
@@ -96,15 +96,69 @@ export default {
         if (this.$route.params.categoryId == 19) {
             return "Snacks";
         }
-        if (this.$route.params.categoryId == 20) {
-            return "Deli";
+        return "Other";
+    },
+   returnCategoryDescription() {
+        if (this.$route.params.categoryId == 1) {
+            return "Frozen Food - Meat, Produce, Snacks, Dinners, Desserts, and other convenient meals to fill your freezer.";
         }
-        if (this.$route.params.categoryId == 21) {
-            return "Missing";
+        if (this.$route.params.categoryId == 2) {
+            return "An assortment of unrelated items";
+        }
+        if (this.$route.params.categoryId == 3) {
+            return "Bakery - Bread, pies, cookies, and a variety of baked delights.";
+        }
+        if (this.$route.params.categoryId == 4) {
+            return "Produce - Freshly picked fruits and vegetables to kickstart any recipe or enjoy on its own.";
+        }
+        if (this.$route.params.categoryId == 5) {
+            return "Alcohol - Beers, wines, and spirits - Please drink responsibly.";
+        }
+        if (this.$route.params.categoryId == 6) {
+            return "International - Exotic foods, snacks, and spices from all over the world.";
+        }
+        if (this.$route.params.categoryId == 7) {
+            return "Beverages - Water, juice, soft drinks, and sports drinks to quench your thirst.";
+        }
+        if (this.$route.params.categoryId == 8) {
+             return "Pets - Dry foods, canned foods, treats, and accessories for your furry family.";
+        }
+        if (this.$route.params.categoryId == 9) {
+            return "Dry Goods - Cereal, pasta, rice, and other grains";
+        }
+        if (this.$route.params.categoryId == 10) {
+            return "Items that may be bought in bulk for the best savings";
+        }
+        if (this.$route.params.categoryId == 11) {
+            return "Personal Care - Vitamins, supplements, and other products to keep you healthy.";
+        }
+        if (this.$route.params.categoryId == 12) {
+            return "Deli - Chicken, beef, pork, fish, and a variety of meats found on land or sea.";
+        }
+        if (this.$route.params.categoryId == 13) {
+            return "Pantry - Sugar, spice, mix, and other essentials for any recipe.";
+        }
+        if (this.$route.params.categoryId == 14) {
+            return "Items for the most important meal of the day";
+        }
+        if (this.$route.params.categoryId == 15) {
+            return "Canned Goods - Fruits, vegetables, meats, and other foods built for a long shelf-life.";
+        }
+        if (this.$route.params.categoryId == 16) {
+            return "Dairy - milk, cheese, and other plant-based alternatives for you and your family to enjoy.";
+        }
+        if (this.$route.params.categoryId == 17) {
+            return "Household - Office, kitchen, bathroom, and cleaning products to keep your home stocked and clean.";
+        }
+        if (this.$route.params.categoryId == 18) {
+            return "Items to care for the youngest among us";
+        }
+        if (this.$route.params.categoryId == 19) {
+            return "Snacks - Chips, dips, cookies, candy, and other treats for you to endulge.";
         }
         return "Other";
     }
- },
+},
   data() {
     return {
       products: [],

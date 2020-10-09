@@ -20,4 +20,7 @@ export default {
     getProductsByCategoryId(categoryId){
         return http.get(`/byCategory/${categoryId}`)
     },
+    getAllCategories(){
+        return http.get(`/cat`)
+    },
 }
