@@ -1,24 +1,29 @@
 <template>
   <div id="app">
-      <banner/>
+    <banner />
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'all-products'}">View All Products</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'cart'}">Cart</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+      <router-link v-bind:to="{ name: 'all-products' }"
+        >View All Products</router-link
+      >&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'cart' }">Cart</router-link>&nbsp;|&nbsp;
+      <router-link
+        v-bind:to="{ name: 'logout' }"
+        v-if="$store.state.token != ''"
+        >Logout</router-link
+      >
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
-import Banner from '@/components/Banner';
+import Banner from "@/components/Banner";
 export default {
   components: {
-    Banner
-  }
-
-}
+    Banner,
+  },
+};
 </script>
 
 <style>
@@ -29,4 +34,8 @@ export default {
   font-size: 1.2em;
 }
 
+a {
+  text-decoration: none;
+  font-family: sans-serif;
+}
 </style>

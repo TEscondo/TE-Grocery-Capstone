@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Product {
 
@@ -34,6 +35,21 @@ public class Product {
 		this.id = id;
 		this.categoryId = categoryId;
 		this.image = image;
+
+	}
+	
+public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, boolean sale, BigDecimal price, String certification) {
+		
+		this.title = title;
+		this.price = price;
+		this.sale = sale;
+		this.brandId = brandId;
+		this.details = details;
+		this.weight = weight;
+		this.id = id;
+		this.categoryId = categoryId;
+		this.image = image;
+		this.certification = certification;
 
 	}
 
