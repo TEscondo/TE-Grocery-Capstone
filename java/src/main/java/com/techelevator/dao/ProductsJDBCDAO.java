@@ -114,8 +114,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 	@Override
 	public Product viewProductDetails(int productId) {
 		// TODO Auto-generated method stub
-		String getAllProducts = "SELECT p.*, a.certification_name from certification a join certification_product cp ON a.certification_id = cp.certification_id"
-				+ " join product p ON p.product_id = cp.product_id WHERE p.product_id = ?";
+		String getAllProducts = "SELECT * from product where product_id = ?";
 		Product productDetails = null;
 		SqlRowSet result = template.queryForRowSet(getAllProducts, productId);
 		while (result.next()) {
@@ -128,9 +127,9 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
-			String certification = result.getString("certification_name");
+			
 
-			productDetails = new Product(id, title, brandId, details, weight, category, image, sale, price, certification);
+			productDetails = new Product(id, title, brandId, details, weight, category, image, sale, price);
 		}
 		return productDetails;
 
