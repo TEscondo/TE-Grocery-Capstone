@@ -31,7 +31,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String title = result.getString("title");
 			int brandId = result.getInt("brand_id");
 			String details = result.getString("details");
-			double weight = result.getDouble("weight");
+			String weight = result.getString("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
@@ -54,7 +54,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String title = result.getString("title");
 			int brandId = result.getInt("brand_id");
 			String details = result.getString("details");
-			double weight = result.getDouble("weight");
+			String weight = result.getString("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
@@ -76,7 +76,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String title = result.getString("title");
 			int brandId1 = result.getInt("brand_id");
 			String details = result.getString("details");
-			double weight = result.getDouble("weight");
+			String weight = result.getString("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
@@ -99,7 +99,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String title = result.getString("title");
 			int brandId = result.getInt("brand_id");
 			String details = result.getString("details");
-			double weight = result.getDouble("weight");
+			String weight = result.getString("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
@@ -123,7 +123,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String title = result.getString("title");
 			int brandId = result.getInt("brand_id");
 			String details = result.getString("details");
-			double weight = result.getDouble("weight");
+			String weight = result.getString("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
@@ -145,7 +145,7 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String title = result.getString("title");
 			int brandId = result.getInt("brand_id");
 			String details = result.getString("details");
-			double weight = result.getDouble("weight");
+			String weight = result.getString("weight");
 			int category = result.getInt("category_id");
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");

@@ -10,13 +10,13 @@ public class Product {
 	private boolean sale;
 	private int brandId;
 	private String details;
-	private double weight;
+	private String weight;
 	private int id;
 	private int categoryId;
 	private String image;
 	private String certification;
 	
-	public Product(int id, String title, String image, BigDecimal price, double weight) {
+	public Product(int id, String title, String image, BigDecimal price, String weight) {
 		this.id = id;
 		this.title =title;
 		this.image = image;
@@ -24,7 +24,7 @@ public class Product {
 		this.weight = weight;
 	}
 
-	public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, boolean sale, BigDecimal price) {
+	public Product(int id, String title, int brandId, String details, String weight, int categoryId, String image, boolean sale, BigDecimal price) {
 		
 		this.title = title;
 		this.price = price;
@@ -38,7 +38,7 @@ public class Product {
 
 	}
 	
-public Product(int id, String title, int brandId, String details, double weight, int categoryId, String image, boolean sale, BigDecimal price, String certification) {
+public Product(int id, String title, int brandId, String details, String weight, int categoryId, String image, boolean sale, BigDecimal price, String certification) {
 		
 		this.title = title;
 		this.price = price;
@@ -100,11 +100,11 @@ public Product(int id, String title, int brandId, String details, double weight,
 		this.details = details;
 	}
 
-	public double getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 
