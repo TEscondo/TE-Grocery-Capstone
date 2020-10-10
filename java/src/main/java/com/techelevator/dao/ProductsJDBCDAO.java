@@ -156,10 +156,15 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		return productName;
 	}
 
-	public Product getCertification(int id) {
-		String select = "SELECT p.*, a.certification_name from certification a join certification_product cp ON a.certification_id = cp.certification_id"
-				+ "join product p ON p.product_id = cp.product_id WHERE p.product_id = ?";
-		Product prod = null;
-		return prod;
+	public String getCertification(int productId) {
+		String select = "SELECT a.certification_name from certification a join certification_product cp ON a.certification_id = cp.certification_id"
+				+ " join product p ON p.product_id = cp.product_id WHERE p.product_id = ?";
+		String name = null;
+		
+		SqlRowSet result = template.queryForRowSet(select, productId);
+		while (result.next()) {
+			name = result.getString("certification_name");
+		}
+		return name;
 	}
 }

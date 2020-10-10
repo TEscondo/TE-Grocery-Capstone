@@ -22,9 +22,9 @@
         <s><div class="before-sale-price">${{ currentProduct.price }}.00</div></s> ${{
           currentProduct.discountedPrice
         }}0
-      </span> {{ currentProduct.weight }}oz <br/>
+      </span> {{ currentProduct.weight }} <br/>
       {{ currentProduct.details }} <br/>
-      Certifications: {{currentProduct.certification}}
+      <div v-if="certification">Certifications: {{certification}}</div>
       
     </div>
   </div>
@@ -38,6 +38,7 @@ export default {
   data() {
     return {
       currentProduct: {},
+      certification: {}
     };
   },
   created() {
@@ -45,6 +46,8 @@ export default {
       this.currentProduct = response.data;
       this.currentProduct.discountedPrice = this.currentProduct.price * 0.9;
     });
+    productService.getCertifications(this.$route.params.id).then((response) =>
+      this.certification = response.data)
   },
 };
 </script>

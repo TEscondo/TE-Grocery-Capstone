@@ -120,4 +120,10 @@ public void test() {
 		List<Category> allCategory= dao1.getAllCategories();
 		return allCategory;
 	}
+	
+	@RequestMapping(path = "/cert/{productId}", method=RequestMethod.GET)
+	public String getCertification(@PathVariable int productId) {
+		String cert = dao.getCertification(productId);
+		return cert;
+	}
 }

@@ -16,5 +16,7 @@ public interface ProductsDAO {
 	Product viewProductDetails(int id);
 	List<Product> getTitleFromCategory(String categoryName);
 
+	String getCertification(int productId);
+
 	
 }
