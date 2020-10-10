@@ -19,9 +19,9 @@ public class ProductService {
 			String price = jsonNode.path("data").path(i).path("items").path("price").path("regular").toString();
 			BigDecimal bdPrice = new BigDecimal(price);
 			String weight = jsonNode.path("data").path(i).path("items").path("size").toString();
-			double dWeight = Double.parseDouble(weight);
+			
 
-			Product product = new Product(i, productName, image, bdPrice, dWeight);
+			Product product = new Product(i, productName, image, bdPrice, weight);
 			productList.add(product);
 
 		}
