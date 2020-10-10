@@ -142,4 +142,5 @@ export default {
 .product-card {
   display: flex;
 }
+
 </style>

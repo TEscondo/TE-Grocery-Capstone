@@ -10,6 +10,7 @@ export default {
 
 <style>
 img {
+  width: 500px;
     display: block;
     margin-left: auto;
     margin-right: auto;

@@ -23,7 +23,8 @@
           currentProduct.discountedPrice
         }}0
       </span> {{ currentProduct.weight }}oz <br/>
-      {{ currentProduct.details }}
+      {{ currentProduct.details }} <br/>
+      Certifications: {{currentProduct.certification}}
       
     </div>
   </div>

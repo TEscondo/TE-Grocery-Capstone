@@ -147,9 +147,8 @@ body {
   font-size: 30px;
 }
 
-img {
+.thumbnail {
   display: flex;
-
   margin: 50px;
   width: 200px;
   height: 200px;
