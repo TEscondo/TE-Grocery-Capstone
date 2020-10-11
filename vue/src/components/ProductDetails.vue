@@ -19,10 +19,9 @@
         ${{ currentProduct.price }}.00 | 
       </span>
       <span class="sale-price" v-else>
-        <s><div class="before-sale-price">${{ currentProduct.price.toFixed(2) }}</div></s> ${{
+        <s><div class="before-sale-price">${{ currentProduct.price.toFixed(2) }}</div></s>${{
           currentProduct.discountedPrice.toFixed(2)
-        }}
-      </span> {{ currentProduct.weight }} <br/>
+        }}</span> {{ currentProduct.weight }} <br/>
       {{ currentProduct.details }} <br/>
       <div v-if="certification">Certifications: {{certification}}</div>
       
@@ -54,7 +53,7 @@ export default {
 
 <style>
 .details-main {
-  display: block;
+  display: flex;
   
 }
 
@@ -65,8 +64,15 @@ export default {
   margin-right: auto;
 }
 
+.thumbnail {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  margin: auto;
+}
+
 h2 {
-    color: #03989e;
+    color: black;
 }
 
 .before-sale-price {
