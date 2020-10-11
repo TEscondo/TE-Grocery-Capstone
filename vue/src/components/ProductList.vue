@@ -1,11 +1,7 @@
 <template>
   <div>
-    <h3>PRODUCTS</h3>
-    <input type="text" id="Search" v-model="filter.title" /><br />
-    <input type="checkbox" v-model="filter.sale" />
-    <label for="checkbox"> Sale Items Only</label>
-    <div class="filter">
-      <label for="basic-dropdown">Categories: </label>
+    <h3>PRODUCTS</h3><div id=search>
+      <label for="basic-dropdown"> Categories: </label>
       <select name="basic-dropdown" v-model="filter.categoryId">
         <option value="">View All</option>
         <option value="1">Frozen</option>
@@ -19,8 +15,11 @@
         <option value="13">Pantry</option>
         <option value="15">Canned Goods</option>
         <option value="19">Snacks</option>
-      </select>
-    </div>
+      </select>&nbsp;&nbsp;
+    <input type="text" placeholder="Search for an item" v-model="filter.title" />&nbsp;
+    <input type="checkbox" v-model="filter.sale" />
+    <label for="checkbox"> Sale Items Only </label>
+    </div><br/>
     <div class="main">
       <div
         class="container"
@@ -143,4 +142,12 @@ export default {
   display: flex;
 }
 
+
+#search {
+  text-align: center;
+}
+
+input[type=text] {
+  width: 30%;
+}
 </style>

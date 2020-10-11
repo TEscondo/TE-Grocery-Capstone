@@ -26,4 +26,7 @@ export default {
     getAllCategories(){
         return http.get(`/cat`)
     },
+    getCertifications(productId) {
+        return http.get(`/cert/${productId}`)
+    }
 }
