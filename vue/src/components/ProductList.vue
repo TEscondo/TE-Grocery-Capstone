@@ -41,8 +41,9 @@
         />
         <div class="product-title">{{ product.title }}</div>
         <div class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</div>
-        <div v-else class="before-sale-price"><s>${{product.price.toFixed(2)}}</s></div><div>${{ product.discountedPrice.toFixed(2) }}</div>
-        {{ product.weight }}oz
+        <div v-else class="before-sale-price"><s>${{product.price.toFixed(2)}}</s><br>
+        ${{ product.discountedPrice.toFixed(2) }}</div>
+        {{ product.weight }}
       </a>
       </div>
       </div>
