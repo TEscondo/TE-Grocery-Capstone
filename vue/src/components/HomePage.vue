@@ -2,7 +2,7 @@
   <div class="home">
     <div v-for="prodCat in prodByCat" v-bind:key="prodCat.categoryName">
       <h3>
-        <a v-bind:href="'/byCategory/'+prodCat.categoryId">{{prodCat.categoryName}}</a>
+        <a v-bind:href="'/byCategory/'+prodCat.categoryId">{{prodCat.categoryName}} -- View All</a>
       </h3>
     <div class ="main">
       <div class="container" v-for="prod in prodCat.productsList" v-bind:key="prod.id">
@@ -22,7 +22,7 @@
           <div class="price" v-if="prod.sale != true">
             ${{ prod.price.toFixed(2) }}</div>
           <div v-else><s>${{prod.price.toFixed(2)}}</s><br>
-          ${{(0.9*prod.price).toFixed(2)}} </div>
+          <div class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</div> </div>
         {{ prod.weight }}
         </a>
       </div>
