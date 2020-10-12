@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3>PRODUCTS</h3><div id=search>
+    <h3>PRODUCTS</h3>
+    <div id=search>
       <label for="basic-dropdown"> Categories: </label>
       <select name="basic-dropdown" v-model="filter.categoryId">
         <option value="">View All</option>
@@ -146,7 +147,12 @@ export default {
 
 
 #search {
+  position: sticky;
+  top: 0;
   text-align: center;
+  background-color: skyblue;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 input[type=text] {
