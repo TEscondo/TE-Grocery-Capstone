@@ -87,4 +87,9 @@ h2 {
   font-size: 16px;
   line-height: 22px;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+}
 </style>
