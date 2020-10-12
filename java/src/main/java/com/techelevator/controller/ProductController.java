@@ -21,10 +21,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.dao.CategoryDAO;
+import com.techelevator.dao.CheckoutDAO;
 import com.techelevator.dao.ProductsDAO;
 import com.techelevator.model.Category;
 import com.techelevator.model.CategorySummary;
 import com.techelevator.model.Certification;
+import com.techelevator.model.Checkout;
 import com.techelevator.model.Product;
 import com.techelevator.service.ProductService;
 
@@ -32,11 +34,12 @@ import com.techelevator.service.ProductService;
 @RestController
 public class ProductController {
 
-	@Autowired
-
-ProductsDAO dao;
-	@Autowired
-CategoryDAO dao1;
+@Autowired
+private ProductsDAO dao;
+@Autowired	
+private CategoryDAO dao1;
+@Autowired
+private CheckoutDAO dao2;
 	
 	@RequestMapping(path="/test", method=RequestMethod.GET)
 public void test() {
@@ -126,5 +129,16 @@ public void test() {
 	public List<Certification> getCertification(@PathVariable int productId) {
 		List<Certification> certs = dao.getCertification(productId);
 		return certs;
+	}
+	
+	@RequestMapping(path = "/cartInventory", method=RequestMethod.GET)
+	public List<Checkout>viewInventory() {
+		List<Checkout> inventory = dao2.viewInventory();
+		return inventory;
+	}
+	@RequestMapping(path= "/toCart/{productId}/{quantity}", method=RequestMethod.POST)
+	public List<Checkout>transferItems(@PathVariable int productId, @PathVariable Integer quantity){
+		List<Checkout> transfer = dao2.transferToCart(productId, quantity);
+		return transfer;
 	}
 }
