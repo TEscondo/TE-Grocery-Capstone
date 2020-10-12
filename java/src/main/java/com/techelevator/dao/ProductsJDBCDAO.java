@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.model.Certification;
 import com.techelevator.model.Product;
 
 @Component
@@ -156,15 +157,19 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		return productName;
 	}
 
-	public String getCertification(int productId) {
-		String select = "SELECT a.certification_name from certification a join certification_product cp ON a.certification_id = cp.certification_id"
+	public List<Certification> getCertification(int productId) {
+		String select = "SELECT a.certification_name, a.certification_id from certification a join certification_product cp ON a.certification_id = cp.certification_id"
 				+ " join product p ON p.product_id = cp.product_id WHERE p.product_id = ?";
-		String name = null;
+		List<Certification> certs = new ArrayList<>();
 		
 		SqlRowSet result = template.queryForRowSet(select, productId);
 		while (result.next()) {
-			name = result.getString("certification_name");
+			int id = result.getInt("certification_id");
+			String name = result.getString("certification_name");
+
+			Certification cert = new Certification(id, name);
+			certs.add(cert);
 		}
-		return name;
+		return certs;
 	}
 }

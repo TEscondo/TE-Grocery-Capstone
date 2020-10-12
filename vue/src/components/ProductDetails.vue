@@ -32,7 +32,7 @@
       <br />
       <div class="product-details">{{ currentProduct.details }}</div>
       <br />
-      <div v-if="certification">Certifications: {{ certification }}</div>
+      Certifications: <div v-for="cert in certification" v-bind:key="cert.id"> {{ cert.name }}</div>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       currentProduct: {},
-      certification: {},
+      certification: [],
     };
   },
   created() {
@@ -76,6 +76,7 @@ export default {
   align-items: center;
   justify-items: center;
   margin: auto;
+  padding: 0px 0px 0px 0px;
 }
 
 h2 {
