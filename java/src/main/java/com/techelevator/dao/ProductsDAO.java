@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import java.util.List;
 
+import com.techelevator.model.Certification;
 import com.techelevator.model.Product;
 
 public interface ProductsDAO {
@@ -16,7 +17,7 @@ public interface ProductsDAO {
 	Product viewProductDetails(int id);
 	List<Product> getTitleFromCategory(String categoryName);
 
-	String getCertification(int productId);
+	List<Certification> getCertification(int productId);
 
 	
 }
