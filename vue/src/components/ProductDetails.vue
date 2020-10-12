@@ -16,11 +16,11 @@
       />
      
       <span class="price" v-if="currentProduct.sale != true">
-        ${{ currentProduct.price.toFixed(2)  }} | 
+        ${{ currentProduct.price.toFixed(2)  }} 
       </span>
       <span class="sale-price" v-else>
-        <s><div class="before-sale-price">${{ currentProduct.price.toFixed(2) }}</div></s></span>
-       <div class="discounted-price"> ${{ currentProduct.discountedPrice.toFixed(2) }}</div>
+        <div class="before-sale-price"><s>${{ currentProduct.price.toFixed(2) }}</s></div></span>
+       <div class="discounted-price">${{ currentProduct.discountedPrice.toFixed(2) }}</div>
       <div class = "product-weight"> {{ currentProduct.weight }} </div><br/>
       <div class = "product-details">{{ currentProduct.details }} </div><br/>
       <div v-if="certification">Certifications: {{certification}}</div>
