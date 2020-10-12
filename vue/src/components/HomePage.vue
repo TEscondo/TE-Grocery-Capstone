@@ -1,13 +1,11 @@
 <template>
   <div class="home">
     <div v-for="prodCat in prodByCat" v-bind:key="prodCat.categoryName">
-      <h3>
-        <a v-bind:href="'/byCategory/'+prodCat.categoryId">{{
-          prodCat.categoryName
-        }}</a>
-      </h3>
+      <h1>
+        <a v-bind:href="'/byCategory/'+prodCat.categoryId">{{prodCat.categoryName}}  <span class = "view-all">View All</span></a>
+      </h1>
     <div class ="main">
-      <div class="container" v-for="prod in prodCat.productsList" v-bind:key="prod.id">
+      <div class="container" v-for="prod in prodCat.productsList.slice(0,3)" v-bind:key="prod.id">
         <a v-bind:href="'/product-details/' + prod.id">
           <img
             class="thumbnail"
@@ -22,27 +20,17 @@
           />
           <div class="product-title">{{ prod.title }}</div>
           <div class="price" v-if="prod.sale != true">
-            ${{ prod.price.toFixed(2) }}
-          </div>
+            ${{ prod.price.toFixed(2) }}</div>
+          <div class="sale-price" v-else>
+            <s><div class="before-sale-price">${{prod.price.toFixed(2)}}</div></s>
+          <div class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</div> </div>
+        <div class = "product-weight">{{ prod.weight }}</div>
         </a>
       </div>
     </div>
     </div>
   </div>
 
-  <!--
-          <h3>
-        <a v-bind:href="'/byCategory/' + category.categoryId">{{
-          category.categoryName
-        }}</a>
-      </h3>
-      <p>{{ category.categoryDescription }}</p>
-      <div v-for="product in products.slice(0, 3)" v-bind:key="product.id">
-        <table>
-          <td>{{ product.title }}</td>
-        </table>
-      </div>
-  -->
 </template>
 
 <script>
@@ -64,23 +52,12 @@ export default {
   created() {
     productService.loadHomePageData().then((response) => {
       this.prodByCat = response.data;
-      this.prodByCat.forEach((product) => {
-        product.discountedPrice = product.price * 0.9;
+      this.prodByCat.forEach((cat) => {
+        (cat.forEach((prod) => {
+          prod.discountedPrice = prod.price*0.9;
+        }))
       });
     });
-
-    //   productService.getAllProducts().then((response) => {
-    //     this.products = response.data;
-    //     this.products.forEach((product) => {
-    //       product.discountedPrice = product.price * 0.9;
-    //     });
-    //   });
-    // productService.getAllCategories().then((response) => {
-    //   this.categories = response.data;
-    // });
-    // productService.getProductsByCategoryId(this.$route.params.categoryId).then((response) => {
-    //   this.prodByCat = response.data;
-    // })
   },
   methods: {
     clickMethod() {
@@ -107,13 +84,7 @@ export default {
       }
       return filteredProducts;
     },
-    byCategory() {
-      let filterByCat = this.prodByCat;
-      filterByCat = filterByCat.filter(
-        (item) => item.categoryId == this.filter.categoryId
-      );
-      return filterByCat;
-    },
+    
   },
 };
 </script>
@@ -153,5 +124,9 @@ body {
   width: 200px;
   height: 200px;
   padding-left: 20px;
+}
+
+.view-all {
+  font-size: 12px;
 }
 </style>

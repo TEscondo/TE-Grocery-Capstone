@@ -1,11 +1,8 @@
 <template>
   <div>
     <h3>PRODUCTS</h3>
-    <input type="text" id="Search" v-model="filter.title" /><br />
-    <input type="checkbox" v-model="filter.sale" />
-    <label for="checkbox"> Sale Items Only</label>
-    <div class="filter">
-      <label for="basic-dropdown">Categories: </label>
+    <div id=search>
+      <label for="basic-dropdown"> Categories: </label>
       <select name="basic-dropdown" v-model="filter.categoryId">
         <option value="">View All</option>
         <option value="1">Frozen</option>
@@ -19,8 +16,11 @@
         <option value="13">Pantry</option>
         <option value="15">Canned Goods</option>
         <option value="19">Snacks</option>
-      </select>
-    </div>
+      </select>&nbsp;&nbsp;
+    <input type="text" placeholder="Search for an item" v-model="filter.title" />&nbsp;
+    <input type="checkbox" v-model="filter.sale" />
+    <label for="checkbox"> Sale Items Only </label>
+    </div><br/>
     <div class="main">
       <div
         class="container"
@@ -42,8 +42,10 @@
         />
         <div class="product-title">{{ product.title }}</div>
         <div class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</div>
-        <div v-else class="before-sale-price"><s>${{product.price.toFixed(2)}}</s></div><div>${{ product.discountedPrice.toFixed(2) }}</div>
-        {{ product.weight }}oz
+        <div v-else class="sale-price">
+          <s><div class = "before-sale-price">${{product.price.toFixed(2)}}</div></s>
+          <div class="discounted-price">${{ product.discountedPrice.toFixed(2) }}</div></div>
+          <div class = "product-weight">{{ product.weight }}</div>
       </a>
       </div>
       </div>
@@ -131,7 +133,7 @@ export default {
 }
 
 .price {
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 .before-sale-price {
@@ -143,4 +145,17 @@ export default {
   display: flex;
 }
 
+
+#search {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  background-color: skyblue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+input[type=text] {
+  width: 30%;
+}
 </style>
