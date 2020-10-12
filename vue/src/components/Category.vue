@@ -207,9 +207,22 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
+  
 }
 
 .before-sale-price {
     color: rgb(253, 97, 97);
+   
+}
+.thumbnail{
+padding: 5rem;
+}
+.product-title{
+    position:relative;
+    top: -125px;
+}
+.price{
+    position:relative;
+    top:-125px;
 }
 </style>
