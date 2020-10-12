@@ -16,7 +16,7 @@
       />
      
       <span class="price" v-if="currentProduct.sale != true">
-        ${{ currentProduct.price }}.00 | 
+        ${{ currentProduct.price.toFixed(2)  }} | 
       </span>
       <span class="sale-price" v-else>
         <s><div class="before-sale-price">${{ currentProduct.price.toFixed(2) }}</div></s>${{
