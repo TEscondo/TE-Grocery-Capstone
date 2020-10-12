@@ -58,7 +58,7 @@ public void test() {
 			List<Product> productsCatAll = dao.viewProductsByCategory(cat.categoryId);
 			
 			List<Product> productsCat = new ArrayList<Product>();
-			for (int i=0; i < 3; i++ ) {
+			for (int i=0; i < productsCatAll.size(); i++ ) {
 				productsCat.add(productsCatAll.get(i));
 			}
 			
