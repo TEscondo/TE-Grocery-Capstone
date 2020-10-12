@@ -10,6 +10,7 @@
         v-for="product in products"
         v-bind:key="product.id"
       >
+      <a v-bind:href="'/product-details/' + product.id">
         <img
           class="thumbnail"
           v-if="product.image"
@@ -23,11 +24,11 @@
         />
         <div class="product-title">{{ product.title }}</div>
         <div class="price" v-if="product.sale != true">
-          ${{ product.price }}.00</div>
+          ${{ product.price.toFixed(2) }}</div>
         <div class="sale-price" v-else>
-          <s><div class="before-sale-price">${{ product.price }}.00</div></s>
-        <div class="discounted-price">${{ product.discountedPrice }}0</div></div>
-        <div class="product-weight">{{ product.weight }}</div>
+          <s><div class="before-sale-price">${{ product.price.toFixed(2) }}</div></s>
+        <div class="discounted-price">${{ product.discountedPrice.toFixed(2) }}</div></div>
+        <div class="product-weight">{{ product.weight }}</div></a>
     </div>
     </div>
   </section>
