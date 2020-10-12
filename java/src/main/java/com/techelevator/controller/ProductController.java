@@ -136,9 +136,11 @@ public void test() {
 		List<Checkout> inventory = dao2.viewInventory();
 		return inventory;
 	}
+	
 	@RequestMapping(path= "/toCart/{productId}/{quantity}", method=RequestMethod.POST)
-	public List<Checkout>transferItems(@PathVariable int productId, @PathVariable Integer quantity){
-		List<Checkout> transfer = dao2.transferToCart(productId, quantity);
-		return transfer;
+	public void transferToCart(@PathVariable int productId, @PathVariable int quantity) {
+		dao2.transferToCart(productId, quantity);
+		
 	}
+
 }

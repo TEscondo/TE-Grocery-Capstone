@@ -7,5 +7,6 @@ import com.techelevator.model.Checkout;
 public interface CheckoutDAO {
 List <Checkout> viewInventory();
 
-List <Checkout> transferToCart(int productId, Integer quantity);
+void transferToCart(int productId, int quantity);
+void updateProduct(int quantity, int productId);
 }

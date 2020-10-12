@@ -34,17 +34,17 @@ public class CheckoutJDBCDAO implements CheckoutDAO {
 	}
 
 	@Override
-	public List<Checkout> transferToCart(int productId, Integer quantity) {
+	public void transferToCart(int productId, int quantity) {
 		String sql = "Insert Into purchases (product_id, item_quantity) VALUES(?, ?)";
-		List <Checkout> transfer = new ArrayList<>();
-		SqlRowSet result = template.queryForRowSet(sql,productId, quantity);
-		while(result.next()) {
-			int id = result.getInt("product_id");
-			Integer inv = result.getInt("item_quantity");
-		Checkout checkout = new Checkout(id, inv);
-		transfer.add(checkout);
-		}
-		return transfer;
+		template.update(sql, productId, quantity);
+		updateProduct(quantity, productId);
 	}
 
+	@Override
+	public void updateProduct(int quantity, int productId) {
+		// TODO Auto-generated method stub
+		String sql = "Update product Set inventory = inventory-? where product_id = ?";
+		template.update(sql, quantity, productId);
+	}
+	
 }
