@@ -24,6 +24,7 @@ import com.techelevator.dao.CategoryDAO;
 import com.techelevator.dao.ProductsDAO;
 import com.techelevator.model.Category;
 import com.techelevator.model.CategorySummary;
+import com.techelevator.model.Certification;
 import com.techelevator.model.Product;
 import com.techelevator.service.ProductService;
 
@@ -122,8 +123,8 @@ public void test() {
 	}
 	
 	@RequestMapping(path = "/cert/{productId}", method=RequestMethod.GET)
-	public String getCertification(@PathVariable int productId) {
-		String cert = dao.getCertification(productId);
-		return cert;
+	public List<Certification> getCertification(@PathVariable int productId) {
+		List<Certification> certs = dao.getCertification(productId);
+		return certs;
 	}
 }
