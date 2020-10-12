@@ -55,7 +55,7 @@ export default {
     productService
       .getCertifications(this.$route.params.id)
       .then((response) => (this.certification = response.data));
-  },
+  }
 };
 </script>
 

@@ -8,6 +8,7 @@ import store from '../store/index'
 import ProductList from '../components/ProductList.vue'
 import Category from '../components/Category.vue'
 import ProductDetails from '../components/ProductDetails.vue'
+import ShoppingCart from '../components/ShoppingCart.vue'
 
 Vue.use(Router)
 
@@ -77,7 +78,11 @@ const router = new Router({
       name: "product-details",
       component: ProductDetails,
     },
-   
+    {
+      path: "/shopping-cart",
+      name: "cart",
+      component: ShoppingCart,
+    },
   ]
 })
 
