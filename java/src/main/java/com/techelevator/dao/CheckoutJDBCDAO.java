@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,16 @@ public class CheckoutJDBCDAO implements CheckoutDAO {
 
 	@Override
 	public List<Checkout> viewInventory() {
-		String getInv = "select * from purchases";
+		String getInv = "SELECT * FROM purchases JOIN product ON purchases.product_id = product.product_id;";
 		List <Checkout> inventory = new ArrayList<>();
 		SqlRowSet result = template.queryForRowSet(getInv);
 		while(result.next()) {
 			int id = result.getInt("product_id");
 			int inv = result.getInt("item_quantity");
-		Checkout checkout = new Checkout(id, inv);
+			String name = result.getString("title");
+			BigDecimal price = result.getBigDecimal("price");
+			String image = result.getString("image");
+		Checkout checkout = new Checkout(id, inv, name, price, image);
 		inventory.add(checkout);
 		}
 		return inventory;	

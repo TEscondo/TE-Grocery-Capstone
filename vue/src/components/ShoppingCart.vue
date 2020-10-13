@@ -1,9 +1,10 @@
 <template>
-  <div class="main">
-      <div class="item-container">
+  
+      <div class="your-cart">
+          <h2>YOUR CART</h2>
           
       </div>
-    </div>
+    
 </template>
 
 <script>
@@ -15,13 +16,10 @@ export default {
         };
     },
     created() {
-    productService.getProductById(this.$route.params.id).then((response) => {
-      this.currentProduct = response.data;
-      this.currentProduct.discountedPrice = this.currentProduct.price * 0.9;
+    productService.viewCartInventory().then((response) => {
+      this.cart = response.data;
+      this.cart.discountedPrice = this.cart.price * 0.9;
     });
-       productService
-      .getCertifications(this.$route.params.id)
-      .then((response) => (this.certification = response.data));
     },
     methods: {
         addToCart(item) {
