@@ -29,7 +29,8 @@ export default new Vuex.Store({
         weight: "21 oz",
         id: 1,
         categoryId: 19,
-        image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/6/18/0/MW0100_0203.jpg"
+        image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/6/18/0/MW0100_0203.jpg",
+        qty: 1
       },
       {
         title: "All-Seasons Salt",
@@ -40,7 +41,8 @@ export default new Vuex.Store({
         weight: "28 oz",
         id: 2,
         categoryId: 13,
-        image: "https://d.newsweek.com/en/full/1577880/stock-image-salt.jpg"
+        image: "https://d.newsweek.com/en/full/1577880/stock-image-salt.jpg",
+        qty: 1
       }, {
         title: "Beef Hot Links Beef Smoked Sausage With Chile Peppers",
         price: 3.00,
@@ -50,7 +52,8 @@ export default new Vuex.Store({
         weight: "18 oz",
         id: 40,
         categoryId: 12,
-        image: "https://stoltzfusmeats.com/wp-content/uploads/2017/10/24.-Smoked-Sausage-Sampler.jpg"
+        image: "https://stoltzfusmeats.com/wp-content/uploads/2017/10/24.-Smoked-Sausage-Sampler.jpg",
+        qty: 1
       },
       {
         title: "Pumpkin Muffin Mix",
@@ -61,21 +64,33 @@ export default new Vuex.Store({
         weight: "14.2 oz",
         id: 50,
         categoryId: 13,
-        image: "https://d2t88cihvgacbj.cloudfront.net/manage/wp-content/uploads/2014/09/Best-Ever-Pumpkin-Muffins-2.jpg?x11740"
+        image: "https://d2t88cihvgacbj.cloudfront.net/manage/wp-content/uploads/2014/09/Best-Ever-Pumpkin-Muffins-2.jpg?x11740",
+        qty: 1
       }
     ],
     token: currentToken || '',
     user: currentUser || {}
   },
-  computed: {
-    cartTotal() {
-      this.state.cart.forEach((item) => {
-        this.state.total.total += item.price;
-      });
-    }
+  // computed: {
+  //   cartTotal() {
+  //     this.state.cart.forEach((item) => {
+  //       this.state.total.total += item.price;
+  //     });
+  //   }
 
-  },
+  // },
   mutations: {
+    UPDATE_ITEM_QTY(state, product) {
+      console.log(state.cart);
+      state.cart.forEach((item)=> {
+      if (product.id == item.id) {
+        item.qty = product.qty
+        
+      }
+    })
+    console.log(state.cart);
+  },
+
     CART_TOTAL(state) {
       state.cart.forEach((item)=> {
         state.total += item.price;
