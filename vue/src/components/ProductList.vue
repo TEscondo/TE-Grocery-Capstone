@@ -150,7 +150,7 @@ export default {
   position: sticky;
   top: 0;
   text-align: center;
-  background-color: skyblue;
+  background-color: #d3d3d3;
   padding-top: 10px;
   padding-bottom: 10px;
 }
