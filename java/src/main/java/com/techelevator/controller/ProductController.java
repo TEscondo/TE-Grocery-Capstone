@@ -125,6 +125,12 @@ public void test() {
 		return allCategory;
 	}
 	
+	@RequestMapping(path = "/certification/{certificateId}", method=RequestMethod.GET)
+	public List<Product>getProductsByCert(@PathVariable int certificateId) {
+		List<Product> prodsByCert = dao.getAllProductsByCertId(certificateId);
+		return prodsByCert;
+	}
+	
 	@RequestMapping(path = "/cert/{productId}", method=RequestMethod.GET)
 	public List<Certification> getCertification(@PathVariable int productId) {
 		List<Certification> certs = dao.getCertification(productId);

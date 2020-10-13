@@ -14,7 +14,7 @@ public class Product {
 	private int id;
 	private int categoryId;
 	private String image;
-	private String certification;
+	private int certification;
 	
 	public Product(int id, String title, String image, BigDecimal price, String weight) {
 		this.id = id;
@@ -38,7 +38,7 @@ public class Product {
 
 	}
 	
-public Product(int id, String title, int brandId, String details, String weight, int categoryId, String image, boolean sale, BigDecimal price, String certification) {
+public Product(int id, String title, int brandId, String details, String weight, int categoryId, String image, boolean sale, BigDecimal price, int certification) {
 		
 		this.title = title;
 		this.price = price;
@@ -132,11 +132,11 @@ public Product(int id, String title, int brandId, String details, String weight,
 		this.image = image;
 	}
 
-	public String getCertification() {
+	public int getCertification() {
 		return certification;
 	}
 
-	public void setCertification(String certification) {
+	public void setCertification(int certification) {
 		this.certification = certification;
 	}
 	

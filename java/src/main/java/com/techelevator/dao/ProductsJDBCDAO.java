@@ -172,4 +172,29 @@ public class ProductsJDBCDAO implements ProductsDAO {
 		}
 		return certs;
 	}
+	
+	@Override
+	public List<Product> getAllProductsByCertId(int certId) {
+		String select = "SELECT p.*, a.certification_name, a.certification_id from certification a join certification_product cp ON a.certification_id = cp.certification_id"
+				+ " join product p ON p.product_id = cp.product_id WHERE cp.certification_id = ?";
+		
+		List<Product> allProductsByCert = new ArrayList<>();
+		SqlRowSet result = template.queryForRowSet(select, certId);
+		while (result.next()) {
+			int id = result.getInt("product_id");
+			String title = result.getString("title");
+			int brandId = result.getInt("brand_id");
+			String details = result.getString("details");
+			String weight = result.getString("weight");
+			int category = result.getInt("category_id");
+			String image = result.getString("image");
+			Boolean sale = result.getBoolean("sale");
+			BigDecimal price = result.getBigDecimal("price");
+			int certification = result.getInt("certification_id");
+
+			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price, certification);
+			allProductsByCert.add(product);
+		}
+		return allProductsByCert;
+	}
 }
