@@ -27,7 +27,7 @@
       <div class="tax">Tax: </div>
       <div class="total">Total: </div>
       <div class="checkout-icon">Checkout</div>
-      <div>{{$store.state.total.total}}</div>
+      <div>{{$store.state.total.toFixed(2)}}</div>
       </div>
       </div>
   </div>
@@ -112,7 +112,7 @@ export default {
     position: sticky;
     top: 0;
     padding: 80px 80px;
-    margin-top: 75px;
+    margin-top: 70px;
     justify-content: space-between;
     background-color: white;
 }

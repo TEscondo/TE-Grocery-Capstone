@@ -18,8 +18,7 @@ if (currentToken != null) {
 
 export default new Vuex.Store({
   state: {
-    total: {
-    },
+    total: 0.00,
     cart: [
       {
         title: "Chocolate Sandwich Cookies",
@@ -77,6 +76,12 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    CART_TOTAL(state) {
+      state.cart.forEach((item)=> {
+        state.total += item.price;
+      })     
+    },
+
     ADD_PRODUCT(state, product) {
       state.cart.unshift(product);
     },
