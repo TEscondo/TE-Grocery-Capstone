@@ -142,5 +142,9 @@ public void test() {
 		dao2.transferToCart(productId, quantity);
 		
 	}
+	@RequestMapping(path="/remove/{quantity}/{productId}",method=RequestMethod.POST)
+	public void removeItemFromCart(@PathVariable int quantity, @PathVariable int productId) {
+		dao2.removeItemFromCart(quantity, productId);
+	}
 
 }

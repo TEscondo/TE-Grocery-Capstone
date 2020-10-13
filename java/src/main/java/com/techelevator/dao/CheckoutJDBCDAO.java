@@ -45,10 +45,21 @@ public class CheckoutJDBCDAO implements CheckoutDAO {
 	}
 
 	@Override
+	
 	public void updateProduct(int quantity, int productId) {
 		// TODO Auto-generated method stub
 		String sql = "Update product Set inventory = inventory-? where product_id = ?";
 		template.update(sql, quantity, productId);
 	}
 	
+	public void removeItemFromCart(int quantity,int productId) {
+		String sql = "update purchases set item_quantity = item_quantity - ? where product_id = ?";
+		template.update(sql, quantity, productId);
+		updateProductRemoval(quantity, productId);
+	}
+	public void updateProductRemoval(int quantity, int productId) {
+		String sql = "update product set inventory = inventory +? where product_id =?";
+		template.update(sql,quantity, productId);
+		
+	}
 }
