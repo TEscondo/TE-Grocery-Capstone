@@ -76,9 +76,10 @@ export default {
   display: grid;
   grid-template-columns: 200px 1fr;
   grid-template-areas:
-    "title title"
+    "image title"
     "image desc"
-    "weight price"
+    "weight desc"
+    ". price"
     "cert cert";
   max-width: 500px;
   text-align: center;
@@ -93,6 +94,7 @@ export default {
   grid-area: price;
 }
 .image-container {
+  margin-top: 20px;
   grid-area: image;
   position: relative;
 }
