@@ -2,7 +2,7 @@
   <div class="details-main">
     <br />
     <div class="image-container">
-      <img id="salebanner" v-if="currentProduct.sale" src="/salebanner.png">
+      <img class="sale-banner" v-if="currentProduct.sale" src="/salebanner.png">
       <img
         class="thumbnail"
         v-if="currentProduct.image"
@@ -99,12 +99,12 @@ export default {
   position: relative;
 }
 
-#salebanner {
+.sale-banner {
   position: absolute;
   width: 160px;
   height: 160px;
   display: block;
-  margin: 10px 20px 10px 20px;
+  margin: 10px 40px 10px 40px;
 }
 
 .thumbnail {
