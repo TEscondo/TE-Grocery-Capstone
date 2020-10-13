@@ -34,7 +34,7 @@
       <br />
       <div class="product-details">{{ currentProduct.details }}</div>
       <br />
-      <div class="cert">Certifications: <div class="cert-icon" v-for="cert in certification" v-bind:key="cert.id"> {{ cert.name }} </div></div>
+      <div class="cert">Certifications: <div class="cert-icon" v-for="cert in certification" v-bind:key="cert.id"> <a v-bind:href="'/certification/' + cert.id"> {{ cert.name }} </a></div></div>
       </div>  
 </template>
 
