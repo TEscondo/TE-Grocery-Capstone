@@ -17,12 +17,13 @@
     </div>
       <h2 id="title">{{ currentProduct.title }}</h2>
       <div id="price" class="price" v-if="!currentProduct.sale">
-        <div class="cart-button"><input type="button" v-on:click.prevent="addToCart">Add to Cart</div>
+        <div class="cart-button" v-on:click.prevent="addToCart(currentProduct)">Add to Cart</div>
+        
         ${{ currentProduct.price.toFixed(2) }}
       </div>
       <div id="price" v-else class="sale-price">
         <span class="discounted-price">
-          <div class="cart-button"><input type="button" v-on:click.prevent="addToCart">Add to Cart</div>
+          <div class="cart-button" v-on:click.prevent="addToCart(currentProduct)">Add to Cart</div>
           ${{ currentProduct.discountedPrice.toFixed(2) }}
         </span> &nbsp;
         <span class="before-sale-price"><s>
@@ -48,8 +49,9 @@ export default {
     };
   },
   methods :{
-    addToCart() {
-      this.$store.cart.commit("ADD_PRODUCT", this.currentProduct);
+    addToCart(item) {
+      this.$store.commit("ADD_PRODUCT", item);
+      window.alert("Added!");
     }
   },
   created() {

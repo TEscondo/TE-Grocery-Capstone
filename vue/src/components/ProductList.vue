@@ -28,7 +28,7 @@
       />&nbsp;
 
       <label for="checkbox" id="sale-box"
-        >Sale Items Only &nbsp;<input type="checkbox" v-model="filter.sale"
+        >Sale Items Only<input type="checkbox" v-model="filter.sale"
       /></label>
     </div>
     <br />
@@ -82,7 +82,7 @@
               >
             </div>
             <div class="product-weight">{{ product.weight }}</div>
-            <div class="cart-button">Add To Cart</div>
+            <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
           </a>
         </div>
       </div>
@@ -110,6 +110,10 @@ export default {
       }
       console.log(this.product.price);
       return this.product.price;
+    },
+    addToCart(item) {
+      this.$store.commit("ADD_PRODUCT", item);
+      window.alert("Added!");
     },
   },
   computed: {
@@ -207,6 +211,7 @@ input[type="checkbox"] {
 
 .search-bar {
   display: flex;
+  block-size: 3em;
 }
 
 .category-dropdown {
