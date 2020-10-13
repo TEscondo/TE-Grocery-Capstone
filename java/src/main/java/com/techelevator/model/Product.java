@@ -15,6 +15,7 @@ public class Product {
 	private int categoryId;
 	private String image;
 	private int certification;
+	private int quantity;
 	
 	public Product(int id, String title, String image, BigDecimal price, String weight) {
 		this.id = id;
@@ -24,7 +25,19 @@ public class Product {
 		this.weight = weight;
 	}
 
-	public Product(int id, String title, int brandId, String details, String weight, int categoryId, String image, boolean sale, BigDecimal price) {
+public Product(int id, String title, int brandId, String details, String weight, int categoryId, String image, boolean sale, BigDecimal price) {
+		
+		this.title = title;
+		this.price = price;
+		this.sale = sale;
+		this.brandId = brandId;
+		this.details = details;
+		this.weight = weight;
+		this.id = id;
+		this.categoryId = categoryId;
+		this.image = image;	}
+	
+	public Product(int id, String title, int brandId, String details, int quantity, String weight, int categoryId, String image, boolean sale, BigDecimal price) {
 		
 		this.title = title;
 		this.price = price;
@@ -35,6 +48,7 @@ public class Product {
 		this.id = id;
 		this.categoryId = categoryId;
 		this.image = image;
+		this.quantity = quantity;
 
 	}
 	
@@ -141,6 +155,14 @@ public Product(int id, String title, int brandId, String details, String weight,
 	}
 	
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 	
 	
 }

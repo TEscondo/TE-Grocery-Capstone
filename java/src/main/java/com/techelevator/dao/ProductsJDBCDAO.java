@@ -37,8 +37,9 @@ public class ProductsJDBCDAO implements ProductsDAO {
 			String image = result.getString("image");
 			Boolean sale = result.getBoolean("sale");
 			BigDecimal price = result.getBigDecimal("price");
+			int quantity = result.getInt("inventory");
 
-			Product product = new Product(id, title, brandId, details, weight, category, image, sale, price);
+			Product product = new Product(id, title, brandId, details, quantity, weight, category, image, sale, price);
 			allProducts.add(product);
 		}
 		return allProducts;
