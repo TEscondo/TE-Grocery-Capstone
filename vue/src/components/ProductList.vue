@@ -3,7 +3,7 @@
     <h3>PRODUCTS</h3>
     <div id=search>
       <label for="basic-dropdown"> Categories: </label>
-      <select name="basic-dropdown" v-model="filter.categoryId">
+      <select name="basic-dropdown" class="category-dropdown" v-model="filter.categoryId">
         <option value="">View All</option>
         <option value="1">Frozen</option>
         <option value="4">Produce</option>
@@ -17,7 +17,7 @@
         <option value="15">Canned Goods</option>
         <option value="19">Snacks</option>
       </select>&nbsp;&nbsp;
-    <input type="text" placeholder="Search for an item" v-model="filter.title" />&nbsp;
+    <input type="text" class="search-bar" placeholder="Search for an item" v-model="filter.title" />&nbsp;
     <input type="checkbox" v-model="filter.sale" />
     <label for="checkbox"> Sale Items Only </label>
     </div><br/>
@@ -147,15 +147,27 @@ export default {
 
 
 #search {
-  position: sticky;
-  top: 0;
-  text-align: center;
+  display: flex;
+  position:sticky;
+  text-align: left;
   background-color: skyblue;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 2em;
+  padding-bottom: 0.5em;
 }
 
 input[type=text] {
+  display: flex;
   width: 30%;
+}
+
+.search-bar {
+  display: flex;
+  block-size: 6em;
+}
+
+.category-dropdown {
+  display: flex;
+  block-size: 2em;
+  align-self: center;
 }
 </style>
