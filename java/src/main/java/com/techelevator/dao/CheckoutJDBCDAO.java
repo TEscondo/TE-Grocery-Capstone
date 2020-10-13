@@ -60,6 +60,14 @@ public class CheckoutJDBCDAO implements CheckoutDAO {
 	public void updateProductRemoval(int quantity, int productId) {
 		String sql = "update product set inventory = inventory +? where product_id =?";
 		template.update(sql,quantity, productId);
-		
+	}
+	public String finalCheckout(double money) {
+		String response = "";
+		if(money >= 25.00) {
+			response = "Transaction Successful";
+		}else {
+			response = "Order must be Minimum $25.00";
+		}
+		return response;
 	}
 }
