@@ -81,6 +81,7 @@ export default {
     display:flex;
     flex-direction:row;
     justify-content: space-around;
+    background-color: #d3d3d3;
 }
 
 .items{
@@ -97,6 +98,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
+    background-color: white;
 }
 
 .prod-title {
@@ -109,8 +111,10 @@ export default {
     flex-direction: column;
     position: sticky;
     top: 0;
-    padding: 80px;
+    padding: 80px 80px;
+    margin-top: 75px;
     justify-content: space-between;
+    background-color: white;
 }
 .prod-price {
   grid-area: price;
