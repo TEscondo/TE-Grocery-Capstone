@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>PRODUCTS</h3>
     <div id=search>
       <label for="basic-dropdown" class="category-label"> Categories: </label>
       <select name="basic-dropdown" class="category-dropdown" v-model="filter.categoryId">
@@ -18,15 +17,15 @@
         <option value="19">Snacks</option>
       </select>&nbsp;&nbsp;
     <input type="text" class="search-bar" placeholder="Search for an item" v-model="filter.title" />&nbsp;
-    <input type="checkbox" class="sale-checkbox " v-model="filter.sale" />
-    <label for="checkbox" class="sale-label"> Sale Items Only </label>
+
+    <label for="checkbox" id="sale-box">Sale Items Only &nbsp;<input type="checkbox" v-model="filter.sale" /></label>
     </div><br/>
     <div class="splash-container">
       <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
       <h2 class="delivery-fee-text">No delivery fee for your first order --></h2>
-      <div class="splash-image">
-      <img src="https://www.rollingstone.com/wp-content/uploads/2019/06/Santana_photo_2_by_Maryanne_Bilham-1.jpg">
-      </div>
+    </div>
+    <div id="top-products-label">
+       <h1>Top Products</h1>
     </div>
     <div class="main">
       <div
@@ -159,13 +158,18 @@ export default {
   position:sticky;
   text-align: left;
   background-color: skyblue;
-  padding-top: 2em;
-  padding-bottom: 2em;
+  margin-top: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 input[type=text] {
   display: flex;
   width: 80%;
+}
+
+input[type=checkbox] {
+  transform: scale(3);
 }
 
 .search-bar {
@@ -175,7 +179,7 @@ input[type=text] {
 
 .category-dropdown {
   display: flex;
-  block-size: 8em;
+  block-size: 8.5em;
 }
 
 .category-label {
@@ -183,14 +187,20 @@ input[type=text] {
   align-items: center;
 }
 
-.sale-label {
+#sale-box {
   display: flex;
   align-items: center;
+  justify-content:space-around;
+  flex-direction: column;
+  text-align: center;
+  padding: 0.10em;
+  font-weight: bold;
+
 }
 
 .splash-container { 
   display: flex;
-  height: 16em;
+  height: 14em;
   flex-direction: column;
   border-style: solid;
   border-width: 0.15em
@@ -201,9 +211,10 @@ input[type=text] {
   color: skyblue;
 }
 
-.splash-image {
+#top-products-label {
   display: flex;
-  max-height: 100%;
-  max-width: 50%;
+  justify-content: center;
+  font-size: 1em;
+  background-color: skyblue;
 }
 </style>
