@@ -29,6 +29,7 @@
       >
       <div class = "product-card">
       <a v-bind:href="'/product-details/' + product.id">
+      <img class="sale-banner" v-if="product.sale" src="/salebanner.png">
         <img
           class="thumbnail"
           v-if="product.image"
