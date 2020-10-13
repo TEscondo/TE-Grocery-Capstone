@@ -104,7 +104,7 @@ export default {
   width: 160px;
   height: 160px;
   display: block;
-  margin: 10px 20px 10px 20px;
+  margin: 10px 40px 10px 40px;
 }
 
 .thumbnail {
