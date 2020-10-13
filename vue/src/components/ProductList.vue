@@ -82,6 +82,7 @@
               >
             </div>
             <div class="product-weight">{{ product.weight }}</div>
+            <div class="cart-button">Add To Cart</div>
           </a>
         </div>
       </div>
@@ -196,6 +197,8 @@ export default {
 input[type="text"] {
   display: flex;
   width: 80%;
+  border-radius: 28px;
+  font-size: 1.5em;
 }
 
 input[type="checkbox"] {
@@ -204,12 +207,11 @@ input[type="checkbox"] {
 
 .search-bar {
   display: flex;
-  block-size: 8em;
 }
 
 .category-dropdown {
   display: flex;
-  block-size: 8.5em;
+  block-size: 3em;
 }
 
 .category-label {
