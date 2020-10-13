@@ -1,8 +1,8 @@
 <template>
   <div class="details-main">
     <br />
-    <div class="details-container">
-      <h2>{{ currentProduct.title }}</h2>
+    <div class="image-container">
+      <img id="salebanner" v-if="currentProduct.sale" src="/salebanner.png">
       <img
         class="thumbnail"
         v-if="currentProduct.image"
@@ -14,27 +14,28 @@
         v-else
         src="https://grocerymonk.com/image_placeholder.png"
       />
-
-      <div class="price" v-if="!currentProduct.sale">
+    </div>
+    
+      <h2 id="title">{{ currentProduct.title }}</h2>
+      <div id="price" class="price" v-if="!currentProduct.sale">
+        <div class=cart-button>Add to Cart</div>
         ${{ currentProduct.price.toFixed(2) }}
       </div>
-      <div v-else class="sale-price">
-        <s
-          ><div class="before-sale-price">
-            ${{ currentProduct.price.toFixed(2) }}
-          </div></s
-        >
-        <div class="discounted-price">
+      <div id="price" v-else class="sale-price">
+        <span class="discounted-price">
+          <div class="cart-button">Add to Cart</div>
           ${{ currentProduct.discountedPrice.toFixed(2) }}
-        </div>
+        </span> &nbsp;
+        <span class="before-sale-price"><s>
+            ${{ currentProduct.price.toFixed(2) }}</s>
+          </span>&nbsp;&nbsp;
       </div>
       <div class="product-weight">{{ currentProduct.weight }}</div>
       <br />
       <div class="product-details">{{ currentProduct.details }}</div>
       <br />
-      Certifications: <div v-for="cert in certification" v-bind:key="cert.id"> {{ cert.name }}</div>
-    </div>
-  </div>
+      <div class="cert">Certifications: <div class="cert-icon" v-for="cert in certification" v-bind:key="cert.id"> {{ cert.name }} </div></div>
+      </div>  
 </template>
 
 <script>
@@ -55,41 +56,88 @@ export default {
     productService
       .getCertifications(this.$route.params.id)
       .then((response) => (this.certification = response.data));
-  }
+  },
 };
 </script>
 
 <style>
-.details-main {
-  display: flex;
+.cart-button {
+  display: inline-block;
+  background-color: #03989e;
+  color: white;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 3px 8px 3px 8px;
+  margin: 5px;
+  font-weight: bold;
 }
 
-.details-container {
+.details-main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas:
+    "image title"
+    "image desc"
+    "weight desc"
+    ". price"
+    "cert cert";
   max-width: 500px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
+#title {
+  grid-area: title;
+}
+#price {
+  grid-area: price;
+}
+.image-container {
+  margin-top: 20px;
+  grid-area: image;
+  position: relative;
+}
+
+#salebanner {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  display: block;
+  margin: 10px 20px 10px 20px;
+}
+
 .thumbnail {
   display: flex;
   align-items: center;
   justify-items: center;
-  margin: auto;
+  margin: 10px 40px 10px 40px;
   padding: 0px 0px 0px 0px;
-}
-
-h2 {
-  color: black;
 }
 
 .product-details {
   font-size: 16px;
   line-height: 22px;
+  grid-area: desc;
+  align-items: center;
 }
 
-.container {
-  display: flex;
-  align-items: center;
+.product-weight {
+  grid-area: weight;
+}
+
+.cert {
+  grid-area: cert;
+  margin-top: 15px;
+}
+
+.cert-icon {
+  display: inline-block;
+  background-color: lightgray;
+  border-radius: 15px;
+  border: 1px solid;
+  padding: 3px 8px 3px 8px;
+  margin: 5px;
+  font-weight: bold;
 }
 </style>
