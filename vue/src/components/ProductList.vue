@@ -1,9 +1,12 @@
 <template>
   <div>
-    <h3>PRODUCTS</h3>
-    <div id=search>
-      <label for="basic-dropdown"> Categories: </label>
-      <select name="basic-dropdown" v-model="filter.categoryId">
+    <div id="search">
+      <label for="basic-dropdown" class="category-label"> Categories: </label>
+      <select
+        name="basic-dropdown"
+        class="category-dropdown"
+        v-model="filter.categoryId"
+      >
         <option value="">View All</option>
         <option value="1">Frozen</option>
         <option value="4">Produce</option>
@@ -15,39 +18,72 @@
         <option value="12">Meat/Seafood</option>
         <option value="13">Pantry</option>
         <option value="15">Canned Goods</option>
-        <option value="19">Snacks</option>
-      </select>&nbsp;&nbsp;
-    <input type="text" placeholder="Search for an item" v-model="filter.title" />&nbsp;
-    <input type="checkbox" v-model="filter.sale" />
-    <label for="checkbox"> Sale Items Only </label>
-    </div><br/>
+        <option value="19">Snacks</option></select
+      >&nbsp;&nbsp;
+      <input
+        type="text"
+        class="search-bar"
+        placeholder="Search for an item"
+        v-model="filter.title"
+      />&nbsp;
+
+      <label for="checkbox" id="sale-box"
+        >Sale Items Only &nbsp;<input type="checkbox" v-model="filter.sale"
+      /></label>
+    </div>
+    <br />
+    <div class="splash-container">
+      <div id="splash-text">
+        <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
+        <h2 class="delivery-fee-text">
+          No delivery fee for your first order -->
+        </h2>
+      </div>
+      <div id="splash-image"><img  src="/deliverystockart.jpg" /></div>
+    </div>
+    <div id="top-products-label">
+      <h1>Top Products</h1>
+    </div>
     <div class="main">
       <div
         class="container"
-        v-for="product in filteredList"
+        v-for="product in filteredList.slice(24, 32)"
         v-bind:key="product.id"
       >
-      <div class = "product-card">
-      <a v-bind:href="'/product-details/' + product.id">
-        <img
-          class="thumbnail"
-          v-if="product.image"
-          v-bind:src="product.image"
-          onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-        />
-        <img
-          class="thumbnail"
-          v-else
-          src="https://grocerymonk.com/image_placeholder.png"
-        />
-        <div class="product-title">{{ product.title }}</div>
-        <div class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</div>
-        <div v-else class="sale-price">
-          <span class="discounted-price">${{(0.9*product.price).toFixed(2)}}</span> &nbsp;
-           <span class="before-sale-price"><s>${{product.price.toFixed(2)}}</s></span></div>
-          <div class = "product-weight">{{ product.weight }}</div>
-      </a>
-      </div>
+        <div class="product-card">
+          <a v-bind:href="'/product-details/' + product.id">
+            <img
+              class="sale-banner"
+              v-if="product.sale"
+              src="/salebanner.png"
+            />
+            <img
+              class="thumbnail"
+              v-if="product.image"
+              v-bind:src="product.image"
+              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+            />
+            <img
+              class="thumbnail"
+              v-else
+              src="https://grocerymonk.com/image_placeholder.png"
+            />
+            <div class="product-title">{{ product.title }}</div>
+            <div class="price" v-if="product.sale != true">
+              ${{ product.price.toFixed(2) }}
+            </div>
+            <div v-else class="sale-price">
+              <span class="discounted-price"
+                >${{ (0.9 * product.price).toFixed(2) }}</span
+              >
+              &nbsp;
+              <span class="before-sale-price"
+                ><s>${{ product.price.toFixed(2) }}</s></span
+              >
+            </div>
+            <div class="product-weight">{{ product.weight }}</div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +144,8 @@ export default {
 </script>
 
 <style>
+
+
 .main {
   display: flex;
   justify-content: space-between;
@@ -116,7 +154,7 @@ export default {
 }
 
 .container {
-  background-color:white;
+  background-color: white;
   border-radius: 1em;
   width: 15em;
   height: 22em;
@@ -137,25 +175,86 @@ export default {
 }
 
 .before-sale-price {
-    color: rgb(253, 97, 97);
-    font-size: 1em;
+  color: rgb(253, 97, 97);
+  font-size: 1em;
 }
 
 .product-card {
   display: flex;
 }
 
-
 #search {
+  display: flex;
   position: sticky;
-  top: 0;
-  text-align: center;
-  background-color: #d3d3d3;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  text-align: left;
+  background-color:#d3d3d3;
+  margin-top: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
-input[type=text] {
-  width: 30%;
+input[type="text"] {
+  display: flex;
+  width: 80%;
+}
+
+input[type="checkbox"] {
+  transform: scale(3);
+}
+
+.search-bar {
+  display: flex;
+  block-size: 8em;
+}
+
+.category-dropdown {
+  display: flex;
+  block-size: 8.5em;
+}
+
+.category-label {
+  display: flex;
+  align-items: center;
+}
+
+#sale-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  text-align: center;
+  padding: 0.1em;
+  font-weight: bold;
+}
+
+#splash-image {
+  display: flex;
+  padding-left: 10em;
+  justify-content: right;
+  
+}
+
+#splash-text {
+  margin-left: 15em;
+}
+
+.splash-container {
+  display: flex;
+  height: 14em;
+  justify-content: space-around;
+  border-style: solid;
+  border-width: 0.15em;
+  
+}
+
+.delivery-fee-text {
+  color: #03989e;
+}
+
+#top-products-label {
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+  background-color: #d3d3d3;
 }
 </style>

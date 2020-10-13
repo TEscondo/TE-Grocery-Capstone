@@ -7,6 +7,7 @@
     <div class ="main">
       <div class="container" v-for="prod in prodCat.productsList.slice(0,4)" v-bind:key="prod.id">
         <a v-bind:href="'/product-details/' + prod.id">
+        <img class="sale-banner" v-if="prod.sale" src="/salebanner.png">
           <img
             class="thumbnail"
             v-if="prod.image"

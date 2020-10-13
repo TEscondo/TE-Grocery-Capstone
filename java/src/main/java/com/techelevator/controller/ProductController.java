@@ -125,6 +125,12 @@ public void test() {
 		return allCategory;
 	}
 	
+	@RequestMapping(path = "/certification/{certificateId}", method=RequestMethod.GET)
+	public List<Product>getProductsByCert(@PathVariable int certificateId) {
+		List<Product> prodsByCert = dao.getAllProductsByCertId(certificateId);
+		return prodsByCert;
+	}
+	
 	@RequestMapping(path = "/cert/{productId}", method=RequestMethod.GET)
 	public List<Certification> getCertification(@PathVariable int productId) {
 		List<Certification> certs = dao.getCertification(productId);
@@ -141,6 +147,15 @@ public void test() {
 	public void transferToCart(@PathVariable int productId, @PathVariable int quantity) {
 		dao2.transferToCart(productId, quantity);
 		
+	}
+	@RequestMapping(path="/remove/{quantity}/{productId}",method=RequestMethod.POST)
+	public void removeItemFromCart(@PathVariable int quantity, @PathVariable int productId) {
+		dao2.removeItemFromCart(quantity, productId);
+	}
+	@RequestMapping(path="/checkout/{money}", method= RequestMethod.GET)
+	public String finalCheckout(@PathVariable int money) {
+		String output=dao2.finalCheckout(money);
+				return output;
 	}
 
 }

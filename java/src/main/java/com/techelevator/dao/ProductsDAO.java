@@ -7,6 +7,8 @@ import com.techelevator.model.Product;
 
 public interface ProductsDAO {
 
+	List<Product> getAllProductsByCertId(int certId);
+
 	List<Product> viewAllProducts();
 	
 	List<Product> viewProductsByCategory(int categoryId);
