@@ -22,8 +22,8 @@
           <div class="price" v-if="prod.sale != true">
             ${{ prod.price.toFixed(2) }}</div>
           <div class="sale-price" v-else>
-            <s><div class="before-sale-price">${{prod.price.toFixed(2)}}</div></s>
-          <div class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</div> </div>
+          <span class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</span> &nbsp;
+           <span class="before-sale-price"><s>${{prod.price.toFixed(2)}}</s></span></div>
         <div class = "product-weight">{{ prod.weight }}</div>
         </a>
       </div>
@@ -63,6 +63,7 @@ export default {
     clickMethod() {
       this.$router.push("all-products");
     },
+    
   },
   computed: {
     filteredList() {
@@ -94,7 +95,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  background-color: #f9fafb;
+  background-color: #d3d3d3;
 }
 
 .container {
@@ -108,7 +109,7 @@ export default {
   vertical-align: middle;
 }
 body {
-  background-color: skyblue;
+  font-family: sans-serif;
 }
 .category {
   display: flex;
