@@ -12,7 +12,10 @@
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
+
+      
     </div>
+    
     <router-view />
   </div>
 </template>
@@ -36,6 +39,7 @@ export default {
 
 a {
   text-decoration: none;
+  color: #000000;
   font-family: sans-serif;
 }
 </style>

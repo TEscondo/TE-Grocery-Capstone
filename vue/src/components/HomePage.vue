@@ -5,7 +5,7 @@
         <a v-bind:href="'/byCategory/'+prodCat.categoryId">{{prodCat.categoryName}}  <span class = "view-all">View All</span></a>
       </h1>
     <div class ="main">
-      <div class="container" v-for="prod in prodCat.productsList.slice(0,3)" v-bind:key="prod.id">
+      <div class="container" v-for="prod in prodCat.productsList.slice(0,4)" v-bind:key="prod.id">
         <a v-bind:href="'/product-details/' + prod.id">
           <img
             class="thumbnail"
@@ -18,13 +18,14 @@
             v-else
             src="https://grocerymonk.com/image_placeholder.png"
           />
+          <div id="details">
           <div class="product-title">{{ prod.title }}</div>
           <div class="price" v-if="prod.sale != true">
             ${{ prod.price.toFixed(2) }}</div>
           <div class="sale-price" v-else>
-            <s><div class="before-sale-price">${{prod.price.toFixed(2)}}</div></s>
-          <div class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</div> </div>
-        <div class = "product-weight">{{ prod.weight }}</div>
+          <span class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</span> &nbsp;
+           <span class="before-sale-price"><s>${{prod.price.toFixed(2)}}</s></span></div>
+        <div class = "product-weight">{{ prod.weight }}</div></div>
         </a>
       </div>
     </div>
@@ -63,6 +64,7 @@ export default {
     clickMethod() {
       this.$router.push("all-products");
     },
+    
   },
   computed: {
     filteredList() {
@@ -92,23 +94,23 @@ export default {
 <style>
 .main {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
-  background-color: #f9fafb;
+  background-color: lightgray;
 }
 
 .container {
+  display: flex;
+  align-content: space-evenly;
   background-color: white;
   border-radius: 10px;
   width: 250px;
-  height: 270px;
-  gap: 1rem;
+  height: 200px;
+  gap: .5rem;
   margin: 1rem;
-  text-align: center;
-  vertical-align: middle;
 }
 body {
-  background-color: skyblue;
+  font-family: sans-serif;
 }
 .category {
   display: flex;
@@ -123,10 +125,10 @@ body {
   margin: 50px;
   width: 200px;
   height: 200px;
-  padding-left: 20px;
 }
 
 .view-all {
   font-size: 12px;
 }
+
 </style>

@@ -43,8 +43,8 @@
         <div class="product-title">{{ product.title }}</div>
         <div class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</div>
         <div v-else class="sale-price">
-          <s><div class = "before-sale-price">${{product.price.toFixed(2)}}</div></s>
-          <div class="discounted-price">${{ product.discountedPrice.toFixed(2) }}</div></div>
+          <span class="discounted-price">${{(0.9*product.price).toFixed(2)}}</span> &nbsp;
+           <span class="before-sale-price"><s>${{product.price.toFixed(2)}}</s></span></div>
           <div class = "product-weight">{{ product.weight }}</div>
       </a>
       </div>
@@ -110,7 +110,7 @@ export default {
 <style>
 .main {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   background-color: #f9fafb;
 }
@@ -119,7 +119,7 @@ export default {
   background-color:white;
   border-radius: 1em;
   width: 15em;
-  height: 25em;
+  height: 22em;
   gap: 10em;
   margin: 1rem;
   text-align: center;

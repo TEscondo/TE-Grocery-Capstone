@@ -28,5 +28,8 @@ export default {
     },
     getCertifications(productId) {
         return http.get(`/cert/${productId}`)
+    },
+    viewCartInventory() {
+        return http.get('/cartInventory');
     }
 }

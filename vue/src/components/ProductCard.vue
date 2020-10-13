@@ -18,12 +18,11 @@
           src="https://grocerymonk.com/image_placeholder.png"
         />
         <div class="product-title">{{ product.title }}</div>
-        <div class="price" v-if="product.sale != true">
-          ${{ product.price }}.00
-        </div>
-        <div class="sale-price" v-else>
-          was ${{ product.price }}.00 now ${{ product.discountedPrice }}0
-        </div>
+       <div>
+        <span class="price" v-if="product.sale != true">${{ product.price.toFixed(2) }}</span>
+        <div v-else class="sale-price">
+          <span class="discounted-price">${{ product.discountedPrice.toFixed(2) }}</span>
+          <s><span class = "before-sale-price">${{product.price.toFixed(2)}}</span></s></div>
         {{ product.weight }}oz
       </a>
     </div>
@@ -75,11 +74,10 @@ export default {
   background-color: white;
   border-radius: 10px;
   width: 250px;
-  height: 270px;
+  height: 200px;
   gap: 1rem;
   margin: 1rem;
-  text-align: center;
-  vertical-align: middle;
+
 }
 .product-title {
   font-size: 1.5rem;

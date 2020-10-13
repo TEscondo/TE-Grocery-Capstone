@@ -60,7 +60,4 @@ export default {
   margin-bottom: 40px;
 }
 
-.thumbnail {
-  max-width: 200px;
-}
 </style>
