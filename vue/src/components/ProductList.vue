@@ -2,7 +2,7 @@
   <div>
     <h3>PRODUCTS</h3>
     <div id=search>
-      <label for="basic-dropdown"> Categories: </label>
+      <label for="basic-dropdown" class="category-label"> Categories: </label>
       <select name="basic-dropdown" class="category-dropdown" v-model="filter.categoryId">
         <option value="">View All</option>
         <option value="1">Frozen</option>
@@ -18,9 +18,16 @@
         <option value="19">Snacks</option>
       </select>&nbsp;&nbsp;
     <input type="text" class="search-bar" placeholder="Search for an item" v-model="filter.title" />&nbsp;
-    <input type="checkbox" v-model="filter.sale" />
-    <label for="checkbox"> Sale Items Only </label>
+    <input type="checkbox" class="sale-checkbox " v-model="filter.sale" />
+    <label for="checkbox" class="sale-label"> Sale Items Only </label>
     </div><br/>
+    <div class="splash-container">
+      <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
+      <h2 class="delivery-fee-text">No delivery fee for your first order --></h2>
+      <div class="splash-image">
+      <img src="https://www.rollingstone.com/wp-content/uploads/2019/06/Santana_photo_2_by_Maryanne_Bilham-1.jpg">
+      </div>
+    </div>
     <div class="main">
       <div
         class="container"
@@ -153,22 +160,50 @@ export default {
   text-align: left;
   background-color: skyblue;
   padding-top: 2em;
-  padding-bottom: 0.5em;
+  padding-bottom: 2em;
 }
 
 input[type=text] {
   display: flex;
-  width: 30%;
+  width: 80%;
 }
 
 .search-bar {
   display: flex;
-  block-size: 6em;
+  block-size: 8em;
 }
 
 .category-dropdown {
   display: flex;
-  block-size: 2em;
-  align-self: center;
+  block-size: 8em;
+}
+
+.category-label {
+  display: flex;
+  align-items: center;
+}
+
+.sale-label {
+  display: flex;
+  align-items: center;
+}
+
+.splash-container { 
+  display: flex;
+  height: 16em;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 0.15em
+
+}
+
+.delivery-fee-text {
+  color: skyblue;
+}
+
+.splash-image {
+  display: flex;
+  max-height: 100%;
+  max-width: 50%;
 }
 </style>
