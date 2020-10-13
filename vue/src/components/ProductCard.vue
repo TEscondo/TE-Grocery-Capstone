@@ -74,11 +74,10 @@ export default {
   background-color: white;
   border-radius: 10px;
   width: 250px;
-  height: 270px;
+  height: 200px;
   gap: 1rem;
   margin: 1rem;
-  text-align: center;
-  vertical-align: middle;
+
 }
 .product-title {
   font-size: 1.5rem;

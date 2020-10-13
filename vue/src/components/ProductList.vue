@@ -110,7 +110,7 @@ export default {
 <style>
 .main {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   background-color: #f9fafb;
 }
@@ -119,7 +119,7 @@ export default {
   background-color:white;
   border-radius: 1em;
   width: 15em;
-  height: 25em;
+  height: 22em;
   gap: 10em;
   margin: 1rem;
   text-align: center;

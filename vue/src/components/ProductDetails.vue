@@ -2,6 +2,7 @@
   <div class="details-main">
     <br />
     <div class="image-container">
+      <img id="salebanner" v-if="currentProduct.sale" src="/salebanner.png">
       <img
         class="thumbnail"
         v-if="currentProduct.image"
@@ -17,15 +18,17 @@
     
       <h2 id="title">{{ currentProduct.title }}</h2>
       <div id="price" class="price" v-if="!currentProduct.sale">
+        <div class=cart-button>Add to Cart</div>
         ${{ currentProduct.price.toFixed(2) }}
       </div>
       <div id="price" v-else class="sale-price">
         <span class="discounted-price">
+          <div class="cart-button">Add to Cart</div>
           ${{ currentProduct.discountedPrice.toFixed(2) }}
         </span> &nbsp;
         <span class="before-sale-price"><s>
             ${{ currentProduct.price.toFixed(2) }}</s>
-          </span>
+          </span>&nbsp;&nbsp;
       </div>
       <div class="product-weight">{{ currentProduct.weight }}</div>
       <br />
@@ -58,6 +61,17 @@ export default {
 </script>
 
 <style>
+.cart-button {
+  display: inline-block;
+  background-color: #03989e;
+  color: white;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 3px 8px 3px 8px;
+  margin: 5px;
+  font-weight: bold;
+}
+
 .details-main {
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -80,13 +94,22 @@ export default {
 }
 .image-container {
   grid-area: image;
+  position: relative;
+}
+
+#salebanner {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  display: block;
+  margin: 10px 20px 10px 20px;
 }
 
 .thumbnail {
   display: flex;
   align-items: center;
   justify-items: center;
-  margin: auto;
+  margin: 10px auto 10px auto;
   padding: 0px 0px 0px 0px;
 }
 
@@ -101,19 +124,15 @@ export default {
   grid-area: weight;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-}
-
 .cert {
   grid-area: cert;
+  margin-top: 15px;
 }
 
 .cert-icon {
   display: inline-block;
   background-color: lightgray;
-  border-radius: 28px;
+  border-radius: 15px;
   border: 1px solid;
   padding: 3px 8px 3px 8px;
   margin: 5px;
