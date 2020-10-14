@@ -48,10 +48,87 @@
         <div class="original-price">Subtotal: ${{originalPrice.toFixed(2)}}</div>
         <div class="tax">Tax: ${{cartTax.toFixed(2)}}</div>
         <div class="total">Total: ${{cartTotal.toFixed(2)}}</div>
-        <router-link
-          v-bind:to="{ name: 'checkout'}"
-        > <div class="checkout-icon">Checkout</div></router-link>
-        
+        <div v-on:click="checkout = !checkout"> <div class="checkout-icon">Checkout</div></div>
+        <div v-if="checkout" class="checkout">
+          
+<form>
+      <input
+        id="name"
+        class="checkout-input"
+        type="text"
+        placeholder="Name"
+        required
+      /><br />
+      <input
+        id="address"
+        class="checkout-input"
+        type="text"
+        placeholder="Street Address"
+        required
+      /><br />
+      <input
+        id="city"
+        class="checkout-input"
+        type="text"
+        placeholder="City"
+        required
+      />
+      <select name="state" id="state" required>
+        <option>Select State</option>
+        <option value="IN">Indiana</option>
+        <option value="MI">Michigan</option>
+        <option value="OH">Ohio</option>
+        <option value="PA">Pennsylvania</option>
+      </select>
+
+      <input
+        id="zip"
+        class="checkout-input"
+        type="text"
+        placeholder="Zip Code"
+        required
+        v-model="zip"
+      />
+      <div v-if="msg.zip">{{msg.zip}}</div>
+      
+      <br />
+      <input
+        id="tel"
+        class="checkout-input"
+        name="tel"
+        type="tel"
+        required
+        placeholder="123-456-7890"
+      /><br />
+
+      When would you like to receive your delivery?
+      <div id="deliverydate">
+        <div>
+          <input type="radio" id="today" name="deldate" value="today" checked />
+          <label for="today">Today - Rush!</label>
+        </div>
+        <div>
+          <input type="radio" id="tomorrow" name="deldate" value="tomorrow" />
+          <label for="tomorrow">Tomorrow</label>
+        </div>
+      </div>
+      <button class="cart-button">Cash on Delivery</button>
+      <button
+        class="cart-button-disable"
+        disable
+        title="Sorry, currently unavailable"
+      >
+        Credit Card
+      </button>
+      <button
+        class="cart-button-disable"
+        disable
+        title="Sorry, currently unavailable"
+      >
+        Paypal
+      </button>
+    </form>
+        </div>
         </div>
       </div>
     </div>
@@ -63,9 +140,17 @@
 export default {
   data() {
     return {
-
+      zip: 0,
+      msg: [],
+      checkout: false,
       cart: [],
     };
+  },
+  watch: {
+    zip(value) {
+      this.zip = value;
+      this.validateZip(value);
+    }
   },
   created() {
     // productService.viewCartInventory().then((response) => {
@@ -90,6 +175,16 @@ export default {
       product.qty = qty;
       this.$store.commit("UPDATE_ITEM_QTY", product);
     },
+    validateZip(zip) {
+      if (zip > 44101 && zip < 44144 || this.zip > 45202 && this.zip < 45248 || this.zip > 43085 && this.zip < 43268 
+      || this.zip > 48126 && this.zip < 48243) {
+        this.msg['zip'] = "";
+      }
+      else {
+        this.msg['zip'] = "Cannot deliver to your area";
+      }
+      console.log(zip);
+    }
   },
   computed: {
     originalPrice() {
