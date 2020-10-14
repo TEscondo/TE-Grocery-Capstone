@@ -9,10 +9,16 @@
         v-bind:key="product.id"
       >
         <img
-          class="thumbnail"
-          v-if="product.image"
-          v-bind:src="product.image"
-        />
+            class="thumbnail"
+            v-if="product.image"
+            v-bind:src="product.image"
+            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+          />
+          <img
+            class="thumbnail"
+            v-else
+            src="https://grocerymonk.com/image_placeholder.png"
+          />
         <div class="prod-title">{{ product.title }}</div>
         <select
           class="qty"
@@ -34,13 +40,92 @@
 
     <div>
       <div class="order-summary">
-        <div class="original-price">Original Price: {{originalPrice.toFixed(2)}}</div>
-        <div class="tax">Tax: {{cartTax.toFixed(2)}}</div>
-        <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
-        <div class="checkout-icon">Checkout</div>
-        
+        <div class="original-price">Subtotal: ${{originalPrice.toFixed(2)}}</div>
+        <div class="tax">Tax: ${{cartTax.toFixed(2)}}</div>
+        <div class="total">Total: ${{cartTotal.toFixed(2)}}</div>
+        <div v-on:click="checkout = !checkout"> <div class="checkout-icon">Checkout</div></div>
+        <div v-if="checkout" class="checkout">
+          
+<form>
+      <input
+        id="name"
+        class="checkout-input"
+        type="text"
+        placeholder="Name"
+        required
+      /><br />
+      <input
+        id="address"
+        class="checkout-input"
+        type="text"
+        placeholder="Street Address"
+        required
+      /><br />
+      <input
+        id="city"
+        class="checkout-input"
+        type="text"
+        placeholder="City"
+        required
+      />
+      <select name="state" id="state" required>
+        <option>Select State</option>
+        <option value="IN">Indiana</option>
+        <option value="MI">Michigan</option>
+        <option value="OH">Ohio</option>
+        <option value="PA">Pennsylvania</option>
+      </select>
+
+      <input
+        id="zip"
+        class="checkout-input"
+        type="number"
+        min="10000"
+        placeholder="Zip Code"
+        required
+        v-model.lazy="zip"
+      />
+      <div v-if="msg.zip">{{msg.zip}}</div>
+      
+      <br />
+      <input
+        id="tel"
+        class="checkout-input"
+        name="tel"
+        type="tel"
+        required
+        placeholder="123-456-7890"
+      /><br />
+
+      When would you like to receive your delivery?
+      <div id="deliverydate">
+        <div>
+          <input type="radio" id="today" name="deldate" value="today" checked />
+          <label for="today">Today - Rush!</label>
         </div>
-        
+        <div>
+          <input type="radio" id="tomorrow" name="deldate" value="tomorrow" />
+          <label for="tomorrow">Tomorrow</label>
+        </div>
+      </div>
+      <button class="cart-button">Cash on Delivery</button>
+      <button
+        class="cart-button-disable"
+        disable
+        title="Sorry, currently unavailable"
+      >
+        Credit Card
+      </button>
+      <button
+        class="cart-button-disable"
+        disable
+        title="Sorry, currently unavailable"
+      >
+        Paypal
+      </button>
+    </form>
+        </div>
+        </div>
       </div>
     </div>
   
@@ -49,6 +134,27 @@
 <script>
 // import productService from "../services/ProductService.js";
 export default {
+  data() {
+    return {
+      zip: null,
+      msg: [],
+      checkout: false,
+      cart: [],
+    };
+  },
+  watch: {
+    zip(value) {
+      this.zip = value;
+      this.validateZip(value);
+    }
+  },
+  created() {
+    // productService.viewCartInventory().then((response) => {
+    //   this.cart = response.data;
+    //   this.cart.discountedPrice = this.cart.price * 0.9;
+    // });
+    // this.cart = this.$store.state.cart;
+  },
   methods: {
       
       removeFromCart(product){
@@ -79,6 +185,19 @@ export default {
       product.quantity = qty;
       this.$store.commit("UPDATE_ITEM_QTY", product);
     },
+    validateZip(zip) {
+   
+      if (zip > 10000 && zip > 44101 && zip < 44144 || this.zip > 45202 && this.zip < 45248 || this.zip > 43085 && this.zip < 43268 
+      || this.zip > 48126 && this.zip < 48243) {
+        this.msg['zip'] = "";
+      }
+      else {
+        this.msg['zip'] = "Cannot deliver to your area";
+      }
+      console.log(zip);
+    }
+    
+    
   },
   computed: {
 
@@ -228,5 +347,11 @@ export default {
   max-width: 50px;
   max-height: 30px;
   grid-area: qty;
+}
+
+#cart-old-price {
+  font-size: .9em;
+  color: rgb(253, 97, 97);
+
 }
 </style>
