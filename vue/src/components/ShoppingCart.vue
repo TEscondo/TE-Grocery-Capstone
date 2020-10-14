@@ -22,7 +22,7 @@
         <div class="prod-title">{{ product.title }}</div>
         <select
           class="qty"
-          v-on:change="updateCart(product, $event.target.value)"
+          v-on:change="addMoreToCart(product, $event.target.value)"
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -30,6 +30,9 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+        <div class="remove">
+          <a href="#" v-on:click.prevent="removeFromCart(product)">Remove</a>
+        </div>
         <div class="prod-price" v-if="!product.sale">
           ${{ product.price.toFixed(2) }}
         </div>
@@ -89,8 +92,7 @@
             <input
               id="zip"
               class="checkout-input"
-              type="number"
-              min="10000"
+              type="text"
               placeholder="Zip Code"
               required
               v-model.lazy="zip"
@@ -115,7 +117,7 @@
                   id="today"
                   name="deldate"
                   value="today"
-                  v-on:click="tomorrow =false"
+                  v-on:click="tomorrow = false"
                   checked
                 />
                 <label for="today">Today - Rush!</label>
@@ -131,24 +133,23 @@
                 <label for="tomorrow">Tomorrow</label>
               </div>
             </div>
-<div v-if="tomorrow">
-            <select name="time" id="time" required>
-              <option>Select Time</option>
-              <option value="morning">Morning</option>
-              <option value="afternoon">Afternoon</option>
-              <option value="night">Night</option>
-            </select>
+            <div v-if="tomorrow">
+              <select name="time" id="time" required>
+                <option>Select Time</option>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="night">Night</option>
+              </select>
             </div>
 
-            <button id="cash" class="cart-button">Cash on Delivery </button>
+            <button id="cash" class="cart-button">Cash on Delivery</button>
             <div v-if="cash">
               <h1>Transaction Successfull</h1>
-              </div>
+            </div>
             <button
               class="cart-button-disable"
               disable
               title="Sorry, currently unavailable"
-             
             >
               Credit Card
             </button>
@@ -192,8 +193,21 @@ export default {
     // this.cart = this.$store.state.cart;
   },
   methods: {
+    removeFromCart(product) {
+      this.$store.commit("REMOVE_FROM_CART", product);
+    },
+
+    addMoreToCart(product, qty) {
+      let i = 0;
+      for (i = 1; i < qty; i++) {
+        this.addToCart(product);
+      }
+    },
+    clearCart() {
+      this.$store.commit("CLEAR_CART");
+    },
     addToCart(item) {
-      this.$store.cart.commit("ADD_PRODUCT", item);
+      this.$store.commit("ADD_PRODUCT", item);
     },
     isInCart(item) {
       const product = this.cart.find((product) => product.id === item.id);
@@ -204,7 +218,7 @@ export default {
       alert("Thanks for shopping with us!");
     },
     updateCart(product, qty) {
-      product.qty = qty;
+      product.quantity = qty;
       this.$store.commit("UPDATE_ITEM_QTY", product);
     },
     validateZip(zip) {
@@ -216,7 +230,8 @@ export default {
       ) {
         this.msg["zip"] = "";
       } else {
-        this.msg["zip"] = "Sorry, we only deliver to Tech Elevator metro areas!";
+        this.msg["zip"] =
+          "Sorry, we only deliver to Tech Elevator metro areas!";
       }
       console.log(zip);
     },
@@ -274,6 +289,10 @@ export default {
 </script>
 
 <style>
+.remove{
+    grid-area: remove;
+    font-size: 12px;
+}
 .total {
   display: flex;
   justify-content: space-between;
@@ -312,6 +331,7 @@ export default {
   grid-template-areas:
     "thumbnail title"
     "thumbnail qty"
+    "thumbnail remove"
     "thumbnail price"
     "notes notes";
   justify-content: space-between;
@@ -325,6 +345,7 @@ export default {
 .prod-title {
   margin-top: 20px;
   grid-area: title;
+  font-size: 20px;
 }
 
 .order-summary {
@@ -368,6 +389,6 @@ export default {
 
 .msg {
   color: red;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 </style>
