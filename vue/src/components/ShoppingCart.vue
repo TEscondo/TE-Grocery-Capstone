@@ -140,10 +140,8 @@
             </select>
             </div>
 
-            <button id="cash" class="cart-button">Cash on Delivery </button>
-            <div v-if="cash">
-              <h1>Transaction Successfull</h1>
-              </div>
+            <button @click="received" id="cash" class="cart-button">Cash on Delivery </button>
+            
             <button
               class="cart-button-disable"
               disable
@@ -220,6 +218,10 @@ export default {
       }
       console.log(zip);
     },
+    received(){
+      let output = "Transaction sucessfull";
+      return output;
+    }
   },
   computed: {
     originalPrice() {
