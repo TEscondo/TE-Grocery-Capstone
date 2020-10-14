@@ -37,7 +37,9 @@
         type="text"
         placeholder="Zip Code"
         required
-      /><br />
+      />
+      <div v-if="validateZip">Sorry, you're not in our delivery area!</div>
+      <br />
       <input
         id="tel"
         class="checkout-input"
@@ -45,7 +47,7 @@
         type="tel"
         required
         placeholder="123-456-7890"
-      /><br/>
+      /><br />
 
       When would you like to receive your delivery?
       <div id="deliverydate">
@@ -59,14 +61,41 @@
         </div>
       </div>
       <button class="cart-button">Cash on Delivery</button>
-      <button class="cart-button-disable" disable>Pay by Visa</button>
-      <button class="cart-button-disable" disable>Pay via Paypal</button>
+      <button
+        class="cart-button-disable"
+        disable
+        title="Sorry, currently unavailable"
+      >
+        Credit Card
+      </button>
+      <button
+        class="cart-button-disable"
+        disable
+        title="Sorry, currently unavailable"
+      >
+        Paypal
+      </button>
     </form>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+    zipValid: {},
+  }
+},
+
+  methods: {
+    validateZip(zip) {
+      if (zip > 44101 && zip < 44144 || zip > 45202 && zip < 45248 || zip > 43085 && zip < 43268 
+      || zip > 48126 && zip < 48243) {
+        return true;
+      }
+    }
+  }
+};
 </script>
 
 <style>
@@ -99,14 +128,9 @@ form {
   width: 7em;
 }
 
-input[required] {
-  color: red;
-  content: " *"
-}
-
 .cart-button-disable {
   display: inline-block;
-  background-color: #67C1C4;
+  background-color: #67c1c4;
   color: white;
   border-radius: 4px;
   border: 1px solid;
