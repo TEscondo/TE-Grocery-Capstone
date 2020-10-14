@@ -45,12 +45,14 @@
 
     <div>
       <div class="order-summary">
-        <div class="original-price">Original Price: ${{originalPrice.toFixed(2)}}</div>
+        <div class="original-price">Subtotal: ${{originalPrice.toFixed(2)}}</div>
         <div class="tax">Tax: ${{cartTax.toFixed(2)}}</div>
         <div class="total">Total: ${{cartTotal.toFixed(2)}}</div>
-        <div class="checkout-icon">Checkout</div>
-        </div>
+        <router-link
+          v-bind:to="{ name: 'checkout'}"
+        > <div class="checkout-icon">Checkout</div></router-link>
         
+        </div>
       </div>
     </div>
   
@@ -61,7 +63,7 @@
 export default {
   data() {
     return {
-    
+
       cart: [],
     };
   },

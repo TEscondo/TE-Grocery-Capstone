@@ -11,6 +11,7 @@ import ProductDetails from '../components/ProductDetails.vue'
 import ShoppingCart from '../components/ShoppingCart.vue'
 import Certification from '../components/Certification.vue'
 import Search from '../components/Search.vue'
+import Checkout from '../components/Checkout.vue'
 
 Vue.use(Router)
 
@@ -91,10 +92,15 @@ const router = new Router({
       component: Certification
     },
     {
+      path: "/checkout",
+      name: "checkout",
+      component: Checkout
+    },
+    {
       path: "/search/:query",
       name: "search",
       Component: Search
-    }
+    },
   ]
 })
 

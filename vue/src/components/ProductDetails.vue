@@ -94,6 +94,11 @@ export default {
   padding: 3px 8px 3px 8px;
   margin: 5px;
   font-weight: bold;
+  
+}
+
+.cart-button:hover {
+  background-color: #02797E;
 }
 
 .details-main {
@@ -163,5 +168,9 @@ export default {
   padding: 3px 8px 3px 8px;
   margin: 5px;
   font-weight: bold;
+}
+
+.cert-icon:hover {
+  background-color: darkgray;
 }
 </style>

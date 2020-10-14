@@ -187,14 +187,6 @@ export default {
   padding-bottom: 1em;
 }
 
-input[type="text"] {
-  display: flex;
-  width: 80%;
-  border-radius: 28px;
-  font-size: 1.5em;
-  padding-left: 10px;
-}
-
 input[type="checkbox"] {
   transform: scale(3);
 }
@@ -202,6 +194,11 @@ input[type="checkbox"] {
 .search-bar {
   display: flex;
   block-size: 2em;
+  display: flex;
+  width: 80%;
+  border-radius: 28px;
+  font-size: 1.5em;
+  padding-left: 10px;
 }
 
 .category-dropdown {
