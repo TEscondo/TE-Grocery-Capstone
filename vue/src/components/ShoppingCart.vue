@@ -32,12 +32,7 @@
 
     <div>
       <div class="order-summary">
-        <div class="order-sum-nums" v-for="product in this.$store.state.cart" v-bind:key="product.id">
-          <div class="sum-prod-price" v-if="!product.sale">
-            Price: {{ product.price.toFixed(2) }}</div>
-            <div class="sum-prod-price" v-else>
-            Price: {{product.discountedPrice.toFixed(2)}}</div>
-          </div>
+        <div class="original-price">Original Price: {{originalPrice.toFixed(2)}}</div>
         <div class="tax">Tax: {{cartTax.toFixed(2)}}</div>
         <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
         <div class="checkout-icon">Checkout</div>
@@ -82,19 +77,22 @@ export default {
     },
   },
   computed: {
-    // prodPrice() {
-    //     let productPrice = 0.00;
-    //     let i = 0;
-    //     for (i=0;i<this.$store.state.cart.length;i++) {
-    //         if (this.$store.state.cart[i].sale == true){
-    //             productPrice = this.$store.state.cart[i].discountedPrice;
-    //         }
-    //         else {
-    //             productPrice = this.$store.state.cart[i].price;
-    //         }
-    //     }
-    //     return productPrice;
-    // },
+    originalPrice() {
+        let newTotal = 0.00;
+        let i=0;
+        let productPrice = 0.00;
+        for (i=0; i<this.$store.state.cart.length;i++) {
+            if (this.$store.state.cart[i].sale == true){
+                productPrice = this.$store.state.cart[i].discountedPrice;
+            }
+            else {
+                productPrice = this.$store.state.cart[i].price;
+            }
+            newTotal = newTotal + productPrice;
+        }
+
+      return newTotal;
+    },
     
     cartTax() {
         let newTotal = 0.00;
@@ -137,20 +135,14 @@ export default {
 .total{
     display: flex;
     justify-content: space-between;
-    font: 20px bold;
-    font-family: Arial, Helvetica, sans-serif;
 }
 .tax{
     display: flex;
     justify-content: space-between;
-    font: 20px bold;
-    font-family: Arial, Helvetica, sans-serif;
 }
-.order-sum-nums{
+.original-price{
     display: flex;
     justify-content: space-between;
-    font: 20px bold;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .checkout-icon {
@@ -198,10 +190,13 @@ export default {
   flex-direction: column;
   position: sticky;
   top: 0;
-  padding: 80px 80px;
+  padding: 80px;
   margin-top: 70px;
   justify-content: space-between;
   background-color: white;
+  box-sizing: border-box;
+      font: 20px bold;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .prod-price {
   grid-area: price;
