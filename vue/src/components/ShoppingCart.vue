@@ -16,7 +16,7 @@
         <div class="prod-title">{{ product.title }}</div>
         <select
           class="qty"
-          v-on:change="updateCart(product, $event.target.value)"
+          v-on:change="addMoreToCart(product, $event.target.value)"
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -24,9 +24,11 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+        <div class ="remove"><a href=# v-on:click.prevent="removeFromCart(product)">Remove</a></div>
         <div class="prod-price" v-if="!product.sale">{{ product.price.toFixed(2) }}</div>
         <div class="prod-price" v-else>{{product.discountedPrice.toFixed(2)}}</div>
         <textarea id="notes" placeholder="Notes for your shopper"></textarea>
+        
       </div>
     </div>
 
@@ -36,6 +38,7 @@
         <div class="tax">Tax: {{cartTax.toFixed(2)}}</div>
         <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
         <div class="checkout-icon">Checkout</div>
+        
         </div>
         
       </div>
@@ -46,22 +49,23 @@
 <script>
 // import productService from "../services/ProductService.js";
 export default {
-  data() {
-    return {
-    
-      cart: [],
-    };
-  },
-  created() {
-    // productService.viewCartInventory().then((response) => {
-    //   this.cart = response.data;
-    //   this.cart.discountedPrice = this.cart.price * 0.9;
-    // });
-    // this.cart = this.$store.state.cart;
-  },
   methods: {
+      
+      removeFromCart(product){
+          this.$store.commit("REMOVE_FROM_CART", product);
+      },
+
+    addMoreToCart(product, qty){
+        let i = 0;
+        for (i=1;i<qty;i++){
+            this.addToCart(product);
+        }
+    },
+    clearCart(){
+        this.$store.commit("CLEAR_CART");
+    },
     addToCart(item) {
-      this.$store.cart.commit("ADD_PRODUCT", item);
+      this.$store.commit("ADD_PRODUCT", item);
     },
     isInCart(item) {
       const product = this.cart.find((product) => product.id === item.id);
@@ -72,11 +76,12 @@ export default {
       alert("Thanks for shopping with us!");
     },
     updateCart(product, qty) {
-      product.qty = qty;
+      product.quantity = qty;
       this.$store.commit("UPDATE_ITEM_QTY", product);
     },
   },
   computed: {
+
     originalPrice() {
         let newTotal = 0.00;
         let i=0;
@@ -132,6 +137,10 @@ export default {
 </script>
 
 <style>
+.remove{
+    grid-area: remove;
+    font-size: 12px;
+}
 .total{
     display: flex;
     justify-content: space-between;
@@ -170,6 +179,7 @@ export default {
   grid-template-areas:
     "thumbnail title"
     "thumbnail qty"
+    "thumbnail remove"
     "thumbnail price"
     "notes notes";
   justify-content: space-between;
@@ -183,6 +193,7 @@ export default {
 .prod-title {
   margin-top: 20px;
   grid-area: title;
+  font-size: 20px;
 }
 
 .order-summary {

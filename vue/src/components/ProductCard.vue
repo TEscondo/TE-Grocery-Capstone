@@ -23,7 +23,7 @@
         <div v-else class="sale-price">
           <span class="discounted-price">${{ product.discountedPrice.toFixed(2) }}</span>
           <s><span class = "before-sale-price">${{product.price.toFixed(2)}}</span></s></div>
-        {{ product.weight }}oz
+        {{ product.weight }}
       </router-link>
     </div>
   </div>
