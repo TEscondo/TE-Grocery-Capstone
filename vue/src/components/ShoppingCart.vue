@@ -5,7 +5,7 @@
 
       <div
         class="items"
-        v-for="product in $store.state.cart"
+        v-for="product in this.cart"
         v-bind:key="product.id"
       >
         <img
@@ -31,34 +31,35 @@
 
     <div>
       <div class="order-summary">
-        <div v-for="product in $store.state.cart" v-bind:key="product.id">
+        <div v-for="product in this.cart" v-bind:key="product.id">
           <div class="sum-prod-price">
             Price: {{ product.price.toFixed(2) }}
           </div>
         </div>
         <div class="tax">Tax:</div>
-        <div class="total">Total:</div>
+        <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
         <div class="checkout-icon">Checkout</div>
-        <div>{{total.toFixed(2)}}</div>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import productService from "../services/ProductService.js";
+// import productService from "../services/ProductService.js";
 export default {
   data() {
     return {
-      total: 0,
+    
       cart: [],
     };
   },
   created() {
-    productService.viewCartInventory().then((response) => {
-      this.cart = response.data;
-      this.cart.discountedPrice = this.cart.price * 0.9;
-    });
+    // productService.viewCartInventory().then((response) => {
+    //   this.cart = response.data;
+    //   this.cart.discountedPrice = this.cart.price * 0.9;
+    // });
+    this.cart = this.$store.state.cart;
   },
   methods: {
     addToCart(item) {
@@ -79,12 +80,12 @@ export default {
   },
   computed: {
     cartTotal() {
-        let total = 0.00;
-      this.$store.state.cart.forEach((product) => {
-        total += product.price;
-
-      });
-      return total;
+        let newTotal = 0.00;
+        let i=0;
+        for (i=0; i<this.cart.length;i++) {
+            newTotal = newTotal + this.cart[i].price;
+        }
+      return newTotal;
     },
   },
 };
