@@ -1,25 +1,6 @@
 <template>
   <div>
     <div id="search">
-      <label for="basic-dropdown" class="category-label"> Categories: </label>
-      <select
-        name="basic-dropdown"
-        class="category-dropdown"
-        v-model="filter.categoryId"
-      >
-        <option value="">View All</option>
-        <option value="1">Frozen</option>
-        <option value="4">Produce</option>
-        <option value="6">International</option>
-        <option value="7">Beverages</option>
-        <option value="8">Pets</option>
-        <option value="9">Dry Goods</option>
-        <option value="11">Personal Care</option>
-        <option value="12">Meat/Seafood</option>
-        <option value="13">Pantry</option>
-        <option value="15">Canned Goods</option>
-        <option value="19">Snacks</option></select
-      >&nbsp;&nbsp;
       <input
         type="text"
         class="search-bar"
@@ -29,8 +10,12 @@
 
       <label for="checkbox" id="sale-box"
         >Sale Items Only<input type="checkbox" v-model="filter.sale"
-      /></label>
+      /></label><br/>
     </div>
+
+    <div class="navigation"> <div v-for="cat in categories" v-bind:key="cat.categoryId">
+    <router-link v-bind:to="{ name: 'category', params: { categoryId : cat.categoryId }}">{{cat.categoryName}}</router-link></div></div>
+
     <br />
     <div class="splash-container">
       <div id="splash-text">
@@ -95,6 +80,7 @@ import productService from "../services/ProductService.js";
 export default {
   data() {
     return {
+      categories: [],
       products: [],
       filter: {
         title: "",
@@ -144,6 +130,9 @@ export default {
         product.discountedPrice = product.price * 0.9;
       });
     });
+    productService.getAllCategories().then((response) => {
+      this.categories = response.data;
+    })
   },
 };
 </script>
@@ -170,6 +159,7 @@ export default {
 .product-title {
   font-size: 1.5rem;
 }
+
 .thumbnail {
   max-width: 10em;
   max-height: 10em;
@@ -190,6 +180,7 @@ export default {
 
 #search {
   display: flex;
+  justify-content: space-around;
   position: sticky;
   text-align: left;
   background-color:#d3d3d3;
@@ -203,6 +194,7 @@ input[type="text"] {
   width: 80%;
   border-radius: 28px;
   font-size: 1.5em;
+  padding-left: 10px;
 }
 
 input[type="checkbox"] {
@@ -211,7 +203,7 @@ input[type="checkbox"] {
 
 .search-bar {
   display: flex;
-  block-size: 3em;
+  block-size: 2em;
 }
 
 .category-dropdown {
@@ -253,7 +245,6 @@ input[type="checkbox"] {
   border-width: 0.15em;
   
 }
-
 .delivery-fee-text {
   color: #03989e;
 }
@@ -263,5 +254,13 @@ input[type="checkbox"] {
   justify-content: center;
   font-size: 1em;
   background-color: #d3d3d3;
+}
+
+.navigation {
+  margin-top: 5px;
+  display: flex;
+  font-size: .85em;
+  font-weight: bold;
+  justify-content: space-evenly;
 }
 </style>
