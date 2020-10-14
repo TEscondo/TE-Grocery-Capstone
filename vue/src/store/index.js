@@ -19,55 +19,7 @@ if (currentToken != null) {
 export default new Vuex.Store({
   state: {
     total: 0.00,
-    cart: [
-      {
-        title: "Chocolate Sandwich Cookies",
-        price: 3.00,
-        sale: true,
-        brandId: 3,
-        details: "Chocolate Sandwich Cookies are a classic combination of rich cream and chocolate wafers. The cream center is sandwiched between two crispy chocolate cookies, making each treat delightfully crunchy on the outside and wonderfully soft on the inside.",
-        weight: "21 oz",
-        id: 1,
-        categoryId: 19,
-        image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/6/18/0/MW0100_0203.jpg",
-        qty: 1
-      },
-      {
-        title: "All-Seasons Salt",
-        price: 10.00,
-        sale: false,
-        brandId: 1,
-        details: "All Seasoned Salt is a blend of salt and savory spices, including paprika, black pepper, onion and garlic, with a hint of chili pepper.",
-        weight: "28 oz",
-        id: 2,
-        categoryId: 13,
-        image: "https://d.newsweek.com/en/full/1577880/stock-image-salt.jpg",
-        qty: 1
-      }, {
-        title: "Beef Hot Links Beef Smoked Sausage With Chile Peppers",
-        price: 3.00,
-        sale: false,
-        brandId: 3,
-        details: "Smoked and seasoned to perfection and made with pork, turkey and beef, our sausage makes a perfect addition to barbecue and spiced dishes.",
-        weight: "18 oz",
-        id: 40,
-        categoryId: 12,
-        image: "https://stoltzfusmeats.com/wp-content/uploads/2017/10/24.-Smoked-Sausage-Sampler.jpg",
-        qty: 1
-      },
-      {
-        title: "Pumpkin Muffin Mix",
-        price: 8.00,
-        sale: false,
-        brandId: 4,
-        details: "With this convenient mix, you can make a loaf of freshly baked bread or 12 delicious muffins.",
-        weight: "14.2 oz",
-        id: 50,
-        categoryId: 13,
-        image: "https://d2t88cihvgacbj.cloudfront.net/manage/wp-content/uploads/2014/09/Best-Ever-Pumpkin-Muffins-2.jpg?x11740",
-        qty: 1
-      }
-    ],
+    cart: [],
     token: currentToken || '',
     user: currentUser || {}
   },
@@ -98,7 +50,7 @@ export default new Vuex.Store({
     },
 
     ADD_PRODUCT(state, product) {
-      state.cart.unshift(product);
+      state.cart.push(product);
     },
 
     SET_AUTH_TOKEN(state, token) {

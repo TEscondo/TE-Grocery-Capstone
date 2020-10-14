@@ -1,8 +1,9 @@
 <template>
   <div>
-      <div class="certification-title">
-        <h1>{{ returnCertificationName }}</h1>
-      </div><br/>
+    <div class="certification-title">
+      <h1>{{ returnCertificationName }}</h1>
+    </div>
+    <br />
     <div class="main">
       <p class="category-description">{{ returnCategoryDescription }}</p>
       <div
@@ -10,8 +11,10 @@
         v-for="product in products"
         v-bind:key="product.id"
       >
-        <a v-bind:href="'/product-details/' + product.id">
-         <img class="sale-banner" v-if="product.sale" src="/salebanner.png">
+        <router-link
+          v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+        >
+          <img class="sale-banner" v-if="product.sale" src="/salebanner.png" />
           <img
             class="thumbnail"
             v-if="product.image"
@@ -35,7 +38,9 @@
               ><s>${{ product.price.toFixed(2) }}</s></span
             >
           </div>
-          <div class="product-weight">{{ product.weight }}</div></a
+          <div class="product-weight">{{ product.weight }}</div>
+          <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
+          </router-link
         >
       </div>
     </div>
@@ -52,7 +57,7 @@ export default {
     };
   },
   computed: {
-      returnCertificationName() {
+    returnCertificationName() {
       if (this.$route.params.id == 1) {
         return "Vegan";
       }
@@ -77,8 +82,7 @@ export default {
       return null;
     },
   },
-      
-  
+
   created() {
     productService
       .getProductsByCertificationId(this.$route.params.id)
@@ -88,8 +92,14 @@ export default {
           product.discountedPrice = product.price * 0.9;
         });
       });
-  }
+  },
+  methods: {
+    addToCart(item) {
+      this.$store.commit("ADD_PRODUCT", item);
+      window.alert("Added!");
 
+    },
+  }
 };
 </script>
 

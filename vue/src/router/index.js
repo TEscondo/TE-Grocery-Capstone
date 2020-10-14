@@ -29,7 +29,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: ProductList,
       meta: {
         requiresAuth: false //anyone can see this - default as guest
       }
@@ -61,7 +61,7 @@ const router = new Router({
     {
       path: "/all-products",
       name: "all-products",
-      component: ProductList,
+      component: Home,
       meta: {
         requiresAuth: false
       }
@@ -86,7 +86,7 @@ const router = new Router({
     },
     {
       path: "/certification/:id",
-      name: "certifications",
+      name: "certification",
       component: Certification
     }
   ]

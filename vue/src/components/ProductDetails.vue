@@ -2,7 +2,11 @@
   <div class="details-main">
     <br />
     <div class="image-container">
-      <img class="sale-banner" v-if="currentProduct.sale" src="/salebanner.png">
+      <img
+        class="sale-banner"
+        v-if="currentProduct.sale"
+        src="/salebanner.png"
+      />
       <img
         class="thumbnail"
         v-if="currentProduct.image"
@@ -15,26 +19,41 @@
         src="https://grocerymonk.com/image_placeholder.png"
       />
     </div>
-      <h2 id="title">{{ currentProduct.title }}</h2>
-      <div id="price" class="price" v-if="!currentProduct.sale">
-        <div class="cart-button"><input type="button" v-on:click.prevent="addToCart">Add to Cart</div>
-        ${{ currentProduct.price.toFixed(2) }}
+    <h2 id="title">{{ currentProduct.title }}</h2>
+    <div id="price" class="price" v-if="!currentProduct.sale">
+      <div class="cart-button" v-on:click.prevent="addToCart(currentProduct)">
+        Add to Cart
       </div>
-      <div id="price" v-else class="sale-price">
-        <span class="discounted-price">
-          <div class="cart-button"><input type="button" v-on:click.prevent="addToCart">Add to Cart</div>
-          ${{ currentProduct.discountedPrice.toFixed(2) }}
-        </span> &nbsp;
-        <span class="before-sale-price"><s>
-            ${{ currentProduct.price.toFixed(2) }}</s>
-          </span>&nbsp;&nbsp;
+
+      ${{ currentProduct.price.toFixed(2) }}
+    </div>
+    <div id="price" v-else class="sale-price">
+      <span class="discounted-price">
+        <div class="cart-button" v-on:click.prevent="addToCart(currentProduct)">
+          Add to Cart
+        </div>
+        ${{ currentProduct.discountedPrice.toFixed(2) }}
+      </span>
+      &nbsp;
+      <span class="before-sale-price"
+        ><s> ${{ currentProduct.price.toFixed(2) }}</s> </span
+      >&nbsp;&nbsp;
+    </div>
+    <div class="product-weight">{{ currentProduct.weight }}</div>
+    <br />
+    <div class="product-details">{{ currentProduct.details }}</div>
+    <br />
+    <div class="cert">
+      Certifications:
+      <div class="cert-icon" v-for="cert in certification" v-bind:key="cert.id">
+        <router-link
+          v-bind:to="{ name: 'certification', params: { id: cert.id } }"
+        >
+          {{ cert.name }}
+        </router-link>
       </div>
-      <div class="product-weight">{{ currentProduct.weight }}</div>
-      <br />
-      <div class="product-details">{{ currentProduct.details }}</div>
-      <br />
-      <div class="cert">Certifications: <div class="cert-icon" v-for="cert in certification" v-bind:key="cert.id"> <a v-bind:href="'/certification/' + cert.id"> {{ cert.name }} </a></div></div>
-      </div>  
+    </div>
+  </div>
 </template>
 
 <script>
@@ -47,10 +66,11 @@ export default {
       certification: [],
     };
   },
-  methods :{
-    addToCart() {
-      this.$store.cart.commit("ADD_PRODUCT", this.currentProduct);
-    }
+  methods: {
+    addToCart(item) {
+      this.$store.commit("ADD_PRODUCT", item);
+      window.alert("Added!");
+    },
   },
   created() {
     productService.getProductById(this.$route.params.id).then((response) => {

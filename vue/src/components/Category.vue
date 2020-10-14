@@ -1,35 +1,46 @@
 <template>
   <section class="product-by-category">
     <div class="category-title">
-      <h1>{{returnCategoryName}}</h1>
+      <h1>{{ returnCategoryName }}</h1>
     </div>
-    <p class="category-description">{{returnCategoryDescription}}</p>
+    <p class="category-description">{{ returnCategoryDescription }}</p>
     <div class="main">
       <div
         class="container"
         v-for="product in products"
         v-bind:key="product.id"
       >
-      <a v-bind:href="'/product-details/' + product.id">
-        <img
-          class="thumbnail"
-          v-if="product.image"
-          v-bind:src="product.image"
-          onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-        />
-        <img
-          class="thumbnail"
-          v-else
-          src="https://grocerymonk.com/image_placeholder.png"
-        />
-        <div class="product-title">{{ product.title }}</div>
-        <div class="price" v-if="product.sale != true">
-          ${{ product.price.toFixed(2) }}</div>
-        <div class="sale-price" v-else>
-         <span class="discounted-price">${{(product.discountedPrice).toFixed(2)}}</span>&nbsp;
-           <span class="before-sale-price"><s>${{product.price.toFixed(2)}}</s></span></div>
-        <div class="product-weight">{{ product.weight }}</div></a>
-    </div>
+        <router-link
+          v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+        >
+          <img
+            class="thumbnail"
+            v-if="product.image"
+            v-bind:src="product.image"
+            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+          />
+          <img
+            class="thumbnail"
+            v-else
+            src="https://grocerymonk.com/image_placeholder.png"
+          />
+          <div class="product-title">{{ product.title }}</div>
+          <div class="price" v-if="product.sale != true">
+            ${{ product.price.toFixed(2) }}
+          </div>
+          <div class="sale-price" v-else>
+            <span class="discounted-price"
+              >${{ product.discountedPrice.toFixed(2) }}</span
+            >&nbsp;
+            <span class="before-sale-price"
+              ><s>${{ product.price.toFixed(2) }}</s></span
+            >
+          </div>
+          <div class="product-weight">{{ product.weight }}</div>
+          <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
+          </router-link
+        >
+      </div>
     </div>
   </section>
 </template>
@@ -174,6 +185,13 @@ export default {
         });
       });
   },
+   methods: {
+    addToCart(item) {
+      this.$store.commit("ADD_PRODUCT", item);
+      window.alert("Added!");
+  
+    },
+  }
 };
 </script>
 
@@ -200,15 +218,13 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
-  
 }
 
 .before-sale-price {
-    color: rgb(253, 97, 97);
+  color: rgb(253, 97, 97);
 }
 
 .discounted-price {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
-
 </style>

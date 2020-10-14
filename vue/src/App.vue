@@ -6,7 +6,7 @@
       <router-link v-bind:to="{ name: 'all-products' }"
         >View All Products</router-link
       >&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'cart' }">Cart</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'cart' }">Cart < {{this.$store.state.cart.length}} ></router-link>&nbsp;|&nbsp;
       <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"

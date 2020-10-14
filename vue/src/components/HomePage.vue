@@ -2,37 +2,55 @@
   <div class="home">
     <div v-for="prodCat in prodByCat" v-bind:key="prodCat.categoryName">
       <h1>
-        <a v-bind:href="'/byCategory/'+prodCat.categoryId">{{prodCat.categoryName}}  <span class = "view-all">View All</span></a>
+        <router-link
+          v-bind:to="{ name: 'category', params: { categoryId: prodCat.categoryId } }"
+        >
+          {{ prodCat.categoryName }}
+          <span class="view-all">View All</span></router-link
+        >
       </h1>
-    <div class ="main">
-      <div class="container" v-for="prod in prodCat.productsList.slice(0,4)" v-bind:key="prod.id">
-        <a v-bind:href="'/product-details/' + prod.id">
-        <img class="sale-banner" v-if="prod.sale" src="/salebanner.png">
-          <img
-            class="thumbnail"
-            v-if="prod.image"
-            v-bind:src="prod.image"
-            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-          />
-          <img
-            class="thumbnail"
-            v-else
-            src="https://grocerymonk.com/image_placeholder.png"
-          />
-          <div id="details">
-          <div class="product-title">{{ prod.title }}</div>
-          <div class="price" v-if="prod.sale != true">
-            ${{ prod.price.toFixed(2) }}</div>
-          <div class="sale-price" v-else>
-          <span class="discounted-price">${{(0.9*prod.price).toFixed(2)}}</span> &nbsp;
-           <span class="before-sale-price"><s>${{prod.price.toFixed(2)}}</s></span></div>
-        <div class = "product-weight">{{ prod.weight }}</div></div>
-        </a>
+      <div class="main">
+        <div
+          class="container"
+          v-for="prod in prodCat.productsList.slice(0, 4)"
+          v-bind:key="prod.id"
+        >
+          <router-link
+            v-bind:to="{ name: 'product-details', params: { id: prod.id } }"
+          >
+            <img class="sale-banner" v-if="prod.sale" src="/salebanner.png" />
+            <img
+              class="thumbnail"
+              v-if="prod.image"
+              v-bind:src="prod.image"
+              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+            />
+            <img
+              class="thumbnail"
+              v-else
+              src="https://grocerymonk.com/image_placeholder.png"
+            />
+            <div id="details">
+              <div class="product-title">{{ prod.title }}</div>
+              <div class="price" v-if="prod.sale != true">
+                ${{ prod.price.toFixed(2) }}
+              </div>
+              <div class="sale-price" v-else>
+                <span class="discounted-price"
+                  >${{ (0.9 * prod.price).toFixed(2) }}</span
+                >
+                &nbsp;
+                <span class="before-sale-price"
+                  ><s>${{ prod.price.toFixed(2) }}</s></span
+                >
+              </div>
+              <div class="product-weight">{{ prod.weight }}</div>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
-    </div>
   </div>
-
 </template>
 
 <script>
@@ -55,9 +73,9 @@ export default {
     productService.loadHomePageData().then((response) => {
       this.prodByCat = response.data;
       this.prodByCat.forEach((cat) => {
-        (cat.forEach((prod) => {
-          prod.discountedPrice = prod.price*0.9;
-        }))
+        cat.forEach((prod) => {
+          prod.discountedPrice = prod.price * 0.9;
+        });
       });
     });
   },
@@ -65,7 +83,6 @@ export default {
     clickMethod() {
       this.$router.push("all-products");
     },
-    
   },
   computed: {
     filteredList() {
@@ -87,7 +104,6 @@ export default {
       }
       return filteredProducts;
     },
-    
   },
 };
 </script>
@@ -107,7 +123,7 @@ export default {
   border-radius: 10px;
   width: 250px;
   height: 200px;
-  gap: .5rem;
+  gap: 0.5rem;
   margin: 1rem;
 }
 body {
@@ -131,5 +147,4 @@ body {
 .view-all {
   font-size: 12px;
 }
-
 </style>

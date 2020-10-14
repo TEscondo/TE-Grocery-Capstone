@@ -85,6 +85,8 @@ export default {
         for (i=0; i<this.cart.length;i++) {
             newTotal = newTotal + this.cart[i].price;
         }
+        let tax = newTotal*0.08;
+        newTotal = newTotal+tax;
       return newTotal;
     },
   },
