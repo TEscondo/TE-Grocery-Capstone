@@ -140,7 +140,10 @@
             </select>
             </div>
 
-            <button class="cart-button">Cash on Delivery</button>
+            <button id="cash" class="cart-button">Cash on Delivery </button>
+            <div v-if="cash">
+              <h1>Transaction Successfull</h1>
+              </div>
             <button
               class="cart-button-disable"
               disable

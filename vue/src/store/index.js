@@ -23,20 +23,22 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {}
   },
-  // computed: {
-  //   cartTotal() {
-  //     this.state.cart.forEach((item) => {
-  //       this.state.total.total += item.price;
-  //     });
-  //   }
-
-  // },
+  
   mutations: {
+
+    REMOVE_FROM_CART(state, product){
+      
+      let index = state.cart.indexOf(product);
+      state.cart.splice(index, 1);
+
+      
+  },
+
     UPDATE_ITEM_QTY(state, product) {
       console.log(state.cart);
       state.cart.forEach((item)=> {
       if (product.id == item.id) {
-        item.qty = product.qty
+        item.quantity = product.quantity
         
       }
     })
@@ -48,8 +50,10 @@ export default new Vuex.Store({
         state.total += item.price;
       })     
     },
-
-    ADD_PRODUCT(state, product) {
+    CLEAR_CART(state) {
+      state.cart = [];
+    },
+    ADD_PRODUCT(state, product) { 
       state.cart.push(product);
     },
 
