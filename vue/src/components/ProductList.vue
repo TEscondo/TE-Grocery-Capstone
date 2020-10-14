@@ -180,6 +180,7 @@ export default {
   display: flex;
   justify-content: space-around;
   position: sticky;
+  top: 0;
   text-align: left;
   background-color:#d3d3d3;
   margin-top: 0.5em;
