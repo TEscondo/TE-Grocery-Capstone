@@ -23,9 +23,7 @@
       <input
         type="text"
         class="search-bar"
-        placeholder="Search for an item"
-        v-model="filter.title"
-      />&nbsp;
+        placeholder="Search for an item" v-model="filter.title"/>&nbsp;
 
       <label for="checkbox" id="sale-box"
         >Sale Items Only<input type="checkbox" v-model="filter.sale"
