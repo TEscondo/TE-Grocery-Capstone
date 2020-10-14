@@ -5,7 +5,7 @@
 
       <div
         class="items"
-        v-for="product in this.cart"
+        v-for="product in this.$store.state.cart"
         v-bind:key="product.id"
       >
         <img
@@ -24,25 +24,23 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <div class="prod-price">{{ product.price.toFixed(2) }}</div>
+        <div class="prod-price" v-if="!product.sale">{{ product.price.toFixed(2) }}</div>
+        <div class="prod-price" v-else>{{product.discountedPrice.toFixed(2)}}</div>
         <textarea id="notes" placeholder="Notes for your shopper"></textarea>
       </div>
     </div>
 
     <div>
       <div class="order-summary">
-        <div v-for="product in this.cart" v-bind:key="product.id">
-          <div class="sum-prod-price">
-            Price: {{ product.price.toFixed(2) }}
-          </div>
-        </div>
-        <div class="tax">Tax:</div>
+        <div class="original-price">Original Price: {{originalPrice.toFixed(2)}}</div>
+        <div class="tax">Tax: {{cartTax.toFixed(2)}}</div>
         <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
         <div class="checkout-icon">Checkout</div>
+        </div>
         
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -59,7 +57,7 @@ export default {
     //   this.cart = response.data;
     //   this.cart.discountedPrice = this.cart.price * 0.9;
     // });
-    this.cart = this.$store.state.cart;
+    // this.cart = this.$store.state.cart;
   },
   methods: {
     addToCart(item) {
@@ -79,11 +77,51 @@ export default {
     },
   },
   computed: {
-    cartTotal() {
+    originalPrice() {
         let newTotal = 0.00;
         let i=0;
-        for (i=0; i<this.cart.length;i++) {
-            newTotal = newTotal + this.cart[i].price;
+        let productPrice = 0.00;
+        for (i=0; i<this.$store.state.cart.length;i++) {
+            if (this.$store.state.cart[i].sale == true){
+                productPrice = this.$store.state.cart[i].discountedPrice;
+            }
+            else {
+                productPrice = this.$store.state.cart[i].price;
+            }
+            newTotal = newTotal + productPrice;
+        }
+
+      return newTotal;
+    },
+    
+    cartTax() {
+        let newTotal = 0.00;
+        let i=0;
+        let productPrice = 0.00;
+        for (i=0; i<this.$store.state.cart.length;i++) {
+            if (this.$store.state.cart[i].sale == true){
+                productPrice = this.$store.state.cart[i].discountedPrice;
+            }
+            else {
+                productPrice = this.$store.state.cart[i].price;
+            }
+            newTotal = newTotal + productPrice;
+        }
+        newTotal = newTotal*0.08;
+      return newTotal;
+    },
+     cartTotal() {
+        let newTotal = 0.00;
+        let i=0;
+        let productPrice = 0.00;
+        for (i=0; i<this.$store.state.cart.length;i++) {
+           if (this.$store.state.cart[i].sale == true){
+                productPrice = this.$store.state.cart[i].discountedPrice;
+            }
+            else {
+                productPrice = this.$store.state.cart[i].price;
+            }
+            newTotal = newTotal + productPrice;
         }
         let tax = newTotal*0.08;
         newTotal = newTotal+tax;
@@ -94,6 +132,19 @@ export default {
 </script>
 
 <style>
+.total{
+    display: flex;
+    justify-content: space-between;
+}
+.tax{
+    display: flex;
+    justify-content: space-between;
+}
+.original-price{
+    display: flex;
+    justify-content: space-between;
+}
+
 .checkout-icon {
   display: inline-block;
   background-color: #f0d922;
@@ -139,10 +190,13 @@ export default {
   flex-direction: column;
   position: sticky;
   top: 0;
-  padding: 80px 80px;
+  padding: 80px;
   margin-top: 70px;
   justify-content: space-between;
   background-color: white;
+  box-sizing: border-box;
+      font: 20px bold;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .prod-price {
   grid-area: price;
