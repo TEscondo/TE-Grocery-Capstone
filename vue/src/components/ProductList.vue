@@ -216,8 +216,6 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  text-align: center;
-  padding: 0.1em;
   font-weight: bold;
 }
 
