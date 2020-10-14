@@ -180,6 +180,7 @@ export default {
   display: flex;
   justify-content: space-around;
   position: sticky;
+  top: 0;
   text-align: left;
   background-color:#d3d3d3;
   margin-top: 0.5em;
@@ -216,8 +217,6 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  text-align: center;
-  padding: 0.1em;
   font-weight: bold;
 }
 

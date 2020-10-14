@@ -2,7 +2,9 @@
   <div class="your-cart">
     <div id="test">
       <h2>YOUR CART</h2>
-
+      <div v-if="!cartTotal">
+      <img id="empty-cart-image" src="https://tinyurl.com/y3wzf32v">
+      </div>
       <div
         class="items"
         v-for="product in this.$store.state.cart"
@@ -47,7 +49,6 @@
         <textarea id="notes" placeholder="Notes for your shopper"></textarea>
       </div>
     </div>
-
     <div>
       <div class="order-summary">
         <div class="original-price">
@@ -394,5 +395,10 @@ export default {
 .msg {
   color: red;
   font-size: 0.8em;
+}
+
+#empty-cart-image {
+  display: flex;
+  padding-top: 3em;
 }
 </style>
