@@ -1,61 +1,65 @@
 <template>
   <div class="your-cart">
-   <div id="test"> 
-    <h2>YOUR CART</h2>
-       
-       <div
-      class="items"
-      v-for="product in this.$store.state.cart"
-      v-bind:key="product.id">
-      <img
+    <div id="test">
+      <h2>YOUR CART</h2>
+
+      <div
+        class="items"
+        v-for="product in this.cart"
+        v-bind:key="product.id"
+      >
+        <img
           class="thumbnail"
           v-if="product.image"
           v-bind:src="product.image"
-          onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
         />
-        <img
-          class="thumbnail"
-          v-else
-          src="https://grocerymonk.com/image_placeholder.png"
-        />
-    <div class="prod-title">{{product.title}}</div>
-    <select class="qty">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select>
-    <div class="prod-price">${{product.price.toFixed(2)}}</div>
-    <textarea id="notes" placeholder="Notes for your shopper"></textarea>
-    </div>
+        <div class="prod-title">{{ product.title }}</div>
+        <select
+          class="qty"
+          v-on:change="updateCart(product, $event.target.value)"
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <div class="prod-price">{{ product.price.toFixed(2) }}</div>
+        <textarea id="notes" placeholder="Notes for your shopper"></textarea>
+      </div>
     </div>
 
-    <div><div class="order-summary"><div v-for="product in $store.state.cart"
-      v-bind:key="product.id">
-      <div class="sum-prod-price">Price: {{product.price.toFixed(2)}}</div></div>
-      <div class="tax">Tax: </div>
-      <div class="total">Total: </div>
-      <div class="checkout-icon">Checkout</div>
-      <div>{{$store.state.total.total}}</div>
+    <div>
+      <div class="order-summary">
+        <div v-for="product in this.cart" v-bind:key="product.id">
+          <div class="sum-prod-price">
+            Price: {{ product.price.toFixed(2) }}
+          </div>
+        </div>
+        <div class="tax">Tax:</div>
+        <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
+        <div class="checkout-icon">Checkout</div>
+        
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import productService from "../services/ProductService.js";
+// import productService from "../services/ProductService.js";
 export default {
   data() {
     return {
+    
       cart: [],
     };
   },
   created() {
-    productService.viewCartInventory().then((response) => {
-      this.cart = response.data;
-      this.cart.discountedPrice = this.cart.price * 0.9;
-    });
+    // productService.viewCartInventory().then((response) => {
+    //   this.cart = response.data;
+    //   this.cart.discountedPrice = this.cart.price * 0.9;
+    // });
+    this.cart = this.$store.state.cart;
   },
   methods: {
     addToCart(item) {
@@ -69,15 +73,30 @@ export default {
       this.cart = [];
       alert("Thanks for shopping with us!");
     },
+    updateCart(product, qty) {
+      product.qty = qty;
+      this.$store.commit("UPDATE_ITEM_QTY", product);
+    },
   },
-  
+  computed: {
+    cartTotal() {
+        let newTotal = 0.00;
+        let i=0;
+        for (i=0; i<this.cart.length;i++) {
+            newTotal = newTotal + this.cart[i].price;
+        }
+        let tax = newTotal*0.08;
+        newTotal = newTotal+tax;
+      return newTotal;
+    },
+  },
 };
 </script>
 
 <style>
-.checkout-icon  {
+.checkout-icon {
   display: inline-block;
-  background-color: #F0D922;
+  background-color: #f0d922;
   color: #03989e;
   border-radius: 4px;
   border: 1px solid black;
@@ -87,28 +106,27 @@ export default {
   max-width: 100px;
   text-align: center;
 }
-.your-cart{
-    display:flex;
-    flex-direction:row;
-    justify-content: space-around;
-    background-color: #d3d3d3;
+.your-cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #d3d3d3;
 }
 
-.items{
-    
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
     "thumbnail title"
     "thumbnail qty"
     "thumbnail price"
     "notes notes";
-    justify-content: space-between;
-    max-width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px;
-    background-color: white;
+  justify-content: space-between;
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  background-color: white;
 }
 
 .prod-title {
@@ -116,15 +134,15 @@ export default {
   grid-area: title;
 }
 
-.order-summary{ 
-    display:flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    padding: 80px 80px;
-    margin-top: 75px;
-    justify-content: space-between;
-    background-color: white;
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  padding: 80px 80px;
+  margin-top: 70px;
+  justify-content: space-between;
+  background-color: white;
 }
 .prod-price {
   grid-area: price;
