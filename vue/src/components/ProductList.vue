@@ -106,8 +106,8 @@ export default {
     filteredList() {
       let filteredProducts = this.products;
       if (this.filter.title != "") {
-        filteredProducts = filteredProducts.filter((item) =>
-          item.title.toLowerCase().includes(this.filter.title.toLowerCase())
+        filteredProducts = filteredProducts.filter(
+          (item) => item.title.toLowerCase().includes(this.filter.title.toLowerCase())
         );
       }
       if (this.filter.sale != "") {
