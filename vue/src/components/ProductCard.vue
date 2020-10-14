@@ -5,7 +5,7 @@
       v-for="product in filteredList"
       v-bind:key="product.id"
     >
-      <a v-bind:href="'/product-details/' + product.id">
+      <router-link v-bind:to="{ name: 'product-details', params: { id : product.id }}">
         <img
           class="thumbnail"
           v-if="product.image"
@@ -24,7 +24,7 @@
           <span class="discounted-price">${{ product.discountedPrice.toFixed(2) }}</span>
           <s><span class = "before-sale-price">${{product.price.toFixed(2)}}</span></s></div>
         {{ product.weight }}oz
-      </a>
+      </router-link>
     </div>
   </div>
 </template>

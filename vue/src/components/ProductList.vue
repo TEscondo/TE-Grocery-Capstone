@@ -51,7 +51,7 @@
         v-bind:key="product.id"
       >
         <div class="product-card">
-          <a v-bind:href="'/product-details/' + product.id">
+          <router-link v-bind:to="{ name: 'product-details', params: { id : product.id }}">
             <img
               class="sale-banner"
               v-if="product.sale"
@@ -83,7 +83,7 @@
             </div>
             <div class="product-weight">{{ product.weight }}</div>
             <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
