@@ -9,16 +9,16 @@
         v-bind:key="product.id"
       >
         <img
-            class="thumbnail"
-            v-if="product.image"
-            v-bind:src="product.image"
-            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-          />
-          <img
-            class="thumbnail"
-            v-else
-            src="https://grocerymonk.com/image_placeholder.png"
-          />
+          class="thumbnail"
+          v-if="product.image"
+          v-bind:src="product.image"
+          onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+        />
+        <img
+          class="thumbnail"
+          v-else
+          src="https://grocerymonk.com/image_placeholder.png"
+        />
         <div class="prod-title">{{ product.title }}</div>
         <select
           class="qty"
@@ -30,110 +30,137 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <div class="prod-price" v-if="!product.sale">${{ product.price.toFixed(2) }}</div>
+        <div class="prod-price" v-if="!product.sale">
+          ${{ product.price.toFixed(2) }}
+        </div>
         <div class="sale-price" v-else>
-            <span class="prod-price"
-              >${{ product.discountedPrice.toFixed(2) }}</span
-            >&nbsp;
-            <span id="cart-old-price"
-              ><s>${{ product.price.toFixed(2) }}</s></span
-            >
-          </div>
+          <span class="prod-price"
+            >${{ product.discountedPrice.toFixed(2) }}</span
+          >&nbsp;
+          <span id="cart-old-price"
+            ><s>${{ product.price.toFixed(2) }}</s></span
+          >
+        </div>
         <textarea id="notes" placeholder="Notes for your shopper"></textarea>
       </div>
     </div>
 
     <div>
       <div class="order-summary">
-        <div class="original-price">Subtotal: ${{originalPrice.toFixed(2)}}</div>
-        <div class="tax">Tax: ${{cartTax.toFixed(2)}}</div>
-        <div class="total">Total: ${{cartTotal.toFixed(2)}}</div>
-        <div v-on:click="checkout = !checkout"> <div class="checkout-icon">Checkout</div></div>
+        <div class="original-price">
+          Subtotal: ${{ originalPrice.toFixed(2) }}
+        </div>
+        <div class="tax">Tax: ${{ cartTax.toFixed(2) }}</div>
+        <div class="total">Total: ${{ cartTotal.toFixed(2) }}</div>
+        <div v-on:click="checkout = !checkout">
+          <div class="checkout-icon">Checkout</div>
+        </div>
         <div v-if="checkout" class="checkout">
-          
-<form>
-      <input
-        id="name"
-        class="checkout-input"
-        type="text"
-        placeholder="Name"
-        required
-      /><br />
-      <input
-        id="address"
-        class="checkout-input"
-        type="text"
-        placeholder="Street Address"
-        required
-      /><br />
-      <input
-        id="city"
-        class="checkout-input"
-        type="text"
-        placeholder="City"
-        required
-      />
-      <select name="state" id="state" required>
-        <option>Select State</option>
-        <option value="IN">Indiana</option>
-        <option value="MI">Michigan</option>
-        <option value="OH">Ohio</option>
-        <option value="PA">Pennsylvania</option>
-      </select>
+          <form>
+            <input
+              id="name"
+              class="checkout-input"
+              type="text"
+              placeholder="Name"
+              required
+            /><br />
+            <input
+              id="address"
+              class="checkout-input"
+              type="text"
+              placeholder="Street Address"
+              required
+            /><br />
+            <input
+              id="city"
+              class="checkout-input"
+              type="text"
+              placeholder="City"
+              required
+            />
+            <select name="state" id="state" required>
+              <option>Select State</option>
+              <option value="IN">Indiana</option>
+              <option value="MI">Michigan</option>
+              <option value="OH">Ohio</option>
+              <option value="PA">Pennsylvania</option>
+            </select>
 
-      <input
-        id="zip"
-        class="checkout-input"
-        type="number"
-        min="10000"
-        placeholder="Zip Code"
-        required
-        v-model.lazy="zip"
-      />
-      <div v-if="msg.zip">{{msg.zip}}</div>
-      
-      <br />
-      <input
-        id="tel"
-        class="checkout-input"
-        name="tel"
-        type="tel"
-        required
-        placeholder="123-456-7890"
-      /><br />
+            <input
+              id="zip"
+              class="checkout-input"
+              type="number"
+              min="10000"
+              placeholder="Zip Code"
+              required
+              v-model.lazy="zip"
+            />
+            <div class="msg" v-if="msg.zip">{{ msg.zip }}</div>
 
-      When would you like to receive your delivery?
-      <div id="deliverydate">
-        <div>
-          <input type="radio" id="today" name="deldate" value="today" checked />
-          <label for="today">Today - Rush!</label>
-        </div>
-        <div>
-          <input type="radio" id="tomorrow" name="deldate" value="tomorrow" />
-          <label for="tomorrow">Tomorrow</label>
-        </div>
-      </div>
-      <button class="cart-button">Cash on Delivery</button>
-      <button
-        class="cart-button-disable"
-        disable
-        title="Sorry, currently unavailable"
-      >
-        Credit Card
-      </button>
-      <button
-        class="cart-button-disable"
-        disable
-        title="Sorry, currently unavailable"
-      >
-        Paypal
-      </button>
-    </form>
-        </div>
+            <br />
+            <input
+              id="tel"
+              class="checkout-input"
+              name="tel"
+              type="tel"
+              required
+              placeholder="123-456-7890"
+            /><br />
+
+            When would you like to receive your delivery?
+            <div id="deliverydate">
+              <div>
+                <input
+                  type="radio"
+                  id="today"
+                  name="deldate"
+                  value="today"
+                  v-on:click="tomorrow =false"
+                  checked
+                />
+                <label for="today">Today - Rush!</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="tomorrow"
+                  name="deldate"
+                  value="tomorrow"
+                  v-on:click="tomorrow = true"
+                />
+                <label for="tomorrow">Tomorrow</label>
+              </div>
+            </div>
+<div v-if="tomorrow">
+            <select name="time" id="time" required>
+              <option>Select Time</option>
+              <option value="morning">Morning</option>
+              <option value="afternoon">Afternoon</option>
+              <option value="night">Night</option>
+            </select>
+            </div>
+
+            <button class="cart-button">Cash on Delivery</button>
+            <button
+              class="cart-button-disable"
+              disable
+              title="Sorry, currently unavailable"
+             
+            >
+              Credit Card
+            </button>
+            <button
+              class="cart-button-disable"
+              disable
+              title="Sorry, currently unavailable"
+            >
+              Paypal
+            </button>
+          </form>
         </div>
       </div>
     </div>
-  
+  </div>
 </template>
 
 <script>
@@ -144,6 +171,7 @@ export default {
       zip: null,
       msg: [],
       checkout: false,
+      tomorrow: false,
       cart: [],
     };
   },
@@ -151,7 +179,7 @@ export default {
     zip(value) {
       this.zip = value;
       this.validateZip(value);
-    }
+    },
   },
   created() {
     // productService.viewCartInventory().then((response) => {
@@ -177,68 +205,65 @@ export default {
       this.$store.commit("UPDATE_ITEM_QTY", product);
     },
     validateZip(zip) {
-   
-      if (zip > 10000 && zip > 44101 && zip < 44144 || this.zip > 45202 && this.zip < 45248 || this.zip > 43085 && this.zip < 43268 
-      || this.zip > 48126 && this.zip < 48243) {
-        this.msg['zip'] = "";
-      }
-      else {
-        this.msg['zip'] = "Cannot deliver to your area";
+      if (
+        (zip > 10000 && zip > 44101 && zip < 44144) ||
+        (this.zip > 45202 && this.zip < 45248) ||
+        (this.zip > 43085 && this.zip < 43268) ||
+        (this.zip > 48126 && this.zip < 48243)
+      ) {
+        this.msg["zip"] = "";
+      } else {
+        this.msg["zip"] = "Sorry, we only deliver to Tech Elevator metro areas!";
       }
       console.log(zip);
-    }
-    
-    
+    },
   },
   computed: {
     originalPrice() {
-        let newTotal = 0.00;
-        let i=0;
-        let productPrice = 0.00;
-        for (i=0; i<this.$store.state.cart.length;i++) {
-            if (this.$store.state.cart[i].sale == true){
-                productPrice = this.$store.state.cart[i].discountedPrice;
-            }
-            else {
-                productPrice = this.$store.state.cart[i].price;
-            }
-            newTotal = newTotal + productPrice;
+      let newTotal = 0.0;
+      let i = 0;
+      let productPrice = 0.0;
+      for (i = 0; i < this.$store.state.cart.length; i++) {
+        if (this.$store.state.cart[i].sale == true) {
+          productPrice = this.$store.state.cart[i].discountedPrice;
+        } else {
+          productPrice = this.$store.state.cart[i].price;
         }
+        newTotal = newTotal + productPrice;
+      }
 
       return newTotal;
     },
-    
+
     cartTax() {
-        let newTotal = 0.00;
-        let i=0;
-        let productPrice = 0.00;
-        for (i=0; i<this.$store.state.cart.length;i++) {
-            if (this.$store.state.cart[i].sale == true){
-                productPrice = this.$store.state.cart[i].discountedPrice;
-            }
-            else {
-                productPrice = this.$store.state.cart[i].price;
-            }
-            newTotal = newTotal + productPrice;
+      let newTotal = 0.0;
+      let i = 0;
+      let productPrice = 0.0;
+      for (i = 0; i < this.$store.state.cart.length; i++) {
+        if (this.$store.state.cart[i].sale == true) {
+          productPrice = this.$store.state.cart[i].discountedPrice;
+        } else {
+          productPrice = this.$store.state.cart[i].price;
         }
-        newTotal = newTotal*0.08;
+        newTotal = newTotal + productPrice;
+      }
+      newTotal = newTotal * 0.08;
       return newTotal;
     },
-     cartTotal() {
-        let newTotal = 0.00;
-        let i=0;
-        let productPrice = 0.00;
-        for (i=0; i<this.$store.state.cart.length;i++) {
-           if (this.$store.state.cart[i].sale == true){
-                productPrice = this.$store.state.cart[i].discountedPrice;
-            }
-            else {
-                productPrice = this.$store.state.cart[i].price;
-            }
-            newTotal = newTotal + productPrice;
+    cartTotal() {
+      let newTotal = 0.0;
+      let i = 0;
+      let productPrice = 0.0;
+      for (i = 0; i < this.$store.state.cart.length; i++) {
+        if (this.$store.state.cart[i].sale == true) {
+          productPrice = this.$store.state.cart[i].discountedPrice;
+        } else {
+          productPrice = this.$store.state.cart[i].price;
         }
-        let tax = newTotal*0.08;
-        newTotal = newTotal+tax;
+        newTotal = newTotal + productPrice;
+      }
+      let tax = newTotal * 0.08;
+      newTotal = newTotal + tax;
       return newTotal;
     },
   },
@@ -246,17 +271,17 @@ export default {
 </script>
 
 <style>
-.total{
-    display: flex;
-    justify-content: space-between;
+.total {
+  display: flex;
+  justify-content: space-between;
 }
-.tax{
-    display: flex;
-    justify-content: space-between;
+.tax {
+  display: flex;
+  justify-content: space-between;
 }
-.original-price{
-    display: flex;
-    justify-content: space-between;
+.original-price {
+  display: flex;
+  justify-content: space-between;
 }
 
 .checkout-icon {
@@ -309,8 +334,8 @@ export default {
   justify-content: space-between;
   background-color: white;
   box-sizing: border-box;
-      font: 20px bold;
-    font-family: Arial, Helvetica, sans-serif;
+  font: 20px bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .prod-price {
   grid-area: price;
@@ -334,8 +359,12 @@ export default {
 }
 
 #cart-old-price {
-  font-size: .9em;
+  font-size: 0.9em;
   color: rgb(253, 97, 97);
+}
 
+.msg {
+  color: red;
+  font-size: .8em;
 }
 </style>
