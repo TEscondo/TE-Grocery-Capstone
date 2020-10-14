@@ -9,10 +9,16 @@
         v-bind:key="product.id"
       >
         <img
-          class="thumbnail"
-          v-if="product.image"
-          v-bind:src="product.image"
-        />
+            class="thumbnail"
+            v-if="product.image"
+            v-bind:src="product.image"
+            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+          />
+          <img
+            class="thumbnail"
+            v-else
+            src="https://grocerymonk.com/image_placeholder.png"
+          />
         <div class="prod-title">{{ product.title }}</div>
         <select
           class="qty"
@@ -24,17 +30,24 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <div class="prod-price" v-if="!product.sale">{{ product.price.toFixed(2) }}</div>
-        <div class="prod-price" v-else>{{product.discountedPrice.toFixed(2)}}</div>
+        <div class="prod-price" v-if="!product.sale">${{ product.price.toFixed(2) }}</div>
+        <div class="sale-price" v-else>
+            <span class="prod-price"
+              >${{ product.discountedPrice.toFixed(2) }}</span
+            >&nbsp;
+            <span id="cart-old-price"
+              ><s>${{ product.price.toFixed(2) }}</s></span
+            >
+          </div>
         <textarea id="notes" placeholder="Notes for your shopper"></textarea>
       </div>
     </div>
 
     <div>
       <div class="order-summary">
-        <div class="original-price">Original Price: {{originalPrice.toFixed(2)}}</div>
-        <div class="tax">Tax: {{cartTax.toFixed(2)}}</div>
-        <div class="total">Total: {{cartTotal.toFixed(2)}}</div>
+        <div class="original-price">Original Price: ${{originalPrice.toFixed(2)}}</div>
+        <div class="tax">Tax: ${{cartTax.toFixed(2)}}</div>
+        <div class="total">Total: ${{cartTotal.toFixed(2)}}</div>
         <div class="checkout-icon">Checkout</div>
         </div>
         
@@ -217,5 +230,11 @@ export default {
   max-width: 50px;
   max-height: 30px;
   grid-area: qty;
+}
+
+#cart-old-price {
+  font-size: .9em;
+  color: rgb(253, 97, 97);
+
 }
 </style>
