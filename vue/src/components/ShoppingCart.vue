@@ -84,10 +84,11 @@
       <input
         id="zip"
         class="checkout-input"
-        type="text"
+        type="number"
+        min="10000"
         placeholder="Zip Code"
         required
-        v-model="zip"
+        v-model.lazy="zip"
       />
       <div v-if="msg.zip">{{msg.zip}}</div>
       
@@ -140,7 +141,7 @@
 export default {
   data() {
     return {
-      zip: 0,
+      zip: null,
       msg: [],
       checkout: false,
       cart: [],
@@ -176,7 +177,8 @@ export default {
       this.$store.commit("UPDATE_ITEM_QTY", product);
     },
     validateZip(zip) {
-      if (zip > 44101 && zip < 44144 || this.zip > 45202 && this.zip < 45248 || this.zip > 43085 && this.zip < 43268 
+   
+      if (zip > 10000 && zip > 44101 && zip < 44144 || this.zip > 45202 && this.zip < 45248 || this.zip > 43085 && this.zip < 43268 
       || this.zip > 48126 && this.zip < 48243) {
         this.msg['zip'] = "";
       }
@@ -185,6 +187,8 @@ export default {
       }
       console.log(zip);
     }
+    
+    
   },
   computed: {
     originalPrice() {
