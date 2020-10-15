@@ -1,47 +1,42 @@
 <template>
   <div>
     <div id="search-and-nav">
-          <div id="search">
-            <input
-              type="text"
-              class="search-bar"
-              name="search"
-              placeholder="Search for an item"
-              v-model="searchTerm"
-            />&nbsp;
-            <button class="search-btn" v-on:click.prevent="search">
-              Search
-            </button>
-          </div>
-          <div class="navigation">
-            <div v-for="cat in categories" v-bind:key="cat.categoryId">
-              <router-link
-                v-bind:to="{
-                  name: 'category',
-                  params: { categoryId: cat.categoryId },
-                }"
-                ><div class="navigation">
-                  {{ cat.categoryName }}
-                </div></router-link
-              >
-            </div>
-          </div>
+      <div id="search">
+        <input
+          type="text"
+          class="search-bar"
+          name="search"
+          placeholder="Search for an item"
+          v-model="searchTerm"
+        />&nbsp;
+        <button class="search-btn" v-on:click.prevent="search">Search</button>
+      </div>
+      <div class="navigation">
+        <div v-for="cat in categories" v-bind:key="cat.categoryId">
+          <router-link
+            v-bind:to="{
+              name: 'category',
+              params: { categoryId: cat.categoryId },
+            }"
+            ><div class="navigation">
+              {{ cat.categoryName }}
+            </div></router-link
+          >
         </div>
+      </div>
+    </div>
     <div class="splash-container">
       <div id="splash-text">
         <h1 id="fresh-food-text">Fresh Food Brought To Your Door</h1>
-        <h2 id="delivery-fee-text">
-          No delivery fee for your first order
-        </h2>
+        <h2 id="delivery-fee-text">No delivery fee for your first order</h2>
       </div>
       <img class="splash-image" src="/deliverystockart.jpg" />
     </div>
-   
-   
+
     <div id="top-products-label">
       <h1>Top Products</h1>
     </div>
-   
+
     <div class="main">
       <div
         class="container"
@@ -88,58 +83,6 @@
           </router-link>
         </div>
       </div>
-
-    </div>
-    <div>
-      <h1>All products</h1>
-       <div class="main">
-         <div
-        class="container1"
-        v-for="product in filteredList"
-        v-bind:key="product.id"
-      >
-        <div class="product-card">
-          <router-link
-            v-bind:to="{ name: 'product-details', params: { id: product.id } }"
-          >
-            <img
-              class="sale-banner"
-              v-if="product.sale"
-              src="/salebanner.png"
-            />
-            <img
-              class="thumbnail"
-              v-if="product.image"
-              v-bind:src="product.image"
-              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-            />
-            <img
-              class="thumbnail"
-              v-else
-              src="https://grocerymonk.com/image_placeholder.png"
-            />
-            <div class="product-title">{{ product.title }}</div>
-            <div class="price" v-if="product.sale != true">
-              ${{ product.price.toFixed(2) }}
-            </div>
-            <div v-else class="sale-price">
-              <span class="discounted-price"
-                >${{ (0.9 * product.price).toFixed(2) }}</span
-              >
-              &nbsp;
-              <span class="before-sale-price"
-                ><s>${{ product.price.toFixed(2) }}</s></span
-              >
-            </div>
-            <div class="product-weight">{{ product.weight }}</div>
-         <div class="cart-button" v-on:click.prevent="addToCart(product)">
-              
-              Add
-            </div>
-          </router-link>
-        </div>
-      </div>
-       </div>
     </div>
   </div>
 </template>
@@ -261,7 +204,7 @@ export default {
   background-color: #d3d3d3;
   margin-top: 0.5em;
   padding-top: 1em;
-  padding-bottom: .4em;
+  padding-bottom: 0.4em;
 }
 
 input[type="checkbox"] {
@@ -300,8 +243,7 @@ input[type="checkbox"] {
   display: flex;
   justify-content: right;
   margin-top: -0.01em;
-  margin-right: -.07em;
-  
+  margin-right: -0.07em;
 }
 
 #splash-text {
@@ -328,10 +270,10 @@ input[type="checkbox"] {
 }
 
 .navigation {
-   display: flex;
-   margin-bottom: 2px;
-   font-weight: bold;
-  font-size: .9em;
+  display: flex;
+  margin-bottom: 2px;
+  font-weight: bold;
+  font-size: 0.9em;
   justify-content: space-evenly;
   background-color: #d3d3d3;
 }
@@ -346,11 +288,11 @@ input[type="checkbox"] {
 }
 
 #fresh-food-text {
-  font-size:2.5em;
+  font-size: 2.5em;
   letter-spacing: -0.02em;
 }
 
 #delivery-fee-text {
-  font-size:1.5em;
+  font-size: 1.5em;
 }
 </style>
