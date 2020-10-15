@@ -68,7 +68,7 @@
           <div class="checkout-icon">Checkout</div>
         </div>
         <div v-if="checkout" class="checkout">
-          <form>
+          <form v-on:submit.prevent="cashout">
             <input
               id="name"
               class="checkout-input"
@@ -245,6 +245,11 @@ export default {
     received(){
       let output = "Transaction sucessfull";
       return output;
+    },
+    cashout() {
+    this.$store.commit("CLEAR_CART");
+      window.alert("We will deliver your items then!");
+      this.checkout = false;
     }
   },
   computed: {
@@ -417,5 +422,9 @@ textarea {
   display: flex;
   justify-content: center;
   font-size: 1.5em;
+}
+
+#cash {
+  width: 100%;
 }
 </style>
