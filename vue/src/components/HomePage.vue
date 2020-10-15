@@ -142,6 +142,7 @@ body {
   margin: 50px;
   width: 200px;
   height: 200px;
+  object-fit: cover;
 }
 
 .view-all {

@@ -36,7 +36,7 @@
             name: 'category',
             params: { categoryId: cat.categoryId },
           }"
-          >{{ cat.categoryName }}</router-link
+          ><div class="navigation">{{ cat.categoryName }}</div></router-link
         >
       </div>
     
@@ -112,6 +112,7 @@ a {
   background: white;
   z-index: 1;
 }
+
 
 
 </style>

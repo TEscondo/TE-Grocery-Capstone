@@ -1,6 +1,6 @@
 <template>
   <div>
-        <div class="splash-container">
+    <div class="splash-container">
       <div id="splash-text">
         <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
         <h2 class="delivery-fee-text">
@@ -9,9 +9,12 @@
       </div>
       <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
     </div>
+   
+   
     <div id="top-products-label">
       <h1>Top Products</h1>
     </div>
+   
     <div class="main">
       <div
         class="container"
@@ -59,7 +62,8 @@
         </div>
       </div>
       </div>
-    </div>
+    
+  </div>
 </template>
 
 <script>
@@ -92,8 +96,8 @@ export default {
     },
     search() {
       console.log(this.searchTerm);
-      this.$router.push(       { name: 'search', params: { query: this.searchTerm }  }      );
-    }
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
+    },
   },
   computed: {
     filteredList() {
@@ -116,7 +120,7 @@ export default {
       return filteredProducts;
     },
   },
-  created() {
+  mounted() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -149,11 +153,13 @@ export default {
 }
 .product-title {
   font-size: 1.5rem;
+  height: 3.5em;
 }
 
 .thumbnail {
   max-width: 10em;
   max-height: 10em;
+  object-fit: cover;
 }
 
 .price {
@@ -243,7 +249,6 @@ input[type="checkbox"] {
   margin-top: 5px;
   display: flex;
   font-size: 0.85em;
-  font-weight: bold;
   justify-content: space-evenly;
 }
 </style>

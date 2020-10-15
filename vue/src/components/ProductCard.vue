@@ -85,6 +85,7 @@ export default {
 .thumbnail {
   max-width: 10em;
   max-height: 10em;
+  object-fit: cover;
 }
 
 .price {
