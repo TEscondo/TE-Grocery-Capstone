@@ -4,15 +4,26 @@
       <input
         type="text"
         class="search-bar"
-        placeholder="Search for an item" v-model="filter.title"/>&nbsp;
+        placeholder="Search for an item"
+        v-model="filter.title"
+      />&nbsp;
 
       <label for="checkbox" id="sale-box"
-        >Sale Items Only<input type="checkbox" v-model="filter.sale"
-      /></label><br/>
+        >Sale Items Only<input type="checkbox" v-model="filter.sale" /></label
+      ><br />
     </div>
 
-    <div class="navigation"> <div v-for="cat in categories" v-bind:key="cat.categoryId">
-    <router-link v-bind:to="{ name: 'category', params: { categoryId : cat.categoryId }}">{{cat.categoryName}}</router-link></div></div>
+    <div class="navigation">
+      <div v-for="cat in categories" v-bind:key="cat.categoryId">
+        <router-link
+          v-bind:to="{
+            name: 'category',
+            params: { categoryId: cat.categoryId },
+          }"
+          >{{ cat.categoryName }}</router-link
+        >
+      </div>
+    </div>
 
     <br />
     <div class="splash-container">
@@ -22,7 +33,7 @@
           No delivery fee for your first order -->
         </h2>
       </div>
-      <div id="splash-image"><img  src="/deliverystockart.jpg" /></div>
+      <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
     </div>
     <div id="top-products-label">
       <h1>Top Products</h1>
@@ -34,7 +45,9 @@
         v-bind:key="product.id"
       >
         <div class="product-card">
-          <router-link v-bind:to="{ name: 'product-details', params: { id : product.id }}">
+          <router-link
+            v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+          >
             <img
               class="sale-banner"
               v-if="product.sale"
@@ -65,55 +78,64 @@
               >
             </div>
             <div class="product-weight">{{ product.weight }}</div>
-            <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
+            <div class="cart-button" v-on:click.prevent="addToCart(product)">
+              Add To Cart
+            </div>
           </router-link>
         </div>
-        </div>
-       <br/>
-       <br/>
-        <h1>All Products</h1>
-  <div class="container"
-  v-for="product in filteredList"
-  v-bind:key="product.id"
-  >
-  <div class="product-card">
-          <router-link v-bind:to="{ name: 'product-details', params: { id : product.id }}">
-            <img
-              class="sale-banner"
-              v-if="product.sale"
-              src="/salebanner.png"
-            />
-            <img
-              class="thumbnail"
-              v-if="product.image"
-              v-bind:src="product.image"
-              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-            />
-            <img
-              class="thumbnail"
-              v-else
-              src="https://grocerymonk.com/image_placeholder.png"
-            />
-            <div class="product-title">{{ product.title }}</div>
-            <div class="price" v-if="product.sale != true">
-              ${{ product.price.toFixed(2) }}
-            </div>
-            <div v-else class="sale-price">
-              <span class="discounted-price"
-                >${{ (0.9 * product.price).toFixed(2) }}</span
-              >
-              &nbsp;
-              <span class="before-sale-price"
-                ><s>${{ product.price.toFixed(2) }}</s></span
-              >
-            </div>
-            <div class="product-weight">{{ product.weight }}</div>
-            <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
-          </router-link>
-      
       </div>
+
     </div>
-  </div>
+    <div>
+      <h1>All products</h1>
+       <div class="main">
+         <div
+        class="container1"
+        v-for="product in filteredList"
+        v-bind:key="product.id"
+      >
+        <div class="product-card">
+          <router-link
+            v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+          >
+            <img
+              class="sale-banner"
+              v-if="product.sale"
+              src="/salebanner.png"
+            />
+            <img
+              class="thumbnail"
+              v-if="product.image"
+              v-bind:src="product.image"
+              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+            />
+            <img
+              class="thumbnail"
+              v-else
+              src="https://grocerymonk.com/image_placeholder.png"
+            />
+            <div class="product-title">{{ product.title }}</div>
+            <div class="price" v-if="product.sale != true">
+              ${{ product.price.toFixed(2) }}
+            </div>
+            <div v-else class="sale-price">
+              <span class="discounted-price"
+                >${{ (0.9 * product.price).toFixed(2) }}</span
+              >
+              &nbsp;
+              <span class="before-sale-price"
+                ><s>${{ product.price.toFixed(2) }}</s></span
+              >
+            </div>
+            <div class="product-weight">{{ product.weight }}</div>
+            <div class="cart-button" v-on:click.prevent="addToCart(product)">
+              Add To Cart
+            </div>
+          </router-link>
+        </div>
+      </div>
+       </div>
+    </div>
   </div>
 </template>
 
@@ -296,5 +318,14 @@ input[type="checkbox"] {
   font-size: 0.85em;
   font-weight: bold;
   justify-content: space-evenly;
+}
+.container1 {
+  background-color: white;
+  border-radius: 1em;
+  width: 15em;
+  height: 22em;
+  gap: 10em;
+  margin: 1rem;
+  text-align: center;
 }
 </style>
