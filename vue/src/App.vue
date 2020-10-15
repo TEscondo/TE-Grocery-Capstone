@@ -24,7 +24,7 @@
         placeholder="Search for an item"
         v-model="searchTerm"
       />&nbsp;
-      <button v-on:click.prevent="search">
+      <button class="search-btn" v-on:click.prevent="search">
         Search
       </button>
       
@@ -77,6 +77,19 @@ export default {
 </script>
 
 <style>
+.search-btn{
+  display: inline-block;
+  background-color: #44B3B3;
+  color: white;
+  border: 1px solid black;
+  padding: 10px 60px;
+  margin: 5px;
+  font-weight: bold;
+  max-width: 350px;
+  text-align: center;
+  font-size: 16px;
+}
+
 #banner {
   height: 70%;
 }

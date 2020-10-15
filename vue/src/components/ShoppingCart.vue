@@ -297,6 +297,10 @@ export default {
 </script>
 
 <style>
+textarea {
+  font-family: sans-serif;
+}
+
 .remove{
     grid-area: remove;
     font-size: 12px;
