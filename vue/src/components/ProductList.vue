@@ -30,7 +30,7 @@
     <div class="main">
       <div
         class="container"
-        v-for="product in filteredList.slice(24, 32)"
+        v-for="product in products.slice(24, 32)"
         v-bind:key="product.id"
       >
         <div class="product-card">
@@ -68,8 +68,52 @@
             <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
           </router-link>
         </div>
+        </div>
+       <br/>
+       <br/>
+        <h1>All Products</h1>
+  <div class="container"
+  v-for="product in filteredList"
+  v-bind:key="product.id"
+  >
+  <div class="product-card">
+          <router-link v-bind:to="{ name: 'product-details', params: { id : product.id }}">
+            <img
+              class="sale-banner"
+              v-if="product.sale"
+              src="/salebanner.png"
+            />
+            <img
+              class="thumbnail"
+              v-if="product.image"
+              v-bind:src="product.image"
+              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+            />
+            <img
+              class="thumbnail"
+              v-else
+              src="https://grocerymonk.com/image_placeholder.png"
+            />
+            <div class="product-title">{{ product.title }}</div>
+            <div class="price" v-if="product.sale != true">
+              ${{ product.price.toFixed(2) }}
+            </div>
+            <div v-else class="sale-price">
+              <span class="discounted-price"
+                >${{ (0.9 * product.price).toFixed(2) }}</span
+              >
+              &nbsp;
+              <span class="before-sale-price"
+                ><s>${{ product.price.toFixed(2) }}</s></span
+              >
+            </div>
+            <div class="product-weight">{{ product.weight }}</div>
+            <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
+          </router-link>
+      
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -104,8 +148,8 @@ export default {
     filteredList() {
       let filteredProducts = this.products;
       if (this.filter.title != "") {
-        filteredProducts = filteredProducts.filter(
-          (item) => item.title.toLowerCase().includes(this.filter.title.toLowerCase())
+        filteredProducts = filteredProducts.filter((item) =>
+          item.title.toLowerCase().includes(this.filter.title.toLowerCase())
         );
       }
       if (this.filter.sale != "") {
@@ -130,14 +174,12 @@ export default {
     });
     productService.getAllCategories().then((response) => {
       this.categories = response.data;
-    })
+    });
   },
 };
 </script>
 
 <style>
-
-
 .main {
   display: flex;
   justify-content: space-between;
@@ -182,7 +224,7 @@ export default {
   position: sticky;
   top: 0;
   text-align: left;
-  background-color:#d3d3d3;
+  background-color: #d3d3d3;
   margin-top: 0.5em;
   padding-top: 1em;
   padding-bottom: 1em;
@@ -224,7 +266,6 @@ input[type="checkbox"] {
   display: flex;
   padding-left: 10em;
   justify-content: right;
-  
 }
 
 #splash-text {
@@ -237,7 +278,6 @@ input[type="checkbox"] {
   justify-content: space-around;
   border-style: solid;
   border-width: 0.15em;
-  
 }
 .delivery-fee-text {
   color: #03989e;
@@ -253,7 +293,7 @@ input[type="checkbox"] {
 .navigation {
   margin-top: 5px;
   display: flex;
-  font-size: .85em;
+  font-size: 0.85em;
   font-weight: bold;
   justify-content: space-evenly;
 }
