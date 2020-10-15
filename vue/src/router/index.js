@@ -13,6 +13,7 @@ import Certification from '../components/Certification.vue'
 import Search from '../components/Search.vue'
 import Checkout from '../components/Checkout.vue'
 
+
 Vue.use(Router)
 
 /**
@@ -99,7 +100,7 @@ const router = new Router({
     {
       path: "/search/:query",
       name: "search",
-      Component: Search
+      component: Search
     },
   ]
 })
