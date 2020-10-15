@@ -1,5 +1,30 @@
 <template>
   <div>
+    <div id="search-and-nav">
+      <div id="search">
+        <input
+          type="text"
+          class="search-bar"
+          name="search"
+          placeholder="Search for an item"
+          v-model="searchTerm"
+        />&nbsp;
+        <button class="search-btn" v-on:click.prevent="search">Search</button>
+      </div>
+      <div class="navigation">
+        <div v-for="cat in categories" v-bind:key="cat.categoryId">
+          <router-link
+            v-bind:to="{
+              name: 'category',
+              params: { categoryId: cat.categoryId },
+            }"
+            ><div class="navigation">
+              {{ cat.categoryName }}
+            </div></router-link
+          >
+        </div>
+      </div>
+    </div>
     <div class="certification-title">
       <h1>{{ returnCertificationName }}</h1>
     </div>
@@ -39,9 +64,10 @@
             >
           </div>
           <div class="product-weight">{{ product.weight }}</div>
-          <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
-          </router-link
-        >
+          <div class="cart-button" v-on:click.prevent="addToCart(product)">
+            Add To Cart
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -53,7 +79,9 @@ export default {
   name: "certification",
   data() {
     return {
+      searchTerm: "",
       products: [],
+      categories: [],
     };
   },
   computed: {
@@ -92,14 +120,19 @@ export default {
           product.discountedPrice = product.price * 0.9;
         });
       });
+    productService.getAllCategories().then((response) => {
+      this.categories = response.data;
+    });
   },
   methods: {
     addToCart(item) {
       this.$store.commit("ADD_PRODUCT", item);
       window.alert("Added!");
-
     },
-  }
+    search() {
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
+    },
+  },
 };
 </script>
 

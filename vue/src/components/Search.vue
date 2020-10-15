@@ -1,5 +1,32 @@
 <template>
     <div>
+      <div id="search-and-nav">
+          <div id="search">
+            <input
+              type="text"
+              class="search-bar"
+              name="search"
+              placeholder="Search for an item"
+              v-model="searchTerm"
+            />&nbsp;
+            <button class="search-btn" v-on:click.prevent="search">
+              Search
+            </button>
+          </div>
+          <div class="navigation">
+            <div v-for="cat in categories" v-bind:key="cat.categoryId">
+              <router-link
+                v-bind:to="{
+                  name: 'category',
+                  params: { categoryId: cat.categoryId },
+                }"
+                ><div class="navigation">
+                  {{ cat.categoryName }}
+                </div></router-link
+              >
+            </div>
+          </div>
+        </div>
       <div id="search-title">
         <h2>Searching for {{ this.$route.params.query }}</h2>
       </div>
@@ -52,6 +79,12 @@
 <script>
 import productService from "../services/ProductService.js";
 export default {
+  watch: {
+    $route(to, from) {
+      this.filter.searchTerm = this.$route.params.query;
+     
+    }
+  },
   data() {
     return {
       searchTerm: "",
@@ -64,10 +97,17 @@ export default {
       },
     };
   },
+  methods: {
+    addToCart(item) {
+      this.$store.commit("ADD_PRODUCT", item);
+      window.alert("Added!");
+    },
+    search() {
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
+    },
+  },
   created() {
-    console.log("hello????");
     this.filter.searchTerm = this.$route.params.query;
-    console.log("got to the search" + this.searchTerm);
 
     productService.getAllProducts().then((response) => {
       this.products = response.data;

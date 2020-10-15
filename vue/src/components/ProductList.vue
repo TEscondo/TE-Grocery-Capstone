@@ -1,31 +1,32 @@
 <template>
   <div>
-    <div id="search">
-      <input
-        type="text"
-        class="search-bar"
-        placeholder="Search for an item"
-        v-model="filter.title"
-      />&nbsp;
-
-      <label for="checkbox" id="sale-box"
-        >Sale Items Only<input type="checkbox" v-model="filter.sale" /></label
-      ><br />
-    </div>
-
-    <div class="navigation">
-      <div v-for="cat in categories" v-bind:key="cat.categoryId">
-        <router-link
-          v-bind:to="{
-            name: 'category',
-            params: { categoryId: cat.categoryId },
-          }"
-          >{{ cat.categoryName }}</router-link
-        >
-      </div>
-    </div>
-
-    <br />
+    <div id="search-and-nav">
+          <div id="search">
+            <input
+              type="text"
+              class="search-bar"
+              name="search"
+              placeholder="Search for an item"
+              v-model="searchTerm"
+            />&nbsp;
+            <button class="search-btn" v-on:click.prevent="search">
+              Search
+            </button>
+          </div>
+          <div class="navigation">
+            <div v-for="cat in categories" v-bind:key="cat.categoryId">
+              <router-link
+                v-bind:to="{
+                  name: 'category',
+                  params: { categoryId: cat.categoryId },
+                }"
+                ><div class="navigation">
+                  {{ cat.categoryName }}
+                </div></router-link
+              >
+            </div>
+          </div>
+        </div>
     <div class="splash-container">
       <div id="splash-text">
         <h1 id="fresh-food-text">Fresh Food Brought To Your Door</h1>
@@ -172,7 +173,6 @@ export default {
       window.alert("Added!");
     },
     search() {
-      console.log(this.searchTerm);
       this.$router.push({ name: "search", params: { query: this.searchTerm } });
     },
   },
@@ -197,7 +197,7 @@ export default {
       return filteredProducts;
     },
   },
-  mounted() {
+  created() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -259,7 +259,7 @@ export default {
   background-color: #d3d3d3;
   margin-top: 0.5em;
   padding-top: 1em;
-  padding-bottom: 1em;
+  padding-bottom: .4em;
 }
 
 input[type="checkbox"] {
@@ -326,10 +326,12 @@ input[type="checkbox"] {
 }
 
 .navigation {
-  margin-top: 5px;
-  display: flex;
-  font-size: 0.85em;
+   display: flex;
+   margin-bottom: 2px;
+   font-weight: bold;
+  font-size: .9em;
   justify-content: space-evenly;
+  background-color: #d3d3d3;
 }
 .container1 {
   background-color: white;
