@@ -54,16 +54,22 @@ export default {
 <style>
 .search-btn {
   display: inline-block;
-  background-color: #44b3b3;
+  background-color: #03989e;
   color: white;
   border: 1px solid black;
   padding: 10px 60px;
   margin: 5px;
   font-weight: bold;
+  border-radius: 6px;
   max-width: 350px;
   text-align: center;
   font-size: 16px;
 }
+
+.search-btn:hover {
+  background-color: #02797E;
+}
+
 
 #banner {
   height: 70%;
