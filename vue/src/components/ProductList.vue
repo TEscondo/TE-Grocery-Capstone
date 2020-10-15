@@ -302,6 +302,7 @@ input[type="checkbox"] {
   justify-content: right;
   margin-top: -0.01em;
   margin-right: -0.07em;
+  object-fit: cover;
 }
 
 #splash-text {
