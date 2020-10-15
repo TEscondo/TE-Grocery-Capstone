@@ -255,6 +255,8 @@ export default {
   display: flex;
   justify-content: space-around;
   text-align: left;
+  position: sticky;
+  top: 0;
   background-color: #d3d3d3;
   margin-top: 0.5em;
   padding-top: 1em;
