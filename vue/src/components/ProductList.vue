@@ -40,7 +40,7 @@
     <div class="main">
       <div
         class="container"
-        v-for="product in products.slice(24, 32)"
+        v-for="product in products.slice(26,34)"
         v-bind:key="product.id"
       >
         <div class="product-card">
