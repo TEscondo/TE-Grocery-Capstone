@@ -73,6 +73,9 @@
                 >
               </div>
               <div class="product-weight">{{ prod.weight }}</div>
+              <div class="cart-button" v-on:click.prevent="addToCart(product)">
+            Add
+          </div>
             </div>
           </router-link>
         </div>
