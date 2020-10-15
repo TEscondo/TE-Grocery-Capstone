@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id ="page">
     <div id="search-and-nav">
       <div id="search">
         <input
@@ -83,6 +83,61 @@
           </router-link>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+
+    </div>
+    <div>
+      <h1 id="all-products">All products</h1>
+       <div class="main">
+         <div
+        class="container1"
+        v-for="product in filteredList"
+        v-bind:key="product.id"
+      >
+        <div class="product-card">
+          <router-link
+            v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+          >
+            <img
+              class="sale-banner"
+              v-if="product.sale"
+              src="/salebanner.png"
+            />
+            <img
+              class="thumbnail"
+              v-if="product.image"
+              v-bind:src="product.image"
+              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+            />
+            <img
+              class="thumbnail"
+              v-else
+              src="https://grocerymonk.com/image_placeholder.png"
+            />
+            <div class="product-title">{{ product.title }}</div>
+            <div class="price" v-if="product.sale != true">
+              ${{ product.price.toFixed(2) }}
+            </div>
+            <div v-else class="sale-price">
+              <span class="discounted-price"
+                >${{ (0.9 * product.price).toFixed(2) }}</span
+              >
+              &nbsp;
+              <span class="before-sale-price"
+                ><s>${{ product.price.toFixed(2) }}</s></span
+              >
+            </div>
+            <div class="product-weight">{{ product.weight }}</div>
+         <div class="cart-button" v-on:click.prevent="addToCart(product)">
+              
+              Add
+            </div>
+          </router-link>
+        </div>
+      </div>
+       </div>
+>>>>>>> a6973523d996c55072b97af55e5e11212307fa8b
     </div>
   </div>
 </template>
@@ -230,7 +285,9 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
 }
-
+#page{
+  background-color: #d3d3d3;
+}
 #sale-box {
   display: flex;
   align-items: center;
@@ -266,6 +323,12 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
   font-size: 1em;
+  background-color: #d3d3d3;
+}
+#all-products{
+  display:flex;
+  justify-content: center;
+  font-size: 3em;
   background-color: #d3d3d3;
 }
 
