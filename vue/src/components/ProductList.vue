@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id ="page">
     <div id="search-and-nav">
           <div id="search">
             <input
@@ -91,7 +91,7 @@
 
     </div>
     <div>
-      <h1>All products</h1>
+      <h1 id="all-products">All products</h1>
        <div class="main">
          <div
         class="container1"
@@ -287,7 +287,9 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
 }
-
+#page{
+  background-color: #d3d3d3;
+}
 #sale-box {
   display: flex;
   align-items: center;
@@ -324,6 +326,12 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
   font-size: 1em;
+  background-color: #d3d3d3;
+}
+#all-products{
+  display:flex;
+  justify-content: center;
+  font-size: 3em;
   background-color: #d3d3d3;
 }
 
