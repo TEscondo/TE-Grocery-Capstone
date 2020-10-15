@@ -3,7 +3,7 @@
     <br />
     <div class="image-container">
       <img
-        class="sale-banner"
+        class="details-sale"
         v-if="currentProduct.sale"
         src="/salebanner.png"
       />
@@ -89,6 +89,16 @@ export default {
   height: 20em;
   object-fit: cover;
   border-radius: 3px;
+  position: relative;
+}
+
+.details-sale {
+  position: absolute;
+  width: 20em;
+  height: 20em;
+  margin: 0px 40px 10px 40px;
+  display: block;
+  z-index: 1;
 }
 
 .cart-button {
@@ -105,7 +115,7 @@ export default {
 }
 
 .cart-button:hover {
-  background-color: #02797E;
+  background-color: #02797e;
 }
 
 .details-main {
