@@ -1,10 +1,37 @@
 <template>
   <div>
+    <div id="search-and-nav">
+          <div id="search">
+            <input
+              type="text"
+              class="search-bar"
+              name="search"
+              placeholder="Search for an item"
+              v-model="searchTerm"
+            />&nbsp;
+            <button class="search-btn" v-on:click.prevent="search">
+              Search
+            </button>
+          </div>
+          <div class="navigation">
+            <div v-for="cat in categories" v-bind:key="cat.categoryId">
+              <router-link
+                v-bind:to="{
+                  name: 'category',
+                  params: { categoryId: cat.categoryId },
+                }"
+                ><div class="navigation">
+                  {{ cat.categoryName }}
+                </div></router-link
+              >
+            </div>
+          </div>
+        </div>
     <div class="splash-container">
       <div id="splash-text">
         <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
         <h2 class="delivery-fee-text">
-          No delivery fee for your first order -->
+          No delivery fee for your first order <span style="font-size:xx-large">&#8680;</span>
         </h2>
       </div>
       <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
@@ -95,7 +122,6 @@ export default {
       window.alert("Added!");
     },
     search() {
-      console.log(this.searchTerm);
       this.$router.push({ name: "search", params: { query: this.searchTerm } });
     },
   },
@@ -120,7 +146,7 @@ export default {
       return filteredProducts;
     },
   },
-  mounted() {
+  created() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -182,7 +208,7 @@ export default {
   background-color: #d3d3d3;
   margin-top: 0.5em;
   padding-top: 1em;
-  padding-bottom: 1em;
+  padding-bottom: .4em;
 }
 
 input[type="checkbox"] {
@@ -228,9 +254,9 @@ input[type="checkbox"] {
 }
 
 .splash-container {
-  display: flex;
+  display: block;
   height: 14em;
-  justify-content: space-around;
+  justify-content: space-evenly;
   border-style: solid;
   border-width: 0.15em;
 }
@@ -246,9 +272,11 @@ input[type="checkbox"] {
 }
 
 .navigation {
-  margin-top: 5px;
-  display: flex;
-  font-size: 0.85em;
+   display: flex;
+   margin-bottom: 2px;
+   font-weight: bold;
+  font-size: .9em;
   justify-content: space-evenly;
+  background-color: #d3d3d3;
 }
 </style>

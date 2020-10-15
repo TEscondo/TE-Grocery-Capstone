@@ -88,6 +88,7 @@ export default {
   width: 20em;
   height: 20em;
   object-fit: cover;
+  border-radius: 3px;
 }
 
 .cart-button {
