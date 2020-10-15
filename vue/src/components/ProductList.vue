@@ -28,12 +28,12 @@
     <br />
     <div class="splash-container">
       <div id="splash-text">
-        <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
-        <h2 class="delivery-fee-text">
-          No delivery fee for your first order -->
+        <h1 id="fresh-food-text">Fresh Food Brought To Your Door</h1>
+        <h2 id="delivery-fee-text">
+          No delivery fee for your first order
         </h2>
       </div>
-      <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
+      <img class="splash-image" src="/deliverystockart.jpg" />
     </div>
    
    
@@ -294,24 +294,27 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 
-#splash-image {
+.splash-image {
   display: flex;
-  padding-left: 10em;
   justify-content: right;
+  margin-top: -0.01em;
+  margin-right: -.07em;
+  
 }
 
 #splash-text {
-  margin-left: 15em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .splash-container {
   display: flex;
-  height: 14em;
-  justify-content: space-around;
+  height: 15em;
   border-style: solid;
   border-width: 0.15em;
 }
-.delivery-fee-text {
+#delivery-fee-text {
   color: #03989e;
 }
 
@@ -336,5 +339,14 @@ input[type="checkbox"] {
   gap: 10em;
   margin: 1rem;
   text-align: center;
+}
+
+#fresh-food-text {
+  font-size:2.5em;
+  letter-spacing: -0.02em;
+}
+
+#delivery-fee-text {
+  font-size:1.5em;
 }
 </style>
