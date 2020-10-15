@@ -298,7 +298,11 @@ input[type="checkbox"] {
   justify-content: right;
   margin-top: -0.01em;
   margin-right: -0.07em;
+<<<<<<< HEAD
   max-width: 100%;
+=======
+  object-fit: cover;
+>>>>>>> e8c1da6a2ac9fa776126e1ee57cd5d95c4f8549a
 }
 
 #splash-text {
