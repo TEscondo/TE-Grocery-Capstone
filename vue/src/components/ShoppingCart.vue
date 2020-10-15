@@ -1,7 +1,7 @@
 <template>
   <div class="your-cart">
     <div id="test">
-      <h2>YOUR CART</h2>
+      <h2 id="your-cart">YOUR CART</h2>
       <div v-if="!cartTotal">
       <img id="empty-cart-image" src="https://tinyurl.com/y3wzf32v">
       </div>
@@ -367,7 +367,7 @@ textarea {
   display: block;
   flex-direction: column;
   position: sticky;
-  top: 0;
+  top: 200px;
   padding: 80px;
   margin-top: 70px;
   justify-content: space-between;
@@ -411,5 +411,11 @@ textarea {
 #empty-cart-image {
   display: flex;
   padding-top: 3em;
+}
+
+#your-cart {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
 }
 </style>

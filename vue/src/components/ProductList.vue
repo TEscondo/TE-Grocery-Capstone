@@ -1,13 +1,40 @@
 <template>
   <div>
+    <div id="search-and-nav">
+          <div id="search">
+            <input
+              type="text"
+              class="search-bar"
+              name="search"
+              placeholder="Search for an item"
+              v-model="searchTerm"
+            />&nbsp;
+            <button class="search-btn" v-on:click.prevent="search">
+              Search
+            </button>
+          </div>
+          <div class="navigation">
+            <div v-for="cat in categories" v-bind:key="cat.categoryId">
+              <router-link
+                v-bind:to="{
+                  name: 'category',
+                  params: { categoryId: cat.categoryId },
+                }"
+                ><div class="navigation">
+                  {{ cat.categoryName }}
+                </div></router-link
+              >
+            </div>
+          </div>
+        </div>
     <div class="splash-container">
       <div id="splash-text">
-        <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
-        <h2 class="delivery-fee-text">
-          No delivery fee for your first order -->
+        <h1 id="fresh-food-text">Fresh Food Brought To Your Door</h1>
+        <h2 id="delivery-fee-text">
+          No delivery fee for your first order
         </h2>
       </div>
-      <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
+      <img class="splash-image" src="/deliverystockart.jpg" />
     </div>
    
    
@@ -56,13 +83,63 @@
             </div>
             <div class="product-weight">{{ product.weight }}</div>
             <div class="cart-button" v-on:click.prevent="addToCart(product)">
+              Add
+            </div>
+          </router-link>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <h1>All products</h1>
+       <div class="main">
+         <div
+        class="container1"
+        v-for="product in filteredList"
+        v-bind:key="product.id"
+      >
+        <div class="product-card">
+          <router-link
+            v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+          >
+            <img
+              class="sale-banner"
+              v-if="product.sale"
+              src="/salebanner.png"
+            />
+            <img
+              class="thumbnail"
+              v-if="product.image"
+              v-bind:src="product.image"
+              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+            />
+            <img
+              class="thumbnail"
+              v-else
+              src="https://grocerymonk.com/image_placeholder.png"
+            />
+            <div class="product-title">{{ product.title }}</div>
+            <div class="price" v-if="product.sale != true">
+              ${{ product.price.toFixed(2) }}
+            </div>
+            <div v-else class="sale-price">
+              <span class="discounted-price"
+                >${{ (0.9 * product.price).toFixed(2) }}</span
+              >
+              &nbsp;
+              <span class="before-sale-price"
+                ><s>${{ product.price.toFixed(2) }}</s></span
+              >
+            </div>
+            <div class="product-weight">{{ product.weight }}</div>
+            <div class="cart-button" v-on:click.prevent="addToCart(product)">
               Add To Cart
             </div>
           </router-link>
         </div>
       </div>
-      </div>
-    
+       </div>
+    </div>
   </div>
 </template>
 
@@ -95,7 +172,6 @@ export default {
       window.alert("Added!");
     },
     search() {
-      console.log(this.searchTerm);
       this.$router.push({ name: "search", params: { query: this.searchTerm } });
     },
   },
@@ -120,7 +196,7 @@ export default {
       return filteredProducts;
     },
   },
-  mounted() {
+  created() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -148,7 +224,7 @@ export default {
   width: 15em;
   height: 22em;
   gap: 10em;
-  margin: 1rem;
+  margin: 2em;
   text-align: center;
 }
 .product-title {
@@ -182,7 +258,7 @@ export default {
   background-color: #d3d3d3;
   margin-top: 0.5em;
   padding-top: 1em;
-  padding-bottom: 1em;
+  padding-bottom: .4em;
 }
 
 input[type="checkbox"] {
@@ -217,24 +293,27 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 
-#splash-image {
+.splash-image {
   display: flex;
-  padding-left: 10em;
   justify-content: right;
+  margin-top: -0.01em;
+  margin-right: -.07em;
+  
 }
 
 #splash-text {
-  margin-left: 15em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .splash-container {
   display: flex;
-  height: 14em;
-  justify-content: space-around;
+  height: 15em;
   border-style: solid;
   border-width: 0.15em;
 }
-.delivery-fee-text {
+#delivery-fee-text {
   color: #03989e;
 }
 
@@ -246,9 +325,29 @@ input[type="checkbox"] {
 }
 
 .navigation {
-  margin-top: 5px;
-  display: flex;
-  font-size: 0.85em;
+   display: flex;
+   margin-bottom: 2px;
+   font-weight: bold;
+  font-size: .9em;
   justify-content: space-evenly;
+  background-color: #d3d3d3;
+}
+.container1 {
+  background-color: white;
+  border-radius: 1em;
+  width: 15em;
+  height: 22em;
+  gap: 10em;
+  margin: 1rem;
+  text-align: center;
+}
+
+#fresh-food-text {
+  font-size:2.5em;
+  letter-spacing: -0.02em;
+}
+
+#delivery-fee-text {
+  font-size:1.5em;
 }
 </style>

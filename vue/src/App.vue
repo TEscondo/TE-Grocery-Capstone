@@ -1,47 +1,24 @@
 <template>
-<div id="app">
-  <div class="top">
-    <div id="banner">
-    <banner />
-    </div>
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'all-products' }"
-        >View All Products</router-link
-      >&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'cart' }">Cart &lt; {{this.$store.state.cart.length}} &gt;</router-link>
-      <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-        >Logout</router-link
-      > 
-   
-    <div id="search">
-      <input
-        type="text"
-        class="search-bar"
-        name="search"
-        placeholder="Search for an item"
-        v-model="searchTerm"
-      />&nbsp;
-      <button class="search-btn" v-on:click.prevent="search">
-        Search
-      </button>
-      
-    </div>
-    <div class="navigation">
-      <div v-for="cat in categories" v-bind:key="cat.categoryId">
+  <div id="app">
+    <div class="top">
+      <div id="banner">
+        <banner />
+      </div>
+      <div id="nav">
+        <router-link v-bind:to="{ name: 'home' }">Home</router-link
+        >&nbsp;|&nbsp;
+        <router-link v-bind:to="{ name: 'all-products' }"
+          >View All Products</router-link
+        >&nbsp;|&nbsp;
+        <router-link v-bind:to="{ name: 'cart' }"
+          >Cart &lt; {{ this.$store.state.cart.length }} &gt;</router-link
+        >
         <router-link
-          v-bind:to="{
-            name: 'category',
-            params: { categoryId: cat.categoryId },
-          }"
-          ><div class="navigation">{{ cat.categoryName }}</div></router-link
+          v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''"
+          >Logout</router-link
         >
       </div>
-    
-    </div>
-    </div>
     </div>
     <router-view />
   </div>
@@ -56,28 +33,26 @@ export default {
   },
   data() {
     return {
-      searchTerm: '',
+      searchTerm: "",
       categories: [],
-    }
+    };
   },
   methods: {
     search() {
       console.log(this.searchTerm);
-      this.$router.push(       { name: 'search', params: { query: this.searchTerm }  }      );
-    }
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
+    },
   },
-    created() {
-    
+  created() {
     productService.getAllCategories().then((response) => {
       this.categories = response.data;
     });
   },
-  
 };
 </script>
 
 <style>
-.search-btn{
+.search-btn {
   display: inline-block;
   background-color: #03989e;
   color: white;
@@ -99,6 +74,7 @@ export default {
   color: #03989e;
   font-weight: bold;
   font-size: 1.2em;
+  margin-top: 5px;
 }
 
 a {
@@ -113,6 +89,7 @@ a {
   z-index: 1;
 }
 
-
-
+#search-and-nav {
+  background-color: #d3d3d3;
+}
 </style>

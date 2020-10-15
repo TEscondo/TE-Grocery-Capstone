@@ -1,5 +1,33 @@
 <template>
+
   <div class="home">
+    <div id="search-and-nav">
+          <div id="search">
+            <input
+              type="text"
+              class="search-bar"
+              name="search"
+              placeholder="Search for an item"
+              v-model="searchTerm"
+            />&nbsp;
+            <button class="search-btn" v-on:click.prevent="search">
+              Search
+            </button>
+          </div>
+          <div class="navigation">
+            <div v-for="cat in categories" v-bind:key="cat.categoryId">
+              <router-link
+                v-bind:to="{
+                  name: 'category',
+                  params: { categoryId: cat.categoryId },
+                }"
+                ><div class="navigation">
+                  {{ cat.categoryName }}
+                </div></router-link
+              >
+            </div>
+          </div>
+        </div>
     <div v-for="prodCat in prodByCat" v-bind:key="prodCat.categoryName">
       <h1>
         <router-link
@@ -66,6 +94,7 @@ export default {
       },
       categories: [],
       prodByCat: [],
+      searchTerm: "",
     };
   },
   components: {},
@@ -78,10 +107,16 @@ export default {
         });
       });
     });
+     productService.getAllCategories().then((response) => {
+      this.categories = response.data;
+    });
   },
   methods: {
     clickMethod() {
       this.$router.push("all-products");
+    },
+    search() {
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
     },
   },
   computed: {
