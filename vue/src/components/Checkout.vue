@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>CHECKOUT</h2>
-    <form>
+    <form id ="checkout-form">
       <input
         id="name"
         class="checkout-input"
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style>
-form {
+#checkout-form {
   text-align: center;
 }
 .checkout-input {

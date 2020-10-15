@@ -1,35 +1,6 @@
 <template>
   <div>
-    <div id="search">
-      <form><input
-        type="text"
-        class="search-bar"
-        name="search"
-        placeholder="Search for an item"
-        v-model="searchTerm"
-      />&nbsp;
-      <button v-on:click.prevent="search">
-        button text
-      </button>
-      <label for="checkbox" id="sale-box"
-        >Sale Items Only<input type="checkbox" v-model="filter.sale" /></label
-      ><br /></form>
-    </div>
-
-    <div class="navigation">
-      <div v-for="cat in categories" v-bind:key="cat.categoryId">
-        <router-link
-          v-bind:to="{
-            name: 'category',
-            params: { categoryId: cat.categoryId },
-          }"
-          >{{ cat.categoryName }}</router-link
-        >
-      </div>
-    </div>
-
-    <br />
-    <div class="splash-container">
+        <div class="splash-container">
       <div id="splash-text">
         <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
         <h2 class="delivery-fee-text">
@@ -42,7 +13,6 @@
       <h1>Top Products</h1>
     </div>
     <div class="main">
-      <div v-if="!searched">
       <div
         class="container"
         v-for="product in products.slice(24, 32)"
@@ -138,7 +108,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -251,8 +220,6 @@ export default {
 #search {
   display: flex;
   justify-content: space-around;
-  position: sticky;
-  top: 0;
   text-align: left;
   background-color: #d3d3d3;
   margin-top: 0.5em;
