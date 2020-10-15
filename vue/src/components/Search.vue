@@ -1,13 +1,19 @@
 <template>
+    <div>
+      <div id="search-title">
+        <h2>Searching for {{ this.$route.params.query }}</h2>
+      </div>
   <div class="main">
-      <div
-        class="container"
-        v-for="product in products"
-        v-bind:key="product.id"
-      >
+    <div
+      class="container"
+      v-for="product in filteredList"
+      v-bind:key="product.id"
+    >
+      <div class="product-card">
         <router-link
           v-bind:to="{ name: 'product-details', params: { id: product.id } }"
         >
+          <img class="sale-banner" v-if="product.sale" src="/salebanner.png" />
           <img
             class="thumbnail"
             v-if="product.image"
@@ -23,37 +29,46 @@
           <div class="price" v-if="product.sale != true">
             ${{ product.price.toFixed(2) }}
           </div>
-          <div class="sale-price" v-else>
+          <div v-else class="sale-price">
             <span class="discounted-price"
-              >${{ product.discountedPrice.toFixed(2) }}</span
-            >&nbsp;
+              >${{ (0.9 * product.price).toFixed(2) }}</span
+            >
+            &nbsp;
             <span class="before-sale-price"
               ><s>${{ product.price.toFixed(2) }}</s></span
             >
           </div>
           <div class="product-weight">{{ product.weight }}</div>
-          <div class="cart-button" v-on:click.prevent="addToCart(product)">Add To Cart</div>
-          </router-link
-        >
+          <div class="cart-button" v-on:click.prevent="addToCart(product)">
+            Add To Cart
+          </div>
+        </router-link>
       </div>
-      </div>
+    </div>
+  </div>
+  </div>
 </template>
 
 <script>
-import productService from '../services/ProductService.js';
+import productService from "../services/ProductService.js";
 export default {
-    data() {
+  data() {
     return {
+      searchTerm: "",
       categories: [],
       products: [],
       filter: {
-        title: "",
+        searchTerm: "",
         sale: false,
         categoryId: "",
       },
     };
   },
-    created() {
+  created() {
+    console.log("hello????");
+    this.filter.searchTerm = this.$route.params.query;
+    console.log("got to the search" + this.searchTerm);
+
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -62,34 +77,32 @@ export default {
     });
     productService.getAllCategories().then((response) => {
       this.categories = response.data;
-    })
+    });
   },
-    computed: {
-        
+  computed: {
     filteredList() {
       let filteredProducts = this.products;
-      if (this.filter.title != "") {
+      if (this.filter.searchTerm != "") {
         filteredProducts = filteredProducts.filter((item) =>
-          item.title.toLowerCase().includes(this.filter.title.toLowerCase())
+          item.title
+            .toLowerCase()
+            .includes(this.filter.searchTerm.toLowerCase())
         );
       }
-      if (this.filter.sale != "") {
-        filteredProducts = filteredProducts.filter(
-          (item) => item.sale === this.filter.sale
-        );
-      }
-      if (this.filter.categoryId != "") {
-        filteredProducts = filteredProducts.filter(
-          (item) => item.categoryId == this.filter.categoryId
-        );
-      }
+
       return filteredProducts;
     },
   },
-
-}
+};
 </script>
 
 <style>
-
+#search-title {
+  display: flex;
+  line-height: 1em;
+  font-size: large;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 </style>

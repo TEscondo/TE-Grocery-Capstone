@@ -35,9 +35,12 @@
       </div>
       <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
     </div>
+   
+   
     <div id="top-products-label">
       <h1>Top Products</h1>
     </div>
+   
     <div class="main">
       <div
         class="container"
@@ -144,6 +147,8 @@ import productService from "../services/ProductService.js";
 export default {
   data() {
     return {
+      searchTerm: "",
+      searched: false,
       categories: [],
       products: [],
       filter: {
@@ -164,6 +169,10 @@ export default {
     addToCart(item) {
       this.$store.commit("ADD_PRODUCT", item);
       window.alert("Added!");
+    },
+    search() {
+      console.log(this.searchTerm);
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
     },
   },
   computed: {
@@ -187,7 +196,7 @@ export default {
       return filteredProducts;
     },
   },
-  created() {
+  mounted() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -220,11 +229,13 @@ export default {
 }
 .product-title {
   font-size: 1.5rem;
+  height: 3.5em;
 }
 
 .thumbnail {
   max-width: 10em;
   max-height: 10em;
+  object-fit: cover;
 }
 
 .price {
@@ -243,8 +254,6 @@ export default {
 #search {
   display: flex;
   justify-content: space-around;
-  position: sticky;
-  top: 0;
   text-align: left;
   background-color: #d3d3d3;
   margin-top: 0.5em;
@@ -316,7 +325,6 @@ input[type="checkbox"] {
   margin-top: 5px;
   display: flex;
   font-size: 0.85em;
-  font-weight: bold;
   justify-content: space-evenly;
 }
 .container1 {

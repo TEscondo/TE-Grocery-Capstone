@@ -10,6 +10,11 @@
         v-for="product in this.$store.state.cart"
         v-bind:key="product.id"
       >
+       <img
+              class="sale-banner"
+              v-if="product.sale"
+              src="/salebanner.png"
+            />
         <img
           class="thumbnail"
           v-if="product.image"
@@ -144,9 +149,7 @@
             </div>
 
             <button id="cash" class="cart-button">Cash on Delivery</button>
-            <div v-if="cash">
-              <h1>Transaction Successfull</h1>
-            </div>
+            
             <button
               class="cart-button-disable"
               disable
@@ -294,6 +297,10 @@ export default {
 </script>
 
 <style>
+textarea {
+  font-family: sans-serif;
+}
+
 .remove{
     grid-area: remove;
     font-size: 12px;
@@ -379,6 +386,7 @@ export default {
 
 .thumbnail {
   grid-area: thumbnail;
+  object-fit: cover;
 }
 
 .qty {
