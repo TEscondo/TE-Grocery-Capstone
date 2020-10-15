@@ -75,6 +75,7 @@ export default {
   font-weight: bold;
   font-size: 1.2em;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 a {
@@ -91,5 +92,8 @@ a {
 
 #search-and-nav {
   background-color: #d3d3d3;
+  position: sticky;
+  top: 10.8em;
+  z-index: 1;
 }
 </style>
