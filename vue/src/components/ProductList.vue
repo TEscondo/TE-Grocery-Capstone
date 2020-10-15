@@ -56,7 +56,7 @@
             </div>
             <div class="product-weight">{{ product.weight }}</div>
             <div class="cart-button" v-on:click.prevent="addToCart(product)">
-              Add To Cart
+              Add
             </div>
           </router-link>
         </div>
@@ -148,7 +148,7 @@ export default {
   width: 15em;
   height: 22em;
   gap: 10em;
-  margin: 1rem;
+  margin: 2em;
   text-align: center;
 }
 .product-title {
