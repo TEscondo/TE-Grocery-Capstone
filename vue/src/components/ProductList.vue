@@ -276,6 +276,7 @@ input[type="checkbox"] {
   border-radius: 28px;
   font-size: 1.5em;
   padding-left: 10px;
+  background-color: #f9fafb;
 }
 
 .category-dropdown {
