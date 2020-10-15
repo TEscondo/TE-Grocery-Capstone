@@ -382,6 +382,7 @@ export default {
 
 .thumbnail {
   grid-area: thumbnail;
+  object-fit: cover;
 }
 
 .qty {

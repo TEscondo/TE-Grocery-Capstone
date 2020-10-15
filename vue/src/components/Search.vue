@@ -1,6 +1,9 @@
 <template>
+    <div>
+      <div id="search-title">
+        <h2>Searching for {{ this.$route.params.query }}</h2>
+      </div>
   <div class="main">
-    
     <div
       class="container"
       v-for="product in filteredList"
@@ -43,6 +46,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -80,10 +84,12 @@ export default {
       let filteredProducts = this.products;
       if (this.filter.searchTerm != "") {
         filteredProducts = filteredProducts.filter((item) =>
-          item.title.toLowerCase().includes(this.filter.searchTerm.toLowerCase())
+          item.title
+            .toLowerCase()
+            .includes(this.filter.searchTerm.toLowerCase())
         );
       }
-    
+
       return filteredProducts;
     },
   },
@@ -91,4 +97,12 @@ export default {
 </script>
 
 <style>
+#search-title {
+  display: flex;
+  line-height: 1em;
+  font-size: large;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 </style>

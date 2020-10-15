@@ -1,6 +1,6 @@
 <template>
   <div>
-        <div class="splash-container">
+    <div class="splash-container">
       <div id="splash-text">
         <h1 class="fresh-food-text">Fresh Food Brought To Your Door</h1>
         <h2 class="delivery-fee-text">
@@ -9,9 +9,12 @@
       </div>
       <div id="splash-image"><img src="/deliverystockart.jpg" /></div>
     </div>
+   
+   
     <div id="top-products-label">
       <h1>Top Products</h1>
     </div>
+   
     <div class="main">
       <div
         class="container"
@@ -58,56 +61,52 @@
           </router-link>
         </div>
       </div>
-      </div>
-      <br />
-      <br />
-      <h1>All Products</h1>
-      <div
-        class="container"
-        v-for="product in filteredList"
-        v-bind:key="product.id"
-      >
-        <div class="product-card">
-          <router-link
-            v-bind:to="{ name: 'product-details', params: { id: product.id } }"
-          >
-            <img
-              class="sale-banner"
-              v-if="product.sale"
-              src="/salebanner.png"
-            />
-            <img
-              class="thumbnail"
-              v-if="product.image"
-              v-bind:src="product.image"
-              onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
-            />
-            <img
-              class="thumbnail"
-              v-else
-              src="https://grocerymonk.com/image_placeholder.png"
-            />
-            <div class="product-title">{{ product.title }}</div>
-            <div class="price" v-if="product.sale != true">
-              ${{ product.price.toFixed(2) }}
-            </div>
-            <div v-else class="sale-price">
-              <span class="discounted-price"
-                >${{ (0.9 * product.price).toFixed(2) }}</span
-              >
-              &nbsp;
-              <span class="before-sale-price"
-                ><s>${{ product.price.toFixed(2) }}</s></span
-              >
-            </div>
-            <div class="product-weight">{{ product.weight }}</div>
-            <div class="cart-button" v-on:click.prevent="addToCart(product)">
-              Add To Cart
-            </div>
-          </router-link>
-        </div>
+    </div>
+    <br />
+    <br />
+    <h1>All Products</h1>
+    <div
+      class="container"
+      v-for="product in filteredList"
+      v-bind:key="product.id"
+    >
+      <div class="product-card">
+        <router-link
+          v-bind:to="{ name: 'product-details', params: { id: product.id } }"
+        >
+          <img class="sale-banner" v-if="product.sale" src="/salebanner.png" />
+          <img
+            class="thumbnail"
+            v-if="product.image"
+            v-bind:src="product.image"
+            onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
+          />
+          <img
+            class="thumbnail"
+            v-else
+            src="https://grocerymonk.com/image_placeholder.png"
+          />
+          <div class="product-title">{{ product.title }}</div>
+          <div class="price" v-if="product.sale != true">
+            ${{ product.price.toFixed(2) }}
+          </div>
+          <div v-else class="sale-price">
+            <span class="discounted-price"
+              >${{ (0.9 * product.price).toFixed(2) }}</span
+            >
+            &nbsp;
+            <span class="before-sale-price"
+              ><s>${{ product.price.toFixed(2) }}</s></span
+            >
+          </div>
+          <div class="product-weight">{{ product.weight }}</div>
+          <div class="cart-button" v-on:click.prevent="addToCart(product)">
+            Add To Cart
+          </div>
+        </router-link>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -140,8 +139,8 @@ export default {
     },
     search() {
       console.log(this.searchTerm);
-      this.$router.push(       { name: 'search', params: { query: this.searchTerm }  }      );
-    }
+      this.$router.push({ name: "search", params: { query: this.searchTerm } });
+    },
   },
   computed: {
     filteredList() {
@@ -164,7 +163,7 @@ export default {
       return filteredProducts;
     },
   },
-  created() {
+  mounted() {
     productService.getAllProducts().then((response) => {
       this.products = response.data;
       this.products.forEach((product) => {
@@ -197,11 +196,13 @@ export default {
 }
 .product-title {
   font-size: 1.5rem;
+  height: 3.5em;
 }
 
 .thumbnail {
   max-width: 10em;
   max-height: 10em;
+  object-fit: cover;
 }
 
 .price {
@@ -291,7 +292,6 @@ input[type="checkbox"] {
   margin-top: 5px;
   display: flex;
   font-size: 0.85em;
-  font-weight: bold;
   justify-content: space-evenly;
 }
 </style>

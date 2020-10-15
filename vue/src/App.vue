@@ -24,7 +24,11 @@
         placeholder="Search for an item"
         v-model="searchTerm"
       />&nbsp;
-      <button v-on:click.prevent="search">
+      <button v-on:click="search"
+      onclick= 
+            "document.getElementById( 
+             'search').value = ''">
+        
         Search
       </button>
       
@@ -36,7 +40,7 @@
             name: 'category',
             params: { categoryId: cat.categoryId },
           }"
-          >{{ cat.categoryName }}</router-link
+          ><div class="navigation">{{ cat.categoryName }}</div></router-link
         >
       </div>
     
@@ -99,6 +103,7 @@ a {
   background: white;
   z-index: 1;
 }
+
 
 
 </style>

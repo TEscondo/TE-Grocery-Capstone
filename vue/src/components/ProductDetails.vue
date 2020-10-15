@@ -8,13 +8,13 @@
         src="/salebanner.png"
       />
       <img
-        class="thumbnail"
+        class="thumbnail-lg"
         v-if="currentProduct.image"
         v-bind:src="currentProduct.image"
         onerror="this.onerror=null; this.src='https://grocerymonk.com/image_placeholder.png'"
       />
       <img
-        class="thumbnail"
+        class="thumbnail-lg"
         v-else
         src="https://grocerymonk.com/image_placeholder.png"
       />
@@ -44,7 +44,6 @@
     <div class="product-details">{{ currentProduct.details }}</div>
     <br />
     <div class="cert">
-      Certifications:
       <div class="cert-icon" v-for="cert in certification" v-bind:key="cert.id">
         <router-link
           v-bind:to="{ name: 'certification', params: { id: cert.id } }"
@@ -85,6 +84,12 @@ export default {
 </script>
 
 <style>
+.thumbnail-lg {
+  width: 20em;
+  height: 20em;
+  object-fit: cover;
+}
+
 .cart-button {
   display: inline-block;
   background-color: #03989e;
@@ -103,14 +108,14 @@ export default {
 
 .details-main {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 400px 1fr;
   grid-template-areas:
     "image title"
+    "image price"
+    "image weight"
     "image desc"
-    "weight desc"
-    ". price"
     "cert cert";
-  max-width: 500px;
+  max-width: 800px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -142,13 +147,14 @@ export default {
   justify-items: center;
   margin: 10px 40px 10px 40px;
   padding: 0px 0px 0px 0px;
+  object-fit: cover;
 }
 
 .product-details {
   font-size: 16px;
   line-height: 22px;
   grid-area: desc;
-  align-items: center;
+  text-align: left;
 }
 
 .product-weight {
@@ -163,7 +169,7 @@ export default {
 .cert-icon {
   display: inline-block;
   background-color: lightgray;
-  border-radius: 15px;
+  border-radius: 6px;
   border: 1px solid;
   padding: 3px 8px 3px 8px;
   margin: 5px;
