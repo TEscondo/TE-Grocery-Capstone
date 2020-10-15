@@ -83,8 +83,6 @@
           </router-link>
         </div>
       </div>
-<<<<<<< HEAD
-=======
 
     </div>
     <div>
@@ -137,7 +135,6 @@
         </div>
       </div>
        </div>
->>>>>>> a6973523d996c55072b97af55e5e11212307fa8b
     </div>
   </div>
 </template>
