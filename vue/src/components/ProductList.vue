@@ -93,7 +93,7 @@
         v-for="product in filteredList"
         v-bind:key="product.id"
       >
-        <div class="product-card">
+        <div class="pgit sroduct-card">
           <router-link
             v-bind:to="{ name: 'product-details', params: { id: product.id } }"
           >
@@ -271,7 +271,6 @@ input[type="checkbox"] {
   border-radius: 28px;
   font-size: 1.5em;
   padding-left: 10px;
-  background-color: #f9fafb;
 }
 
 .category-dropdown {
