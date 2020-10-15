@@ -239,6 +239,10 @@ export default {
       }
       console.log(zip);
     },
+    received(){
+      let output = "Transaction sucessfull";
+      return output;
+    }
   },
   computed: {
     originalPrice() {
