@@ -62,9 +62,10 @@
             >
           </div>
           <div class="product-weight">{{ product.weight }}</div>
-          <div class="cart-button" v-on:click.prevent="addToCart(product)">Add</div>
-          </router-link
-        >
+          <div class="cart-button" v-on:click.prevent="addToCart(product)">
+            Add
+          </div>
+        </router-link>
       </div>
     </div>
   </section>
@@ -73,6 +74,12 @@
 <script>
 import productService from "../services/ProductService.js";
 export default {
+  watch: {
+    $route(to, from) {
+      this.reload();
+  
+    }
+  },
   computed: {
     returnCategoryName() {
       if (this.$route.params.categoryId == 1) {
@@ -222,6 +229,16 @@ export default {
     },
     search() {
       this.$router.push({ name: "search", params: { query: this.searchTerm } });
+    },
+    reload() {
+    productService
+      .getProductsByCategoryId(this.$route.params.categoryId)
+      .then((response) => {
+        this.products = response.data;
+        this.products.forEach((product) => {
+          product.discountedPrice = product.price * 0.9;
+        });
+      });
     },
   },
 };
