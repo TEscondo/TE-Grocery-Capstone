@@ -57,10 +57,13 @@
     <div>
       <div class="order-summary">
         <div class="original-price">
-          Subtotal: ${{ originalPrice.toFixed(2) }}
+          Subtotal: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+        <span id="order-sum-nums"> ${{ originalPrice.toFixed(2) }} </span>
         </div>
-        <div class="tax">Tax: ${{ cartTax.toFixed(2) }}</div>
-        <div class="total">Total: ${{ cartTotal.toFixed(2) }}</div>
+        <div class="tax">Tax: <span id="order-sum-nums">${{ cartTax.toFixed(2) }}</span></div>
+        <div class="total">Total: <span id="order-sum-nums">${{ cartTotal.toFixed(2) }}</span></div>
         <div v-on:click="checkout = !checkout">
           <div class="checkout-icon">Checkout</div>
         </div>
@@ -342,9 +345,9 @@ textarea {
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "thumbnail title"
+    "thumbnail price"
     "thumbnail qty"
     "thumbnail remove"
-    "thumbnail price"
     "notes notes";
   justify-content: space-between;
   max-width: 70%;
@@ -361,7 +364,7 @@ textarea {
 }
 
 .order-summary {
-  display: flex;
+  display: block;
   flex-direction: column;
   position: sticky;
   top: 0;
