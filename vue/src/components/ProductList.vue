@@ -132,9 +132,9 @@
               >
             </div>
             <div class="product-weight">{{ product.weight }}</div>
-         <div class="cart-button" v-on:click.prevent="addToCart(product)" @click="toggle= !toggle">
-              <span class ="{!toggle}">Added</span>
-              Add To Cart
+         <div class="cart-button" v-on:click.prevent="addToCart(product)">
+              
+              Add
             </div>
           </router-link>
         </div>
