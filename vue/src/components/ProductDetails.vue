@@ -22,7 +22,7 @@
     <h2 id="title">{{ currentProduct.title }}</h2>
     <div id="price" class="price" v-if="!currentProduct.sale">
       <div class="cart-button" v-on:click.prevent="addToCart(currentProduct)">
-        Add to Cart
+        Add
       </div>
 
       ${{ currentProduct.price.toFixed(2) }}
@@ -30,7 +30,7 @@
     <div id="price" v-else class="sale-price">
       <span class="discounted-price">
         <div class="cart-button" v-on:click.prevent="addToCart(currentProduct)">
-          Add to Cart
+          Add
         </div>
         ${{ currentProduct.discountedPrice.toFixed(2) }}
       </span>
@@ -95,12 +95,13 @@ export default {
   display: inline-block;
   background-color: #03989e;
   color: white;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid black;
-  padding: 3px 8px 3px 8px;
+  padding: 6px 16px 6px 16px;
   margin: 5px;
   font-weight: bold;
-  
+  width: 5em;
+  text-align: center;
 }
 
 .cart-button:hover {
